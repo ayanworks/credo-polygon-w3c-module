@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.build.json",
+
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "afj-polygon-w3c-module/*": ["src"]
+    }
+  },
+  "include": ["./.eslintrc.js", "./jest.config.ts", "./jest.config.base.ts", "types", "test", "samples"],
+  "exclude": ["node_modules", "build"]
+}

@@ -6,12 +6,19 @@ import {
   JsonTransformer,
 } from '@aries-framework/core'
 
-import { PolygonLedgerService } from '../ledger'
-
 import { isValidPolygonDid } from './didPolygonUtil'
+import { Resolver, ResolverRegistry } from 'did-resolver'
+
+import { getResolver } from '@ayanworks/polygon-did-resolver'
 
 export class PolygonDidResolver implements DidResolver {
   public readonly supportedMethods = ['polygon']
+
+  public resolver: Resolver
+
+  constructor() {
+    this.resolver = new Resolver(getResolver() as ResolverRegistry)
+  }
 
   public async resolve(agentContext: AgentContext, did: string): Promise<DidResolutionResult> {
     const didDocumentMetadata = {}
@@ -20,7 +27,14 @@ export class PolygonDidResolver implements DidResolver {
       throw new Error('Invalid DID')
     }
     try {
-      return this.resolveDidDoc(agentContext, did)
+      // return this.resolveDidDoc(agentContext, did)
+      const { didDocument, didDocumentMetadata, didResolutionMetadata } = await this.resolver.resolve(did)
+
+      return {
+        didDocument: JsonTransformer.fromJSON(didDocument, DidDocument),
+        didDocumentMetadata,
+        didResolutionMetadata,
+      }
     } catch (error) {
       return {
         didDocument: null,
@@ -30,18 +44,6 @@ export class PolygonDidResolver implements DidResolver {
           message: `resolver_error: Unable to resolve did '${did}': ${error}`,
         },
       }
-    }
-  }
-
-  private async resolveDidDoc(agentContext: AgentContext, did: string): Promise<DidResolutionResult> {
-    const polygonLedgerService = agentContext.dependencyManager.resolve(PolygonLedgerService)
-
-    const { didDocument, didDocumentMetadata, didResolutionMetadata } = await polygonLedgerService.resolve(did)
-
-    return {
-      didDocument: JsonTransformer.fromJSON(didDocument, DidDocument),
-      didDocumentMetadata,
-      didResolutionMetadata,
     }
   }
 }

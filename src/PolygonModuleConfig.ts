@@ -2,23 +2,16 @@
  * PolygonModuleConfigOptions defines the interface for the options of the PolygonModuleConfig class.
  */
 export interface PolygonModuleConfigOptions {
-  networks: NetworkConfig[]
-}
-
-export interface NetworkConfig {
-  rpcUrl?: string
-  network: string
+  rpcUrl: string
+  contractAddress: string
 }
 
 export class PolygonModuleConfig {
-  private options: PolygonModuleConfigOptions
+  public readonly rpcUrl!: string
+  public readonly contractAddress!: string
 
   public constructor(options: PolygonModuleConfigOptions) {
-    this.options = options
-  }
-
-  /** See {@link PolygonModuleConfigOptions.networks} */
-  public get networks() {
-    return this.options.networks
+    this.rpcUrl = options.rpcUrl
+    this.contractAddress = options.contractAddress
   }
 }

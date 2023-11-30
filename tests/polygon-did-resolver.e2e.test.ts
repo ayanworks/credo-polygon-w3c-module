@@ -49,7 +49,10 @@ describe('Polygon Module did resolver', () => {
       modules: {
         askar: new AskarModule({ ariesAskar }),
         // Add required modules
-        polygon: new PolygonModule(),
+        polygon: new PolygonModule({
+          rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
+          contractAddress: '0x8B335A167DA81CCef19C53eE629cf2F6291F2255',
+        }),
         dids: new DidsModule({
           resolvers: [new PolygonDidResolver()],
         }),

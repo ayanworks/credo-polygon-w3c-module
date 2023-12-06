@@ -1,11 +1,8 @@
 // Dids
-export { PolygonDidRegistrar, PolygonDidResolver } from "./dids"
+export { PolygonDidRegistrar, PolygonDidResolver } from './dids'
 
-export { PolygonLedgerService } from "./ledger"
+export { PolygonLedgerService } from './ledger'
 
-export { PolygonModule } from "./PolygonModule"
+export { PolygonModule } from './PolygonModule'
 
-export {
-  PolygonModuleConfig,
-  PolygonModuleConfigOptions,
-} from "./PolygonModuleConfig"
+export { PolygonModuleConfig, PolygonModuleConfigOptions } from './PolygonModuleConfig'

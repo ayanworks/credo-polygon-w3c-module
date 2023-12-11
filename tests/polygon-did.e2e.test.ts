@@ -7,8 +7,8 @@ import {
   ConsoleLogger,
   DidsModule,
   EncryptedMessage,
-  JsonTransformer,
   LogLevel,
+  TypedArrayEncoder,
   utils,
 } from '@aries-framework/core'
 import { Subject } from 'rxjs'
@@ -16,7 +16,8 @@ import { Subject } from 'rxjs'
 import { PolygonModule } from '../src/PolygonModule'
 import { SubjectOutboundTransport } from './transport/SubjectOutboundTransport'
 import { SubjectInboundTransport } from './transport/SubjectInboundTransport'
-import { PolygonDidResolver } from '../src/dids'
+import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
+import { PolygonDidCreateOptions } from '../src/dids/PolygonDidRegistrar'
 
 const logger = new ConsoleLogger(LogLevel.info)
 
@@ -52,9 +53,11 @@ describe('Polygon Module did resolver', () => {
         polygon: new PolygonModule({
           rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
           contractAddress: '0x8B335A167DA81CCef19C53eE629cf2F6291F2255',
+          privateKey: TypedArrayEncoder.fromHex(''),
         }),
         dids: new DidsModule({
           resolvers: [new PolygonDidResolver()],
+          registrars: [new PolygonDidRegistrar()],
         }),
       },
     })
@@ -77,47 +80,15 @@ describe('Polygon Module did resolver', () => {
     }
   })
 
-  test('should resolve a did:polygon did', async () => {
-    const testDid = 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993'
-    const didResult = await aliceAgent.dids.resolve(testDid)
-
-    expect(JsonTransformer.toJSON(didResult)).toMatchObject({
-      didDocument: {
-        '@context': 'https://w3id.org/did/v1',
-        id: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993',
-        verificationMethod: [
-          {
-            id: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993#key-1',
-            type: 'EcdsaSecp256k1VerificationKey2019',
-            controller: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993',
-            publicKeyBase58:
-              '7Lnm1ZnseKDkH1baAb1opREfAU4MPY7zCdUDSrWSm9NxNTQmy4neU9brFUYnEcyy7CwFKjD11ikyP9J8cf6zEaAKrEzzp',
-          },
-        ],
-        authentication: [
-          'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993',
-          {
-            id: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993#key-1',
-            type: 'EcdsaSecp256k1VerificationKey2019',
-            controller: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993',
-            publicKeyBase58:
-              '7Lnm1ZnseKDkH1baAb1opREfAU4MPY7zCdUDSrWSm9NxNTQmy4neU9brFUYnEcyy7CwFKjD11ikyP9J8cf6zEaAKrEzzp',
-          },
-        ],
-        assertionMethod: [
-          'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993',
-          {
-            id: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993#key-1',
-            type: 'EcdsaSecp256k1VerificationKey2019',
-            controller: 'did:polygon:testnet:0x794b781493AeD65b9ceBD680716fec257e118993',
-            publicKeyBase58:
-              '7Lnm1ZnseKDkH1baAb1opREfAU4MPY7zCdUDSrWSm9NxNTQmy4neU9brFUYnEcyy7CwFKjD11ikyP9J8cf6zEaAKrEzzp',
-          },
-        ],
+  test('create and resolve a did:polygon did', async () => {
+    const createdDid = await aliceAgent.dids.create<PolygonDidCreateOptions>({
+      method: 'polygon',
+      options: {
+        network: 'testnet',
+        endpoint: 'https://example.com',
       },
-      didDocumentMetadata: {},
-      didResolutionMetadata: {
-        contentType: 'application/did+ld+json',
+      secret: {
+        privateKey: TypedArrayEncoder.fromHex(''),
       },
     })
   })

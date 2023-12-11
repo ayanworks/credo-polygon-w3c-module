@@ -1,0 +1,302 @@
+diff --git a/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts b/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts
+index d1369ea..337d40e 100644
+--- a/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts
++++ b/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts
+@@ -6,5 +6,6 @@ export declare enum KeyType {
+     X25519 = "x25519",
+     P256 = "p256",
+     P384 = "p384",
+-    P521 = "p521"
++    P521 = "p521",
++    K256 = "k256"
+ }
+diff --git a/node_modules/@aries-framework/core/build/crypto/KeyType.js b/node_modules/@aries-framework/core/build/crypto/KeyType.js
+index dfb6a39..ebb1896 100644
+--- a/node_modules/@aries-framework/core/build/crypto/KeyType.js
++++ b/node_modules/@aries-framework/core/build/crypto/KeyType.js
+@@ -11,5 +11,6 @@ var KeyType;
+     KeyType["P256"] = "p256";
+     KeyType["P384"] = "p384";
+     KeyType["P521"] = "p521";
++    KeyType["K256"] = "k256";
+ })(KeyType = exports.KeyType || (exports.KeyType = {}));
+ //# sourceMappingURL=KeyType.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/crypto/KeyType.js.map b/node_modules/@aries-framework/core/build/crypto/KeyType.js.map
+index e392656..9f23300 100644
+--- a/node_modules/@aries-framework/core/build/crypto/KeyType.js.map
++++ b/node_modules/@aries-framework/core/build/crypto/KeyType.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"KeyType.js","sourceRoot":"","sources":["../../src/crypto/KeyType.ts"],"names":[],"mappings":";;;AAAA,IAAY,OASX;AATD,WAAY,OAAO;IACjB,8BAAmB,CAAA;IACnB,wCAA6B,CAAA;IAC7B,oCAAyB,CAAA;IACzB,oCAAyB,CAAA;IACzB,4BAAiB,CAAA;IACjB,wBAAa,CAAA;IACb,wBAAa,CAAA;IACb,wBAAa,CAAA;AACf,CAAC,EATW,OAAO,GAAP,eAAO,KAAP,eAAO,QASlB"}
+\ No newline at end of file
++{"version":3,"file":"KeyType.js","sourceRoot":"","sources":["../../src/crypto/KeyType.ts"],"names":[],"mappings":";;;AAAA,IAAY,OAUX;AAVD,WAAY,OAAO;IACjB,8BAAmB,CAAA;IACnB,wCAA6B,CAAA;IAC7B,oCAAyB,CAAA;IACzB,oCAAyB,CAAA;IACzB,4BAAiB,CAAA;IACjB,wBAAa,CAAA;IACb,wBAAa,CAAA;IACb,wBAAa,CAAA;IACb,wBAAa,CAAA;AACf,CAAC,EAVW,OAAO,GAAP,eAAO,KAAP,eAAO,QAUlB"}
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/crypto/keyUtils.js b/node_modules/@aries-framework/core/build/crypto/keyUtils.js
+index 6963c44..7917482 100644
+--- a/node_modules/@aries-framework/core/build/crypto/keyUtils.js
++++ b/node_modules/@aries-framework/core/build/crypto/keyUtils.js
+@@ -13,6 +13,7 @@ function isValidSeed(seed, keyType) {
+         [KeyType_1.KeyType.P256]: 64,
+         [KeyType_1.KeyType.P384]: 64,
+         [KeyType_1.KeyType.P521]: 64,
++        [KeyType_1.KeyType.K256]: 64,
+     };
+     return utils_1.Buffer.isBuffer(seed) && seed.length >= minimumSeedLength[keyType];
+ }
+@@ -27,6 +28,7 @@ function isValidPrivateKey(privateKey, keyType) {
+         [KeyType_1.KeyType.P256]: 32,
+         [KeyType_1.KeyType.P384]: 48,
+         [KeyType_1.KeyType.P521]: 66,
++        [KeyType_1.KeyType.K256]: 32,
+     };
+     return utils_1.Buffer.isBuffer(privateKey) && privateKey.length === privateKeyLength[keyType];
+ }
+@@ -41,6 +43,7 @@ function isSigningSupportedForKeyType(keyType) {
+         [KeyType_1.KeyType.Bls12381g1]: true,
+         [KeyType_1.KeyType.Bls12381g2]: true,
+         [KeyType_1.KeyType.Bls12381g1g2]: true,
++        [KeyType_1.KeyType.K256]: true,
+     };
+     return keyTypeSigningSupportedMapping[keyType];
+ }
+@@ -55,6 +58,7 @@ function isEncryptionSupportedForKeyType(keyType) {
+         [KeyType_1.KeyType.Bls12381g1]: false,
+         [KeyType_1.KeyType.Bls12381g2]: false,
+         [KeyType_1.KeyType.Bls12381g1g2]: false,
++        [KeyType_1.KeyType.K256]: true,
+     };
+     return keyTypeEncryptionSupportedMapping[keyType];
+ }
+diff --git a/node_modules/@aries-framework/core/build/crypto/keyUtils.js.map b/node_modules/@aries-framework/core/build/crypto/keyUtils.js.map
+index 56f0cc0..9bff8f9 100644
+--- a/node_modules/@aries-framework/core/build/crypto/keyUtils.js.map
++++ b/node_modules/@aries-framework/core/build/crypto/keyUtils.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"keyUtils.js","sourceRoot":"","sources":["../../src/crypto/keyUtils.ts"],"names":[],"mappings":";;;AAAA,oCAAiC;AAEjC,uCAAmC;AAEnC,SAAgB,WAAW,CAAC,IAAY,EAAE,OAAgB;IACxD,MAAM,iBAAiB,GAAG;QACxB,CAAC,iBAAO,CAAC,OAAO,CAAC,EAAE,EAAE;QACrB,CAAC,iBAAO,CAAC,MAAM,CAAC,EAAE,EAAE;QACpB,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,EAAE;QACxB,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,EAAE;QACxB,CAAC,iBAAO,CAAC,YAAY,CAAC,EAAE,EAAE;QAC1B,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,EAAE;QAClB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,EAAE;QAClB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,EAAE;KACV,CAAA;IAEV,OAAO,cAAM,CAAC,QAAQ,CAAC,IAAI,CAAC,IAAI,IAAI,CAAC,MAAM,IAAI,iBAAiB,CAAC,OAAO,CAAC,CAAA;AAC3E,CAAC;AAbD,kCAaC;AAED,SAAgB,iBAAiB,CAAC,UAAkB,EAAE,OAAgB;IACpE,MAAM,gBAAgB,GAAG;QACvB,CAAC,iBAAO,CAAC,OAAO,CAAC,EAAE,EAAE;QACrB,CAAC,iBAAO,CAAC,MAAM,CAAC,EAAE,EAAE;QACpB,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,EAAE;QACxB,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,EAAE;QACxB,CAAC,iBAAO,CAAC,YAAY,CAAC,EAAE,EAAE;QAC1B,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,EAAE;QAClB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,EAAE;QAClB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,EAAE;KACV,CAAA;IAEV,OAAO,cAAM,CAAC,QAAQ,CAAC,UAAU,CAAC,IAAI,UAAU,CAAC,MAAM,KAAK,gBAAgB,CAAC,OAAO,CAAC,CAAA;AACvF,CAAC;AAbD,8CAaC;AAED,SAAgB,4BAA4B,CAAC,OAAgB;IAC3D,MAAM,8BAA8B,GAAG;QACrC,CAAC,iBAAO,CAAC,OAAO,CAAC,EAAE,IAAI;QACvB,CAAC,iBAAO,CAAC,MAAM,CAAC,EAAE,KAAK;QACvB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,IAAI;QACpB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,IAAI;QACpB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,IAAI;QACpB,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,IAAI;QAC1B,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,IAAI;QAC1B,CAAC,iBAAO,CAAC,YAAY,CAAC,EAAE,IAAI;KACpB,CAAA;IAEV,OAAO,8BAA8B,CAAC,OAAO,CAAC,CAAA;AAChD,CAAC;AAbD,oEAaC;AAED,SAAgB,+BAA+B,CAAC,OAAgB;IAC9D,MAAM,iCAAiC,GAAG;QACxC,CAAC,iBAAO,CAAC,OAAO,CAAC,EAAE,KAAK;QACxB,CAAC,iBAAO,CAAC,MAAM,CAAC,EAAE,IAAI;QACtB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,IAAI;QACpB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,IAAI;QACpB,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,IAAI;QACpB,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,KAAK;QAC3B,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,KAAK;QAC3B,CAAC,iBAAO,CAAC,YAAY,CAAC,EAAE,KAAK;KACrB,CAAA;IAEV,OAAO,iCAAiC,CAAC,OAAO,CAAC,CAAA;AACnD,CAAC;AAbD,0EAaC"}
+\ No newline at end of file
++{"version":3,"file":"keyUtils.js","sourceRoot":"","sources":["../../src/crypto/keyUtils.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js
+index cfba351..414c459 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js
+@@ -10,6 +10,7 @@ const bls12381g1g2_1 = require("./bls12381g1g2");
+ const bls12381g2_1 = require("./bls12381g2");
+ const ed25519_1 = require("./ed25519");
+ const keyDidJsonWebKey_1 = require("./keyDidJsonWebKey");
++const secp256k1_1 = require("./secp256k1");
+ const x25519_1 = require("./x25519");
+ // TODO: Maybe we should make this dynamically?
+ const keyDidMapping = {
+@@ -21,6 +22,7 @@ const keyDidMapping = {
+     [KeyType_1.KeyType.P256]: keyDidJsonWebKey_1.keyDidJsonWebKey,
+     [KeyType_1.KeyType.P384]: keyDidJsonWebKey_1.keyDidJsonWebKey,
+     [KeyType_1.KeyType.P521]: keyDidJsonWebKey_1.keyDidJsonWebKey,
++    [KeyType_1.KeyType.K256]: secp256k1_1.keyDidSecp256k1,
+ };
+ /**
+  * Dynamically creates a mapping from verification method key type to the key Did interface
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js.map
+index e6f9a12..46769b4 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js.map
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/keyDidMapping.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"keyDidMapping.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/keyDidMapping.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,qDAA4D;AAC5D,6CAAuD;AACvD,yEAAmH;AAEnH,6CAA+C;AAC/C,iDAAmD;AACnD,6CAA+C;AAC/C,uCAAyC;AACzC,yDAAqD;AACrD,qCAAuC;AAQvC,+CAA+C;AAC/C,MAAM,aAAa,GAAmC;IACpD,CAAC,iBAAO,CAAC,OAAO,CAAC,EAAE,uBAAa;IAChC,CAAC,iBAAO,CAAC,MAAM,CAAC,EAAE,qBAAY;IAC9B,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,6BAAgB;IACtC,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,6BAAgB;IACtC,CAAC,iBAAO,CAAC,YAAY,CAAC,EAAE,iCAAkB;IAC1C,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,mCAAgB;IAChC,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,mCAAgB;IAChC,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,mCAAgB;CACjC,CAAA;AAED;;;;;;;GAOG;AACH,MAAM,+BAA+B,GAAG,MAAM,CAAC,MAAM,CAAC,iBAAO,CAAC,CAAC,MAAM,CACnE,CAAC,OAAO,EAAE,OAAO,EAAE,EAAE;IACnB,MAAM,SAAS,GAAG,aAAa,CAAC,OAAO,CAAC,CAAC,gCAAgC,CAAC,MAAM,CAC9E,CAAC,WAAW,EAAE,cAAc,EAAE,EAAE,CAAC,iCAC5B,WAAW,KACd,CAAC,cAAc,CAAC,EAAE,aAAa,CAAC,OAAO,CAAC,IACxC,EACF,EAAE,CACH,CAAA;IAED,uCACK,OAAO,GACP,SAAS,EACb;AACH,CAAC,EACD,EAAE,CACH,CAAA;AAED,SAAgB,yBAAyB,CAAC,OAAgB;IACxD,MAAM,MAAM,GAAG,aAAa,CAAC,OAAO,CAAC,CAAA;IAErC,IAAI,CAAC,MAAM,EAAE;QACX,MAAM,IAAI,2BAAmB,CAAC,sCAAsC,OAAO,GAAG,CAAC,CAAA;KAChF;IAED,OAAO,MAAM,CAAA;AACf,CAAC;AARD,8DAQC;AAED,SAAgB,4BAA4B,CAAC,kBAAsC;IACjF,iFAAiF;IACjF,IAAI,IAAA,iCAAgB,EAAC,kBAAkB,CAAC,EAAE;QACxC,8CAA8C;QAC9C,IAAI,CAAC,kBAAkB,CAAC,YAAY,EAAE;YACpC,MAAM,IAAI,2BAAmB,CAC3B,yDAAyD,2DAA0C,EAAE,CACtG,CAAA;SACF;QAED,OAAO,IAAA,oBAAc,EAAC,kBAAkB,CAAC,YAAY,CAAC,CAAC,GAAG,CAAA;KAC3D;IAED,MAAM,MAAM,GAAG,+BAA+B,CAAC,kBAAkB,CAAC,IAAI,CAAC,CAAA;IACvE,IAAI,CAAC,MAAM,EAAE;QACX,MAAM,IAAI,2BAAmB,CAAC,sDAAsD,kBAAkB,CAAC,IAAI,GAAG,CAAC,CAAA;KAChH;IAED,OAAO,MAAM,CAAC,4BAA4B,CAAC,kBAAkB,CAAC,CAAA;AAChE,CAAC;AAnBD,oEAmBC;AAED,SAAgB,8CAA8C,CAAC,OAAgB;IAC7E,MAAM,MAAM,GAAG,aAAa,CAAC,OAAO,CAAC,CAAA;IAErC,IAAI,CAAC,MAAM,EAAE;QACX,MAAM,IAAI,2BAAmB,CAAC,sCAAsC,OAAO,GAAG,CAAC,CAAA;KAChF;IAED,OAAO,MAAM,CAAC,gCAAgC,CAAA;AAChD,CAAC;AARD,wGAQC"}
+\ No newline at end of file
++{"version":3,"file":"keyDidMapping.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/keyDidMapping.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,qDAA4D;AAC5D,6CAAuD;AACvD,yEAAmH;AAEnH,6CAA+C;AAC/C,iDAAmD;AACnD,6CAA+C;AAC/C,uCAAyC;AACzC,yDAAqD;AACrD,2CAA6C;AAC7C,qCAAuC;AAQvC,+CAA+C;AAC/C,MAAM,aAAa,GAAmC;IACpD,CAAC,iBAAO,CAAC,OAAO,CAAC,EAAE,uBAAa;IAChC,CAAC,iBAAO,CAAC,MAAM,CAAC,EAAE,qBAAY;IAC9B,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,6BAAgB;IACtC,CAAC,iBAAO,CAAC,UAAU,CAAC,EAAE,6BAAgB;IACtC,CAAC,iBAAO,CAAC,YAAY,CAAC,EAAE,iCAAkB;IAC1C,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,mCAAgB;IAChC,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,mCAAgB;IAChC,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,mCAAgB;IAChC,CAAC,iBAAO,CAAC,IAAI,CAAC,EAAE,2BAAe;CAChC,CAAA;AAED;;;;;;;GAOG;AACH,MAAM,+BAA+B,GAAG,MAAM,CAAC,MAAM,CAAC,iBAAO,CAAC,CAAC,MAAM,CACnE,CAAC,OAAO,EAAE,OAAO,EAAE,EAAE;IACnB,MAAM,SAAS,GAAG,aAAa,CAAC,OAAO,CAAC,CAAC,gCAAgC,CAAC,MAAM,CAC9E,CAAC,WAAW,EAAE,cAAc,EAAE,EAAE,CAAC,iCAC5B,WAAW,KACd,CAAC,cAAc,CAAC,EAAE,aAAa,CAAC,OAAO,CAAC,IACxC,EACF,EAAE,CACH,CAAA;IAED,uCACK,OAAO,GACP,SAAS,EACb;AACH,CAAC,EACD,EAAE,CACH,CAAA;AAED,SAAgB,yBAAyB,CAAC,OAAgB;IACxD,MAAM,MAAM,GAAG,aAAa,CAAC,OAAO,CAAC,CAAA;IAErC,IAAI,CAAC,MAAM,EAAE;QACX,MAAM,IAAI,2BAAmB,CAAC,sCAAsC,OAAO,GAAG,CAAC,CAAA;KAChF;IAED,OAAO,MAAM,CAAA;AACf,CAAC;AARD,8DAQC;AAED,SAAgB,4BAA4B,CAAC,kBAAsC;IACjF,iFAAiF;IACjF,IAAI,IAAA,iCAAgB,EAAC,kBAAkB,CAAC,EAAE;QACxC,8CAA8C;QAC9C,IAAI,CAAC,kBAAkB,CAAC,YAAY,EAAE;YACpC,MAAM,IAAI,2BAAmB,CAC3B,yDAAyD,2DAA0C,EAAE,CACtG,CAAA;SACF;QAED,OAAO,IAAA,oBAAc,EAAC,kBAAkB,CAAC,YAAY,CAAC,CAAC,GAAG,CAAA;KAC3D;IAED,MAAM,MAAM,GAAG,+BAA+B,CAAC,kBAAkB,CAAC,IAAI,CAAC,CAAA;IACvE,IAAI,CAAC,MAAM,EAAE;QACX,MAAM,IAAI,2BAAmB,CAAC,sDAAsD,kBAAkB,CAAC,IAAI,GAAG,CAAC,CAAA;KAChH;IAED,OAAO,MAAM,CAAC,4BAA4B,CAAC,kBAAkB,CAAC,CAAA;AAChE,CAAC;AAnBD,oEAmBC;AAED,SAAgB,8CAA8C,CAAC,OAAgB;IAC7E,MAAM,MAAM,GAAG,aAAa,CAAC,OAAO,CAAC,CAAA;IAErC,IAAI,CAAC,MAAM,EAAE;QACX,MAAM,IAAI,2BAAmB,CAAC,sCAAsC,OAAO,GAAG,CAAC,CAAA;KAChF;IAED,OAAO,MAAM,CAAC,gCAAgC,CAAA;AAChD,CAAC;AARD,wGAQC"}
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.d.ts b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.d.ts
+new file mode 100644
+index 0000000..2d10f87
+--- /dev/null
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.d.ts
+@@ -0,0 +1,2 @@
++import type { KeyDidMapping } from './keyDidMapping';
++export declare const keyDidSecp256k1: KeyDidMapping;
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js
+new file mode 100644
+index 0000000..bf7c827
+--- /dev/null
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js
+@@ -0,0 +1,22 @@
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.keyDidSecp256k1 = void 0;
++const KeyType_1 = require("../../../../crypto/KeyType");
++const error_1 = require("../../../../error");
++const verificationMethod_1 = require("../verificationMethod");
++exports.keyDidSecp256k1 = {
++    supportedVerificationMethodTypes: [verificationMethod_1.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019],
++    getVerificationMethods: (did, key) => [
++        (0, verificationMethod_1.getEcdsaSecp256k1VerificationKey2019)({ id: `${did}#${key.fingerprint}`, key, controller: did }),
++    ],
++    getKeyFromVerificationMethod: (verificationMethod) => {
++        if ((0, verificationMethod_1.isEcdsaSecp256k1VerificationKey2019)(verificationMethod)) {
++            return (0, verificationMethod_1.getKeyFromEcdsaSecp256k1VerificationKey2019)(verificationMethod);
++        }
++        if ((0, verificationMethod_1.isJsonWebKey2020)(verificationMethod)) {
++            return (0, verificationMethod_1.getKeyFromJsonWebKey2020)(verificationMethod);
++        }
++        throw new error_1.AriesFrameworkError(`Verification method with type '${verificationMethod.type}' not supported for key type '${KeyType_1.KeyType.K256}'`);
++    },
++};
++//# sourceMappingURL=secp256k1.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map
+new file mode 100644
+index 0000000..b9e9dde
+--- /dev/null
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"secp256k1.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/secp256k1.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,6CAAuD;AACvD,8DAO8B;AAEjB,QAAA,eAAe,GAAkB;IAC5C,gCAAgC,EAAE,CAAC,mFAA8D,CAAC;IAClG,sBAAsB,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC;QACpC,IAAA,yDAAoC,EAAC,EAAE,EAAE,EAAE,GAAG,GAAG,IAAI,GAAG,CAAC,WAAW,EAAE,EAAE,GAAG,EAAE,UAAU,EAAE,GAAG,EAAE,CAAC;KAChG;IACD,4BAA4B,EAAE,CAAC,kBAAsC,EAAE,EAAE;QACvE,IAAI,IAAA,wDAAmC,EAAC,kBAAkB,CAAC,EAAE;YAC3D,OAAO,IAAA,gEAA2C,EAAC,kBAAkB,CAAC,CAAA;SACvE;QAED,IAAI,IAAA,qCAAgB,EAAC,kBAAkB,CAAC,EAAE;YACxC,OAAO,IAAA,6CAAwB,EAAC,kBAAkB,CAAC,CAAA;SACpD;QAED,MAAM,IAAI,2BAAmB,CAC3B,kCAAkC,kBAAkB,CAAC,IAAI,iCAAiC,iBAAO,CAAC,IAAI,GAAG,CAC1G,CAAA;IACH,CAAC;CACF,CAAA"}
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js b/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js
+index efafb05..bead61c 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js
+@@ -19,6 +19,7 @@ const didDocumentKeyTypeMapping = {
+     [KeyType_1.KeyType.P256]: getJsonWebKey2020DidDocument,
+     [KeyType_1.KeyType.P384]: getJsonWebKey2020DidDocument,
+     [KeyType_1.KeyType.P521]: getJsonWebKey2020DidDocument,
++    [KeyType_1.KeyType.K256]: getSecp256k1DidDoc,
+ };
+ function getDidDocumentForKey(did, key) {
+     const getDidDocument = didDocumentKeyTypeMapping[key.keyType];
+@@ -111,4 +112,7 @@ function getSignatureKeyBase({ did, key, verificationMethod, }) {
+         .addCapabilityDelegation(keyId)
+         .addCapabilityInvocation(keyId);
+ }
++function getSecp256k1DidDoc(id, key) {
++    throw new Error('Method not implemented.');
++}
+ //# sourceMappingURL=keyDidDocument.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js.map
+index 2ef248f..cd5dcbd 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js.map
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"keyDidDocument.js","sourceRoot":"","sources":["../../../../src/modules/dids/domain/keyDidDocument.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
++{"version":3,"file":"keyDidDocument.js","sourceRoot":"","sources":["../../../../src/modules/dids/domain/keyDidDocument.ts"],"names":[],"mappings":"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"}
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.d.ts b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.d.ts
+new file mode 100644
+index 0000000..4f6a471
+--- /dev/null
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.d.ts
+@@ -0,0 +1,23 @@
++import { Key } from '../../../../crypto/Key';
++import { VerificationMethod } from './VerificationMethod';
++export declare const VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019 = "EcdsaSecp256k1VerificationKey2019";
++type EcdsaSecp256k1VerificationKey2019 = VerificationMethod & {
++    type: typeof VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019;
++};
++/**
++ * Get a EcdsaSecp256k1VerificationKey2019 verification method.
++ */
++export declare function getEcdsaSecp256k1VerificationKey2019({ key, id, controller, }: {
++    id: string;
++    key: Key;
++    controller: string;
++}): VerificationMethod;
++/**
++ * Check whether a verification method is a EcdsaSecp256k1VerificationKey2019 verification method.
++ */
++export declare function isEcdsaSecp256k1VerificationKey2019(verificationMethod: VerificationMethod): verificationMethod is EcdsaSecp256k1VerificationKey2019;
++/**
++ * Get a key from a EcdsaSecp256k1VerificationKey2019 verification method.
++ */
++export declare function getKeyFromEcdsaSecp256k1VerificationKey2019(verificationMethod: EcdsaSecp256k1VerificationKey2019): Key;
++export {};
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js
+new file mode 100644
+index 0000000..298ba8e
+--- /dev/null
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js
+@@ -0,0 +1,43 @@
++"use strict";
++// import { AriesFrameworkError, Key, KeyType, VerificationMethod } from '@aries-framework/core'
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.getKeyFromEcdsaSecp256k1VerificationKey2019 = exports.isEcdsaSecp256k1VerificationKey2019 = exports.getEcdsaSecp256k1VerificationKey2019 = exports.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019 = void 0;
++const Key_1 = require("../../../../crypto/Key");
++const KeyType_1 = require("../../../../crypto/KeyType");
++const error_1 = require("../../../../error");
++const VerificationMethod_1 = require("./VerificationMethod");
++exports.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019 = 'EcdsaSecp256k1VerificationKey2019';
++/**
++ * Get a EcdsaSecp256k1VerificationKey2019 verification method.
++ */
++function getEcdsaSecp256k1VerificationKey2019({ key, id, controller, }) {
++    return new VerificationMethod_1.VerificationMethod({
++        id,
++        type: exports.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
++        controller,
++        publicKeyMultibase: key.fingerprint,
++    });
++}
++exports.getEcdsaSecp256k1VerificationKey2019 = getEcdsaSecp256k1VerificationKey2019;
++/**
++ * Check whether a verification method is a EcdsaSecp256k1VerificationKey2019 verification method.
++ */
++function isEcdsaSecp256k1VerificationKey2019(verificationMethod) {
++    return verificationMethod.type === exports.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019;
++}
++exports.isEcdsaSecp256k1VerificationKey2019 = isEcdsaSecp256k1VerificationKey2019;
++/**
++ * Get a key from a EcdsaSecp256k1VerificationKey2019 verification method.
++ */
++function getKeyFromEcdsaSecp256k1VerificationKey2019(verificationMethod) {
++    if (!verificationMethod.publicKeyMultibase) {
++        throw new error_1.AriesFrameworkError('verification method is missing publicKeyMultibase');
++    }
++    const key = Key_1.Key.fromFingerprint(verificationMethod.publicKeyMultibase);
++    if (key.keyType !== KeyType_1.KeyType.K256) {
++        throw new error_1.AriesFrameworkError(`Verification method publicKeyMultibase is for unexpected key type ${key.keyType}`);
++    }
++    return key;
++}
++exports.getKeyFromEcdsaSecp256k1VerificationKey2019 = getKeyFromEcdsaSecp256k1VerificationKey2019;
++//# sourceMappingURL=EcdsaSecp256k1VerificationKey2019.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js.map
+new file mode 100644
+index 0000000..151cffa
+--- /dev/null
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js.map
+@@ -0,0 +1 @@
++{"version":3,"file":"EcdsaSecp256k1VerificationKey2019.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.ts"],"names":[],"mappings":";AAAA,gGAAgG;;;AAEhG,gDAA4C;AAC5C,wDAAoD;AACpD,6CAAuD;AAEvD,6DAAyD;AAE5C,QAAA,8DAA8D,GAAG,mCAAmC,CAAA;AAKjH;;GAEG;AACH,SAAgB,oCAAoC,CAAC,EACnD,GAAG,EACH,EAAE,EACF,UAAU,GAKX;IACC,OAAO,IAAI,uCAAkB,CAAC;QAC5B,EAAE;QACF,IAAI,EAAE,sEAA8D;QACpE,UAAU;QACV,kBAAkB,EAAE,GAAG,CAAC,WAAW;KACpC,CAAC,CAAA;AACJ,CAAC;AAfD,oFAeC;AAED;;GAEG;AACH,SAAgB,mCAAmC,CACjD,kBAAsC;IAEtC,OAAO,kBAAkB,CAAC,IAAI,KAAK,sEAA8D,CAAA;AACnG,CAAC;AAJD,kFAIC;AAED;;GAEG;AACH,SAAgB,2CAA2C,CAAC,kBAAqD;IAC/G,IAAI,CAAC,kBAAkB,CAAC,kBAAkB,EAAE;QAC1C,MAAM,IAAI,2BAAmB,CAAC,mDAAmD,CAAC,CAAA;KACnF;IAED,MAAM,GAAG,GAAG,SAAG,CAAC,eAAe,CAAC,kBAAkB,CAAC,kBAAkB,CAAC,CAAA;IACtE,IAAI,GAAG,CAAC,OAAO,KAAK,iBAAO,CAAC,IAAI,EAAE;QAChC,MAAM,IAAI,2BAAmB,CAAC,qEAAqE,GAAG,CAAC,OAAO,EAAE,CAAC,CAAA;KAClH;IAED,OAAO,GAAG,CAAA;AACZ,CAAC;AAXD,kGAWC"}
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.d.ts b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.d.ts
+index c5d1f5d..3297e2e 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.d.ts
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.d.ts
+@@ -4,5 +4,6 @@ export * from './Bls12381G1Key2020';
+ export * from './Bls12381G2Key2020';
+ export * from './Ed25519VerificationKey2018';
+ export * from './Ed25519VerificationKey2020';
++export * from './EcdsaSecp256k1VerificationKey2019';
+ export * from './JsonWebKey2020';
+ export * from './X25519KeyAgreementKey2019';
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js
+index fe7774c..03ca5d0 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js
+@@ -24,6 +24,7 @@ __exportStar(require("./Bls12381G1Key2020"), exports);
+ __exportStar(require("./Bls12381G2Key2020"), exports);
+ __exportStar(require("./Ed25519VerificationKey2018"), exports);
+ __exportStar(require("./Ed25519VerificationKey2020"), exports);
++__exportStar(require("./EcdsaSecp256k1VerificationKey2019"), exports);
+ __exportStar(require("./JsonWebKey2020"), exports);
+ __exportStar(require("./X25519KeyAgreementKey2019"), exports);
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js.map
+index ef7616f..6bc9831 100644
+--- a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js.map
++++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/verificationMethod/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;AAAA,2DAAyD;AAAhD,wHAAA,kBAAkB,OAAA;AAC3B,iFAA6G;AAApG,8IAAA,6BAA6B,OAAA;AAAE,6IAAA,4BAA4B,OAAA;AAEpE,sDAAmC;AACnC,sDAAmC;AACnC,+DAA4C;AAC5C,+DAA4C;AAC5C,mDAAgC;AAChC,8DAA2C"}
+\ No newline at end of file
++{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/verificationMethod/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;AAAA,2DAAyD;AAAhD,wHAAA,kBAAkB,OAAA;AAC3B,iFAA6G;AAApG,8IAAA,6BAA6B,OAAA;AAAE,6IAAA,4BAA4B,OAAA;AAEpE,sDAAmC;AACnC,sDAAmC;AACnC,+DAA4C;AAC5C,+DAA4C;AAC5C,sEAAmD;AACnD,mDAAgC;AAChC,8DAA2C"}
+\ No newline at end of file

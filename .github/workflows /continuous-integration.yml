@@ -41,10 +41,6 @@ jobs:
     runs-on: ubuntu-20.04
     name: Integration Tests
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-
     steps:
       - name: Checkout afj-polygon-w3c-module
         uses: actions/checkout@v4
@@ -52,7 +48,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
           cache: 'yarn'
 
       - name: Install dependencies

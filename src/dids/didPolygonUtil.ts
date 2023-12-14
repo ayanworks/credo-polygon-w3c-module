@@ -1,14 +1,8 @@
 import {
   DidCreateResult,
-  AgentContext,
-  AriesFrameworkError,
-  getKeyFromVerificationMethod,
-  VERIFICATION_METHOD_TYPE_ED25519_VERIFICATION_KEY_2018,
-  VERIFICATION_METHOD_TYPE_JSON_WEB_KEY_2020,
-  VERIFICATION_METHOD_TYPE_ED25519_VERIFICATION_KEY_2020,
   DidDocument,
+  VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
 } from '@aries-framework/core'
-import { PolygonDidResolver } from './PolygonDidResolver'
 import { computeAddress } from 'ethers'
 
 export const polygonDidRegex = new RegExp(/^did:polygon(:testnet)?:0x[0-9a-fA-F]{40}$/)
@@ -17,6 +11,10 @@ export const isValidPolygonDid = (did: string) => polygonDidRegex.test(did)
 
 export function buildDid(method: string, network: string, publicKey: string): string {
   const address = computeAddress('0x' + publicKey)
+
+  if (network === 'mainnet') {
+    return `did:${method}:${address}`
+  }
 
   return `did:${method}:${network}:${address}`
 }
@@ -48,13 +46,7 @@ export function validateSpecCompliantPayload(didDocument: DidDocument): string |
   // verificationMethod types must be supported
   const isValidVerificationMethod = didDocument.verificationMethod.every((vm) => {
     switch (vm.type) {
-      // case VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019:
-      case VERIFICATION_METHOD_TYPE_ED25519_VERIFICATION_KEY_2020:
-        return vm.publicKeyMultibase != null
-      case VERIFICATION_METHOD_TYPE_JSON_WEB_KEY_2020:
-        return vm.publicKeyJwk != null
-      case VERIFICATION_METHOD_TYPE_ED25519_VERIFICATION_KEY_2018:
-        return vm.publicKeyBase58 != null
+      case VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019:
       default:
         return false
     }
@@ -71,21 +63,4 @@ export function validateSpecCompliantPayload(didDocument: DidDocument): string |
   if (!isValidService) return 'Service is Invalid'
 
   return null
-}
-
-export async function verificationKeyForDid(agentContext: AgentContext, did: string) {
-  const resolver = agentContext.dependencyManager.resolve(PolygonDidResolver)
-
-  const { didDocument, didDocumentMetadata, didResolutionMetadata } = await resolver.resolve(agentContext, did)
-
-  if (didResolutionMetadata.error)
-    throw new AriesFrameworkError(`${didResolutionMetadata.error}: ${didResolutionMetadata.message}`)
-  if (didDocumentMetadata.deactivated) throw new AriesFrameworkError('DID has been deactivated')
-  if (!didDocument) throw new AriesFrameworkError('DID not found')
-
-  // did:indy dids MUST have a verificationMethod with #verkey
-  const verificationMethod = didDocument.dereferenceKey(`${did}#KEY-1`)
-  const key = getKeyFromVerificationMethod(verificationMethod)
-
-  return key
 }

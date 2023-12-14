@@ -115,10 +115,10 @@ index 0000000..2d10f87
 +export declare const keyDidSecp256k1: KeyDidMapping;
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js
 new file mode 100644
-index 0000000..bf7c827
+index 0000000..48e5a9b
 --- /dev/null
 +++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js
-@@ -0,0 +1,22 @@
+@@ -0,0 +1,19 @@
 +"use strict";
 +Object.defineProperty(exports, "__esModule", { value: true });
 +exports.keyDidSecp256k1 = void 0;
@@ -128,14 +128,11 @@ index 0000000..bf7c827
 +exports.keyDidSecp256k1 = {
 +    supportedVerificationMethodTypes: [verificationMethod_1.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019],
 +    getVerificationMethods: (did, key) => [
-+        (0, verificationMethod_1.getEcdsaSecp256k1VerificationKey2019)({ id: `${did}#${key.fingerprint}`, key, controller: did }),
++        (0, verificationMethod_1.getEcdsaSecp256k1VerificationKey2019)({ id: `${did}#key-1`, key, controller: did }),
 +    ],
 +    getKeyFromVerificationMethod: (verificationMethod) => {
 +        if ((0, verificationMethod_1.isEcdsaSecp256k1VerificationKey2019)(verificationMethod)) {
 +            return (0, verificationMethod_1.getKeyFromEcdsaSecp256k1VerificationKey2019)(verificationMethod);
-+        }
-+        if ((0, verificationMethod_1.isJsonWebKey2020)(verificationMethod)) {
-+            return (0, verificationMethod_1.getKeyFromJsonWebKey2020)(verificationMethod);
 +        }
 +        throw new error_1.AriesFrameworkError(`Verification method with type '${verificationMethod.type}' not supported for key type '${KeyType_1.KeyType.K256}'`);
 +    },
@@ -144,11 +141,11 @@ index 0000000..bf7c827
 \ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map
 new file mode 100644
-index 0000000..b9e9dde
+index 0000000..b469b40
 --- /dev/null
 +++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map
 @@ -0,0 +1 @@
-+{"version":3,"file":"secp256k1.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/secp256k1.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,6CAAuD;AACvD,8DAO8B;AAEjB,QAAA,eAAe,GAAkB;IAC5C,gCAAgC,EAAE,CAAC,mFAA8D,CAAC;IAClG,sBAAsB,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC;QACpC,IAAA,yDAAoC,EAAC,EAAE,EAAE,EAAE,GAAG,GAAG,IAAI,GAAG,CAAC,WAAW,EAAE,EAAE,GAAG,EAAE,UAAU,EAAE,GAAG,EAAE,CAAC;KAChG;IACD,4BAA4B,EAAE,CAAC,kBAAsC,EAAE,EAAE;QACvE,IAAI,IAAA,wDAAmC,EAAC,kBAAkB,CAAC,EAAE;YAC3D,OAAO,IAAA,gEAA2C,EAAC,kBAAkB,CAAC,CAAA;SACvE;QAED,IAAI,IAAA,qCAAgB,EAAC,kBAAkB,CAAC,EAAE;YACxC,OAAO,IAAA,6CAAwB,EAAC,kBAAkB,CAAC,CAAA;SACpD;QAED,MAAM,IAAI,2BAAmB,CAC3B,kCAAkC,kBAAkB,CAAC,IAAI,iCAAiC,iBAAO,CAAC,IAAI,GAAG,CAC1G,CAAA;IACH,CAAC;CACF,CAAA"}
++{"version":3,"file":"secp256k1.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/secp256k1.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,6CAAuD;AACvD,8DAK8B;AAEjB,QAAA,eAAe,GAAkB;IAC5C,gCAAgC,EAAE,CAAC,mFAA8D,CAAC;IAClG,sBAAsB,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC;QACpC,IAAA,yDAAoC,EAAC,EAAE,EAAE,EAAE,GAAG,GAAG,QAAQ,EAAE,GAAG,EAAE,UAAU,EAAE,GAAG,EAAE,CAAC;KACnF;IACD,4BAA4B,EAAE,CAAC,kBAAsC,EAAE,EAAE;QACvE,IAAI,IAAA,wDAAmC,EAAC,kBAAkB,CAAC,EAAE;YAC3D,OAAO,IAAA,gEAA2C,EAAC,kBAAkB,CAAC,CAAA;SACvE;QAED,MAAM,IAAI,2BAAmB,CAC3B,kCAAkC,kBAAkB,CAAC,IAAI,iCAAiC,iBAAO,CAAC,IAAI,GAAG,CAC1G,CAAA;IACH,CAAC;CACF,CAAA"}
 \ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js b/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js
 index efafb05..bead61c 100644
@@ -211,10 +208,10 @@ index 0000000..4f6a471
 +export {};
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js
 new file mode 100644
-index 0000000..298ba8e
+index 0000000..935b1e6
 --- /dev/null
 +++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js
-@@ -0,0 +1,43 @@
+@@ -0,0 +1,39 @@
 +"use strict";
 +// import { AriesFrameworkError, Key, KeyType, VerificationMethod } from '@aries-framework/core'
 +Object.defineProperty(exports, "__esModule", { value: true });
@@ -232,7 +229,7 @@ index 0000000..298ba8e
 +        id,
 +        type: exports.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
 +        controller,
-+        publicKeyMultibase: key.fingerprint,
++        publicKeyBase58: key.publicKeyBase58,
 +    });
 +}
 +exports.getEcdsaSecp256k1VerificationKey2019 = getEcdsaSecp256k1VerificationKey2019;
@@ -247,25 +244,21 @@ index 0000000..298ba8e
 + * Get a key from a EcdsaSecp256k1VerificationKey2019 verification method.
 + */
 +function getKeyFromEcdsaSecp256k1VerificationKey2019(verificationMethod) {
-+    if (!verificationMethod.publicKeyMultibase) {
-+        throw new error_1.AriesFrameworkError('verification method is missing publicKeyMultibase');
++    if (!verificationMethod.publicKeyBase58) {
++        throw new error_1.AriesFrameworkError('verification method is missing publicKeyBase58');
 +    }
-+    const key = Key_1.Key.fromFingerprint(verificationMethod.publicKeyMultibase);
-+    if (key.keyType !== KeyType_1.KeyType.K256) {
-+        throw new error_1.AriesFrameworkError(`Verification method publicKeyMultibase is for unexpected key type ${key.keyType}`);
-+    }
-+    return key;
++    return Key_1.Key.fromPublicKeyBase58(verificationMethod.publicKeyBase58, KeyType_1.KeyType.K256);
 +}
 +exports.getKeyFromEcdsaSecp256k1VerificationKey2019 = getKeyFromEcdsaSecp256k1VerificationKey2019;
 +//# sourceMappingURL=EcdsaSecp256k1VerificationKey2019.js.map
 \ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js.map
 new file mode 100644
-index 0000000..151cffa
+index 0000000..54e8c3e
 --- /dev/null
 +++ b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.js.map
 @@ -0,0 +1 @@
-+{"version":3,"file":"EcdsaSecp256k1VerificationKey2019.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.ts"],"names":[],"mappings":";AAAA,gGAAgG;;;AAEhG,gDAA4C;AAC5C,wDAAoD;AACpD,6CAAuD;AAEvD,6DAAyD;AAE5C,QAAA,8DAA8D,GAAG,mCAAmC,CAAA;AAKjH;;GAEG;AACH,SAAgB,oCAAoC,CAAC,EACnD,GAAG,EACH,EAAE,EACF,UAAU,GAKX;IACC,OAAO,IAAI,uCAAkB,CAAC;QAC5B,EAAE;QACF,IAAI,EAAE,sEAA8D;QACpE,UAAU;QACV,kBAAkB,EAAE,GAAG,CAAC,WAAW;KACpC,CAAC,CAAA;AACJ,CAAC;AAfD,oFAeC;AAED;;GAEG;AACH,SAAgB,mCAAmC,CACjD,kBAAsC;IAEtC,OAAO,kBAAkB,CAAC,IAAI,KAAK,sEAA8D,CAAA;AACnG,CAAC;AAJD,kFAIC;AAED;;GAEG;AACH,SAAgB,2CAA2C,CAAC,kBAAqD;IAC/G,IAAI,CAAC,kBAAkB,CAAC,kBAAkB,EAAE;QAC1C,MAAM,IAAI,2BAAmB,CAAC,mDAAmD,CAAC,CAAA;KACnF;IAED,MAAM,GAAG,GAAG,SAAG,CAAC,eAAe,CAAC,kBAAkB,CAAC,kBAAkB,CAAC,CAAA;IACtE,IAAI,GAAG,CAAC,OAAO,KAAK,iBAAO,CAAC,IAAI,EAAE;QAChC,MAAM,IAAI,2BAAmB,CAAC,qEAAqE,GAAG,CAAC,OAAO,EAAE,CAAC,CAAA;KAClH;IAED,OAAO,GAAG,CAAA;AACZ,CAAC;AAXD,kGAWC"}
++{"version":3,"file":"EcdsaSecp256k1VerificationKey2019.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/verificationMethod/EcdsaSecp256k1VerificationKey2019.ts"],"names":[],"mappings":";AAAA,gGAAgG;;;AAEhG,gDAA4C;AAC5C,wDAAoD;AACpD,6CAAuD;AAEvD,6DAAyD;AAE5C,QAAA,8DAA8D,GAAG,mCAAmC,CAAA;AAMjH;;GAEG;AACH,SAAgB,oCAAoC,CAAC,EACnD,GAAG,EACH,EAAE,EACF,UAAU,GAKX;IACC,OAAO,IAAI,uCAAkB,CAAC;QAC5B,EAAE;QACF,IAAI,EAAE,sEAA8D;QACpE,UAAU;QACV,eAAe,EAAE,GAAG,CAAC,eAAe;KACrC,CAAC,CAAA;AACJ,CAAC;AAfD,oFAeC;AAED;;GAEG;AACH,SAAgB,mCAAmC,CACjD,kBAAsC;IAEtC,OAAO,kBAAkB,CAAC,IAAI,KAAK,sEAA8D,CAAA;AACnG,CAAC;AAJD,kFAIC;AAED;;GAEG;AACH,SAAgB,2CAA2C,CAAC,kBAAqD;IAC/G,IAAI,CAAC,kBAAkB,CAAC,eAAe,EAAE;QACvC,MAAM,IAAI,2BAAmB,CAAC,gDAAgD,CAAC,CAAA;KAChF;IAED,OAAO,SAAG,CAAC,mBAAmB,CAAC,kBAAkB,CAAC,eAAe,EAAE,iBAAO,CAAC,IAAI,CAAC,CAAA;AAClF,CAAC;AAND,kGAMC"}
 \ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.d.ts b/node_modules/@aries-framework/core/build/modules/dids/domain/verificationMethod/index.d.ts
 index c5d1f5d..3297e2e 100644

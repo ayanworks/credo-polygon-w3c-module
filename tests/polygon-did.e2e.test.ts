@@ -5,8 +5,11 @@ import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 import {
   Agent,
   ConsoleLogger,
+  DidDocument,
   DidsModule,
   EncryptedMessage,
+  JsonTransformer,
+  KeyType,
   LogLevel,
   TypedArrayEncoder,
   utils,
@@ -29,7 +32,7 @@ describe('Polygon Module did resolver', () => {
   let aliceWalletId: string
   let aliceWalletKey: string
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     aliceWalletId = utils.uuid()
     aliceWalletKey = utils.uuid()
 
@@ -66,9 +69,22 @@ describe('Polygon Module did resolver', () => {
     aliceAgent.registerOutboundTransport(new SubjectOutboundTransport(subjectMap))
     aliceAgent.registerInboundTransport(new SubjectInboundTransport(aliceMessages))
     await aliceAgent.initialize()
+
+    const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c5dB0475D0e07bFc96EF49'
+
+    await aliceAgent.dids.import({
+      did,
+      overwrite: true,
+      privateKeys: [
+        {
+          keyType: KeyType.K256,
+          privateKey: TypedArrayEncoder.fromHex('89d6e6df0272c4262533f951d0550ecd9f444ec2e13479952e4cc6982febfed6'),
+        },
+      ],
+    })
   })
 
-  afterEach(async () => {
+  afterAll(async () => {
     // Wait for messages to flush out
     await new Promise((r) => setTimeout(r, 1000))
 
@@ -81,7 +97,7 @@ describe('Polygon Module did resolver', () => {
     }
   })
 
-  // test('create and resolve a did:polygon did', async () => {
+  // it('create and resolve a did:polygon did', async () => {
   //   const createdDid = await aliceAgent.dids.create<PolygonDidCreateOptions>({
   //     method: 'polygon',
   //     options: {
@@ -124,6 +140,24 @@ describe('Polygon Module did resolver', () => {
 
       expect(result.didDocument).toEqual(null)
       expect(result.didResolutionMetadata.error).toEqual('notFound')
+    })
+
+    it('should update the DID doc when new DIDDoc is passed', async () => {
+      const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c5dB0475D0e07bFc96EF49'
+
+      const didDocument = JsonTransformer.fromJSON(PolygonDIDFixtures.VALID_DID_DOCUMENT, DidDocument)
+
+      const response = await aliceAgent.dids.update({ did, didDocument })
+
+      expect(response).toEqual({
+        didDocumentMetadata: {},
+        didRegistrationMetadata: {},
+        didState: {
+          state: 'finished',
+          did: didDocument.id,
+          didDocument,
+        },
+      })
     })
   })
 })

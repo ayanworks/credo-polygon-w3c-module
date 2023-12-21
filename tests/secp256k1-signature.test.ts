@@ -57,7 +57,6 @@ describe('Secp256k1 W3cCredentialService', () => {
   let agentContext: AgentContext
   let w3cJsonLdCredentialService: W3cJsonLdCredentialService
   let w3cCredentialService: W3cCredentialService
-  const seed = TypedArrayEncoder.fromString('testseed000000000000000000000001')
   const privateKey = TypedArrayEncoder.fromHex('89d6e6df0272c4262533f951d0550ecd9f444ec2e13479952e4cc6982febfed6')
 
   beforeAll(async () => {

@@ -73,10 +73,10 @@
     ref-napi "^3.0.3"
     ws "^8.13.0"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.3":
-  version "0.0.16-alpha.3"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.3.tgz#ae25c8d7eadb3cc1a2247d7291dfbf8c35857715"
-  integrity sha512-5EwQtGuE37MML0R1dqza8vYpFppW28ZkwoTaZ4UBb+akPST90tSSpPQL8CCxfpXQ1XawyL5XiWI1MvNI0MFZkw==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.4":
+  version "0.0.16-alpha.4"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.4.tgz#1c908d13e4914c117954fcf4d6eeae3e7955ea38"
+  integrity sha512-OfOt6Q/QBnk8gJ3rYiX2UTmE+9RQ4doFI6kb3LK81YZerq+5SfVSwn0JlUIIITnbCdcUKSlBRM6whzjXyX1UzQ==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.2"
     "@ethersproject/basex" "^5.7.0"

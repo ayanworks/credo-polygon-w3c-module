@@ -29,7 +29,7 @@
   "dependencies": {
     "@aries-framework/askar": "0.4.2",
     "@aries-framework/core": "0.4.2",
-    "@ayanworks/polygon-did-registrar": "0.0.16-alpha.3",
+    "@ayanworks/polygon-did-registrar": "0.0.16-alpha.4",
     "@ayanworks/polygon-did-resolver": "0.0.16-alpha.6",
     "did-resolver": "^4.1.0",
     "ethers": "^6.9.0"

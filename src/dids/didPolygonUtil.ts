@@ -32,7 +32,7 @@ export function failedResult(reason: string): DidCreateResult {
 
 export function validateSpecCompliantPayload(didDocument: DidDocument): string | null {
   // id is required, validated on both compile and runtime
-  if (!didDocument.id && !didDocument.id.startsWith('did:')) return 'id is required'
+  if (!didDocument.id && !didDocument.id.startsWith('did:polygon:')) return 'id is required'
 
   // verificationMethod is required
   if (!didDocument.verificationMethod) return 'verificationMethod is required'
@@ -47,20 +47,23 @@ export function validateSpecCompliantPayload(didDocument: DidDocument): string |
   const isValidVerificationMethod = didDocument.verificationMethod.every((vm) => {
     switch (vm.type) {
       case VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019:
+        return vm?.publicKeyBase58 && vm?.controller && vm?.id
       default:
         return false
     }
   })
 
-  if (!isValidVerificationMethod) return 'verificationMethod publicKey is Invalid'
+  if (!isValidVerificationMethod) return 'verificationMethod is Invalid'
 
-  const isValidService = didDocument.service
-    ? didDocument?.service?.every((s) => {
-        return s?.serviceEndpoint && s?.id && s?.type
-      })
-    : true
+  if (didDocument.service) {
+    const isValidService = didDocument.service
+      ? didDocument?.service?.every((s) => {
+          return s?.serviceEndpoint && s?.id && s?.type
+        })
+      : true
 
-  if (!isValidService) return 'Service is Invalid'
+    if (!isValidService) return 'Service is Invalid'
+  }
 
   return null
 }

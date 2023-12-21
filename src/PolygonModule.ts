@@ -1,8 +1,15 @@
 import type { PolygonModuleConfigOptions } from './PolygonModuleConfig'
-import type { DependencyManager, Module } from '@aries-framework/core'
+import {
+  SignatureSuiteToken,
+  type DependencyManager,
+  type Module,
+  VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
+  KeyType,
+} from '@aries-framework/core'
 
 import { PolygonModuleConfig } from './PolygonModuleConfig'
 import { PolygonLedgerService } from './ledger'
+import { EcdsaSecp256k1Signature2019 } from './signature-suites'
 
 export class PolygonModule implements Module {
   public readonly config: PolygonModuleConfig
@@ -17,5 +24,13 @@ export class PolygonModule implements Module {
 
     // Services
     dependencyManager.registerSingleton(PolygonLedgerService)
+
+    // Signature suites.
+    dependencyManager.registerInstance(SignatureSuiteToken, {
+      suiteClass: EcdsaSecp256k1Signature2019,
+      proofType: 'EcdsaSecp256k1Signature2019',
+      verificationMethodTypes: [VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019],
+      keyTypes: [KeyType.K256],
+    })
   }
 }

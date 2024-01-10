@@ -10,9 +10,11 @@ import {
 import { PolygonModuleConfig } from './PolygonModuleConfig'
 import { PolygonLedgerService } from './ledger'
 import { EcdsaSecp256k1Signature2019 } from './signature-suites'
+import { PolygonApi } from './PolygonApi'
 
 export class PolygonModule implements Module {
   public readonly config: PolygonModuleConfig
+  public readonly api = PolygonApi
 
   public constructor(options: PolygonModuleConfigOptions) {
     this.config = new PolygonModuleConfig(options)
@@ -24,6 +26,9 @@ export class PolygonModule implements Module {
 
     // Services
     dependencyManager.registerSingleton(PolygonLedgerService)
+
+    // Api
+    dependencyManager.registerContextScoped(PolygonApi)
 
     // Signature suites.
     dependencyManager.registerInstance(SignatureSuiteToken, {

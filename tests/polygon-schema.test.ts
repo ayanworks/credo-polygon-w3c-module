@@ -1,0 +1,206 @@
+import { agentDependencies } from '@aries-framework/node'
+import { AskarModule } from '@aries-framework/askar'
+import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
+
+import {
+  Agent,
+  ConsoleLogger,
+  DidDocument,
+  DidsModule,
+  EncryptedMessage,
+  JsonTransformer,
+  KeyType,
+  LogLevel,
+  TypedArrayEncoder,
+  utils,
+} from '@aries-framework/core'
+import { Subject } from 'rxjs'
+
+import { PolygonDID } from '@ayanworks/polygon-did-registrar'
+import { PolygonModule } from '../src/PolygonModule'
+import { SubjectOutboundTransport } from './transport/SubjectOutboundTransport'
+import { SubjectInboundTransport } from './transport/SubjectInboundTransport'
+import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
+import { PolygonDidCreateOptions } from '../src/dids/PolygonDidRegistrar'
+import { PolygonDIDFixtures } from './fixtures'
+
+const logger = new ConsoleLogger(LogLevel.info)
+
+export type SubjectMessage = { message: EncryptedMessage; replySubject?: Subject<SubjectMessage> }
+
+const privateKey = TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99')
+
+const testNetdid = 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771'
+
+const testSchema = {
+  '@context': [
+    {
+      '@version': 1.1,
+    },
+    'https://www.w3.org/ns/odrl.jsonld',
+    {
+      ex: 'https://example.org/examples#',
+      schema: 'http://schema.org/',
+      rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+      '3rdPartyCorrelation': 'ex:3rdPartyCorrelation',
+      AllVerifiers: 'ex:AllVerifiers',
+      Archival: 'ex:Archival',
+      BachelorDegree: 'ex:BachelorDegree',
+      Child: 'ex:Child',
+      CLCredentialDefinition2019: 'ex:CLCredentialDefinition2019',
+      CLSignature2019: 'ex:CLSignature2019',
+      IssuerPolicy: 'ex:IssuerPolicy',
+      HolderPolicy: 'ex:HolderPolicy',
+      Mother: 'ex:Mother',
+      RelationshipCredential: 'ex:RelationshipCredential',
+      UniversityDegreeCredential: 'ex:UniversityDegreeCredential',
+      AlumniCredential: 'ex:AlumniCredential',
+      DisputeCredential: 'ex:DisputeCredential',
+      PrescriptionCredential: 'ex:PrescriptionCredential',
+      ZkpExampleSchema2018: 'ex:ZkpExampleSchema2018',
+      issuerData: 'ex:issuerData',
+      attributes: 'ex:attributes',
+      signature: 'ex:signature',
+      signatureCorrectnessProof: 'ex:signatureCorrectnessProof',
+      primaryProof: 'ex:primaryProof',
+      nonRevocationProof: 'ex:nonRevocationProof',
+      alumniOf: { '@id': 'schema:alumniOf', '@type': 'rdf:HTML' },
+      child: { '@id': 'ex:child', '@type': '@id' },
+      degree: 'ex:degree',
+      degreeType: 'ex:degreeType',
+      degreeSchool: 'ex:degreeSchool',
+      college: 'ex:college',
+      name: { '@id': 'schema:name', '@type': 'rdf:HTML' },
+      givenName: 'schema:givenName',
+      familyName: 'schema:familyName',
+      parent: { '@id': 'ex:parent', '@type': '@id' },
+      referenceId: 'ex:referenceId',
+      documentPresence: 'ex:documentPresence',
+      evidenceDocument: 'ex:evidenceDocument',
+      spouse: 'schema:spouse',
+      subjectPresence: 'ex:subjectPresence',
+      verifier: { '@id': 'ex:verifier', '@type': '@id' },
+      currentStatus: 'ex:currentStatus',
+      statusReason: 'ex:statusReason',
+      prescription: 'ex:prescription',
+    },
+  ],
+}
+
+describe('Polygon Module did resolver', () => {
+  let faberAgent: Agent<{ askar: AskarModule; polygon: PolygonModule; dids: DidsModule }>
+  let faberWalletId: string
+  let faberWalletKey: string
+
+  beforeAll(async () => {
+    faberWalletId = utils.uuid()
+    faberWalletKey = utils.uuid()
+
+    const aliceMessages = new Subject<SubjectMessage>()
+
+    const subjectMap = {
+      'rxjs:alice': aliceMessages,
+    }
+
+    // const response = await PolygonDID.createKeyPair('testnet')
+
+    // console.log('response', response)
+
+    // Initialize alice
+    faberAgent = new Agent({
+      config: {
+        label: 'alice',
+        endpoints: ['rxjs:alice'],
+        walletConfig: { id: faberWalletId, key: faberWalletKey },
+        logger,
+      },
+      dependencies: agentDependencies,
+      modules: {
+        askar: new AskarModule({ ariesAskar }),
+        // Add required modules
+        polygon: new PolygonModule({
+          rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
+          didContractAddress: '0x12513116875BB3E4F098Ce74624739Ee51bAf023',
+          privateKey,
+          fileServerToken:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6IjdmYjRmN2I3LWQ5ZWUtNDYxOC04OTE4LWZiMmIzYzY1M2EyYiJ9.x-kHeTVqX4w19ibSAspCYgIL-JFVss8yZ0CT21QVRYM',
+          schemaManagerContractAddress: '0x67e8223D80aEcb337FE8D90dD41845A0DA31B4b0',
+          serverUrl: 'https://51e1-103-97-166-226.ngrok-free.app',
+        }),
+        dids: new DidsModule({
+          resolvers: [new PolygonDidResolver()],
+          registrars: [new PolygonDidRegistrar()],
+        }),
+      },
+    })
+
+    faberAgent.registerOutboundTransport(new SubjectOutboundTransport(subjectMap))
+    faberAgent.registerInboundTransport(new SubjectInboundTransport(aliceMessages))
+    await faberAgent.initialize()
+
+    await faberAgent.dids.import({
+      did: testNetdid,
+      overwrite: true,
+      privateKeys: [
+        {
+          keyType: KeyType.K256,
+          privateKey,
+        },
+      ],
+    })
+  })
+
+  afterAll(async () => {
+    // Wait for messages to flush out
+    await new Promise((r) => setTimeout(r, 1000))
+
+    if (faberAgent) {
+      await faberAgent.shutdown()
+
+      if (faberAgent.wallet.isInitialized && faberAgent.wallet.isProvisioned) {
+        await faberAgent.wallet.delete()
+      }
+    }
+  })
+
+  describe('PolygonSchema', () => {
+    // it('should create a polygon keypair', async () => {
+    //   const response = await PolygonDID.createKeyPair('testnet')
+    //   console.log('response', response)
+    // })
+
+    // it('create a polygon did', async () => {
+    //   const did = await faberAgent.dids.create<PolygonDidCreateOptions>({
+    //     method: 'polygon',
+    //     options: {
+    //       network: 'testnet',
+    //       endpoint: 'https://example.com',
+    //     },
+    //     secret: {
+    //       privateKey,
+    //     },
+    //   })
+    //   console.log('did', did)
+    // })
+
+    // it('should create w3c schema', async () => {
+    //   const response = await faberAgent.modules.polygon.createSchema({
+    //     did: testNetdid,
+    //     schemaName: 'TestCollegeSchema',
+    //     schema: testSchema,
+    //   })
+    //   console.log('Created Schema Response', response)
+    // })
+
+    // it('should resolve a schema by Id', async () => {
+    //   const schemaId = 'd0781b8c-46ee-4620-8d9b-740d537513f6'
+    //   const schema = await faberAgent.modules.polygon.getSchemaById(testNetdid, schemaId)
+    //   console.log('Get schema By id', schema)
+    // })
+
+    it('should resolve a polygon did with metadata', async () => {
+      const resolvedDIDDoc = await faberAgent.dids.resolve(testNetdid)
+      console.log('resolvedDIDDoc', JSON.stringify(resolvedDIDDoc))
+    })
+  })
+})

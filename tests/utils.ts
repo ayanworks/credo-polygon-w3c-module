@@ -61,8 +61,12 @@ export function getAgentConfig(
   const { config, dependencies } = getAgentOptions(name, extraConfig, {
     polygon: new PolygonModule({
       rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
-      contractAddress: '0x8B335A167DA81CCef19C53eE629cf2F6291F2255',
-      privateKey: TypedArrayEncoder.fromHex('bf15b65d1b497e47e2529292927e817c90bd95c1ca98a59d472cdcda85310b1d'),
+      didContractAddress: '0x12513116875BB3E4F098Ce74624739Ee51bAf023',
+      privateKey: TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99'),
+      fileServerToken:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6IjdmYjRmN2I3LWQ5ZWUtNDYxOC04OTE4LWZiMmIzYzY1M2EyYiJ9.x-kHeTVqX4w19ibSAspCYgIL-JFVss8yZ0CT21QVRYM',
+      schemaManagerContractAddress: '0x67e8223D80aEcb337FE8D90dD41845A0DA31B4b0',
+      serverUrl: 'https://51e1-103-97-166-226.ngrok-free.app',
     }),
     dids: new DidsModule({
       resolvers: [new PolygonDidResolver()],

@@ -27,6 +27,8 @@ const logger = new ConsoleLogger(LogLevel.info)
 
 export type SubjectMessage = { message: EncryptedMessage; replySubject?: Subject<SubjectMessage> }
 
+const did = 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771'
+
 describe('Polygon Module did resolver', () => {
   let aliceAgent: Agent<{ askar: AskarModule; polygon: PolygonModule; dids: DidsModule }>
   let aliceWalletId: string
@@ -74,15 +76,13 @@ describe('Polygon Module did resolver', () => {
     aliceAgent.registerInboundTransport(new SubjectInboundTransport(aliceMessages))
     await aliceAgent.initialize()
 
-    const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c5dB0475D0e07bFc96EF49'
-
     await aliceAgent.dids.import({
       did,
       overwrite: true,
       privateKeys: [
         {
           keyType: KeyType.K256,
-          privateKey: TypedArrayEncoder.fromHex('89d6e6df0272c4262533f951d0550ecd9f444ec2e13479952e4cc6982febfed6'),
+          privateKey: TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99'),
         },
       ],
     })
@@ -118,8 +118,6 @@ describe('Polygon Module did resolver', () => {
 
   describe('PolygonDidResolver', () => {
     it('should resolve a polygon did when valid did is passed', async () => {
-      const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c5dB0475D0e07bFc96EF49'
-
       const resolvedDIDDoc = await aliceAgent.dids.resolve(did)
 
       expect(resolvedDIDDoc.didDocument?.context).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT['@context'])
@@ -147,8 +145,6 @@ describe('Polygon Module did resolver', () => {
     })
 
     it('should update the DID doc when new DIDDoc is passed', async () => {
-      const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c5dB0475D0e07bFc96EF49'
-
       const didDocument = JsonTransformer.fromJSON(PolygonDIDFixtures.VALID_DID_DOCUMENT, DidDocument)
 
       const response = await aliceAgent.dids.update({ did, didDocument })

@@ -73,36 +73,42 @@
     ref-napi "^3.0.3"
     ws "^8.13.0"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.4":
-  version "0.0.16-alpha.4"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.4.tgz#1c908d13e4914c117954fcf4d6eeae3e7955ea38"
-  integrity sha512-OfOt6Q/QBnk8gJ3rYiX2UTmE+9RQ4doFI6kb3LK81YZerq+5SfVSwn0JlUIIITnbCdcUKSlBRM6whzjXyX1UzQ==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.5":
+  version "0.0.16-alpha.5"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.5.tgz#6c683558eaee2eb42fb136e42d348316613cb71b"
+  integrity sha512-Z3+sBuuivHcuUE3dmT/7zWvoyKFymHzlwQtmhDSKBGHWBxj9gbd681q7m+ph5klHTw9OJH1rZvUTXNtnVtEO1A==
   dependencies:
-    "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.2"
+    "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"
     "@ethersproject/wallet" "^5.7.0"
     ethers "^6.9.0"
+    uuid "^9.0.1"
 
-"@ayanworks/polygon-did-registry-contract@2.0.1-alpha.1":
-  version "2.0.1-alpha.1"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-2.0.1-alpha.1.tgz#1e1947e9a800fa0896e1464bd31bb81f95f8074e"
-  integrity sha512-KxDgk/ql/CClSeB3+PXOBoHjSb4yPzTL0mQYb5T8IPWFQxSqUFD7HhU5XP7KWkVy+eZiGCeMEzmiVW7RRrjZVQ==
+"@ayanworks/polygon-did-registry-contract@2.0.1-alpha.3":
+  version "2.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-2.0.1-alpha.3.tgz#7bb932b712a4c48df857682f27adfb08154c4358"
+  integrity sha512-8FZZVAmzXZn0pjZasuxdRblL0obK91JoaoXzpM4oZ7hD5VRUbiWf7BTh17WsWc6Oaf6XtafT4csuBo11fZiUoQ==
 
-"@ayanworks/polygon-did-registry-contract@2.0.1-alpha.2":
-  version "2.0.1-alpha.2"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-2.0.1-alpha.2.tgz#6a7292feb720287d672e2e0dccba6fd1d93767f9"
-  integrity sha512-RsLa6dRQksORuN6GwSkyCSBWmP/Wjrmv6H4wbIrte/DBxvB9mUGdEDD3FtDHyXtSSB1NlrEdTqazy2hbgT6oGA==
-
-"@ayanworks/polygon-did-resolver@0.0.16-alpha.6":
-  version "0.0.16-alpha.6"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.6.tgz#124f07363158f18d75e8d1d1a6e25a3a6cc77249"
-  integrity sha512-qEDqsuP8sV5/bEv6/le2m6P/v0PBKI2kZ+sqicF+vCBDsWBOEF2qDiU53RxZM26SxLncC8GKQaP8ldM8dUWVKw==
+"@ayanworks/polygon-did-resolver@0.0.16-alpha.8":
+  version "0.0.16-alpha.8"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.8.tgz#bea0d7343a2079cc849a3f7f2e358ed58fefd6f1"
+  integrity sha512-rTubdjbwGtvIoSpR3OWp/7SseShCZNzJ41Rd5yL/Y/xYlX8PJr2zWUM0pcUouReVQzgeAYuUphHAV0QpqWRoSQ==
   dependencies:
-    "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.1"
+    "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     did-resolver "^4.1.0"
     ethers "^5.1.0"
+
+"@ayanworks/polygon-schema-manager@0.0.2-alpha.1":
+  version "0.0.2-alpha.1"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.1.tgz#4d5837c605975fbd069628d43e86c679cdd718df"
+  integrity sha512-E9vBhY24cn0RO/Rr8JYHNwqGZNJw2ke6T6NevbxJu91m+HNWFs17sjZY8lYgvo2O4wfxWif+pACx5aif29Bk9w==
+  dependencies:
+    "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
+    axios "^1.6.3"
+    ethers "^6.9.0"
+    uuid "^9.0.1"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.22.13", "@babel/code-frame@^7.23.5":
   version "7.23.5"
@@ -2004,6 +2010,15 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
+axios@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.3.tgz#7f50f23b3aa246eff43c54834272346c396613f4"
+  integrity sha512-fWyNdeawGam70jXSVlKl+SUNVcL6j6W79CuSIPfi6HnDUmSCH6gyUys/HrqHeA/wU0Az41rRgean494d0Jb+ww==
+  dependencies:
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
+
 b64-lite@^1.3.1, b64-lite@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/b64-lite/-/b64-lite-1.4.0.tgz#e62442de11f1f21c60e38b74f111ac0242283d3d"
@@ -3364,6 +3379,11 @@ find-yarn-workspace-root@^2.0.0:
   integrity sha512-1IMnbjt4KzsQfnhnzNd8wUEgXZ44IzZaZmnLYx7D5FZlaHt2gW20Cri8Q+E/t5tIj4+epTBub+2Zxu/vNILzqQ==
   dependencies:
     micromatch "^4.0.2"
+
+follow-redirects@^1.15.0:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
+  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
 
 for-each@^0.3.3:
   version "0.3.3"
@@ -6665,7 +6685,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
-uuid@^9.0.0:
+uuid@^9.0.0, uuid@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==

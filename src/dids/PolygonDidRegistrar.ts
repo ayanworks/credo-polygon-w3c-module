@@ -118,7 +118,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
         }
       }
 
-      const response = await ledgerService.didRegistry.update(didDocument.id, JSON.stringify(didDocument))
+      const response = await ledgerService.didRegistry.update(didDocument.id, didDocument)
 
       if (!response) {
         throw new Error('Unable to update did document')

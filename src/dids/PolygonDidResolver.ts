@@ -10,6 +10,7 @@ import { isValidPolygonDid } from './didPolygonUtil'
 import { Resolver, ResolverRegistry } from 'did-resolver'
 
 import { getResolver } from '@ayanworks/polygon-did-resolver'
+import { PolygonLedgerService } from '../ledger'
 
 export class PolygonDidResolver implements DidResolver {
   public readonly supportedMethods = ['polygon']
@@ -27,7 +28,6 @@ export class PolygonDidResolver implements DidResolver {
       throw new Error('Invalid DID')
     }
     try {
-      // return this.resolveDidDoc(agentContext, did)
       const { didDocument, didDocumentMetadata, didResolutionMetadata } = await this.resolver.resolve(did)
 
       return {

@@ -57,7 +57,7 @@ describe('Secp256k1 W3cCredentialService', () => {
   let agentContext: AgentContext
   let w3cJsonLdCredentialService: W3cJsonLdCredentialService
   let w3cCredentialService: W3cCredentialService
-  const privateKey = TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99')
+  const privateKey = TypedArrayEncoder.fromHex('7229440234c231c8dc067ef2425bc694f202514779a02876c1d273b00adf66fb')
 
   beforeAll(async () => {
     const agentConfig = getAgentConfig('EcdsaSecp256k1e2eTest')
@@ -259,7 +259,7 @@ describe('Secp256k1 W3cCredentialService', () => {
 
         const purpose = new CredentialIssuancePurpose({
           controller: {
-            id: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771#key-1',
+            id: 'did:polygon:testnet:0x26C2809EC8385bB15eb66586582e3D4626ee63C7#key-1',
           },
           date: new Date().toISOString(),
         })

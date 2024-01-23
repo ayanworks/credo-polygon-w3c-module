@@ -27,9 +27,10 @@ export class PolygonDidRegistrar implements DidRegistrar {
   public async create(agentContext: AgentContext, options: PolygonDidCreateOptions): Promise<DidCreateResult> {
     const ledgerService = agentContext.dependencyManager.resolve(PolygonLedgerService)
     const didRepository = agentContext.dependencyManager.resolve(DidRepository)
-    const { secret } = options
 
-    const key = await agentContext.wallet.createKey({ keyType: KeyType.K256, privateKey: secret.privateKey })
+    const privateKey = options.secret.privateKey
+
+    const key = await agentContext.wallet.createKey({ keyType: KeyType.K256, privateKey })
 
     const publicKeyHex = key.publicKey.toString('hex')
 
@@ -37,7 +38,9 @@ export class PolygonDidRegistrar implements DidRegistrar {
     agentContext.config.logger.info(`Creating DID on ledger: ${did}`)
 
     try {
-      const response = await ledgerService.didRegistry.create({
+      const didRegistry = ledgerService.createDidRegistryInstance(privateKey.toString('hex'))
+
+      const response = await didRegistry.create({
         did,
         publicKeyBase58: key.publicKeyBase58,
         serviceEndpoint: options.options.endpoint,
@@ -118,7 +121,11 @@ export class PolygonDidRegistrar implements DidRegistrar {
         }
       }
 
-      const response = await ledgerService.didRegistry.update(didDocument.id, didDocument)
+      const privateKey = options.secret.privateKey
+
+      const didRegistry = ledgerService.createDidRegistryInstance(privateKey.toString('hex'))
+
+      const response = await didRegistry.update(didDocument.id, didDocument)
 
       if (!response) {
         throw new Error('Unable to update did document')
@@ -160,7 +167,7 @@ export interface PolygonDidCreateOptions extends DidCreateOptions {
   method: 'polygon'
   did?: never
   options: {
-    network: string
+    network: 'mainnet' | 'testnet'
     endpoint?: string
   }
   secret: {
@@ -173,6 +180,9 @@ export interface PolygonDidUpdateOptions extends DidUpdateOptions {
   did: string
   didDocument: DidDocument
   options: {
-    network: string
+    network: 'mainnet' | 'testnet'
+  }
+  secret: {
+    privateKey: Buffer
   }
 }

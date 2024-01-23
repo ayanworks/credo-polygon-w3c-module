@@ -147,7 +147,13 @@ describe('Polygon Module did resolver', () => {
     it('should update the DID doc when new DIDDoc is passed', async () => {
       const didDocument = JsonTransformer.fromJSON(PolygonDIDFixtures.VALID_DID_DOCUMENT, DidDocument)
 
-      const response = await aliceAgent.dids.update({ did, didDocument })
+      const response = await aliceAgent.dids.update({
+        did,
+        didDocument,
+        secret: {
+          privateKey: TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99'),
+        },
+      })
 
       expect(response).toEqual({
         didDocumentMetadata: {},

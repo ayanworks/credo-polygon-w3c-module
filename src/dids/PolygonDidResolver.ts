@@ -10,7 +10,6 @@ import { isValidPolygonDid } from './didPolygonUtil'
 import { Resolver, ResolverRegistry } from 'did-resolver'
 
 import { getResolver } from '@ayanworks/polygon-did-resolver'
-import { PolygonLedgerService } from '../ledger'
 
 export class PolygonDidResolver implements DidResolver {
   public readonly supportedMethods = ['polygon']

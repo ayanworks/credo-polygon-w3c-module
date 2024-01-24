@@ -1,24 +1,22 @@
+import type { AgentDependencies, InitConfig, InjectionToken, Wallet, WalletConfig } from '@aries-framework/core'
+import type { AgentModulesInput, EmptyModuleMap } from '@aries-framework/core/build/agent/AgentModules'
+
 import {
   AgentConfig,
   AgentContext,
-  AgentDependencies,
   ConnectionsModule,
   ConsoleLogger,
   DependencyManager,
   DidsModule,
-  InitConfig,
   InjectionSymbols,
-  InjectionToken,
   LogLevel,
   TypedArrayEncoder,
-  Wallet,
-  WalletConfig,
   utils,
 } from '@aries-framework/core'
-import { AgentModulesInput, EmptyModuleMap } from '@aries-framework/core/build/agent/AgentModules'
 import { agentDependencies } from '@aries-framework/node'
-import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
+
 import { PolygonModule } from '../src/PolygonModule'
+import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
 
 const testLogger = new ConsoleLogger(LogLevel.off)
 

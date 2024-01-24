@@ -1,28 +1,16 @@
-import { agentDependencies } from '@aries-framework/node'
-import { AskarModule } from '@aries-framework/askar'
-import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
+import type { EncryptedMessage } from '@aries-framework/core'
 
-import {
-  Agent,
-  ConsoleLogger,
-  DidDocument,
-  DidsModule,
-  EncryptedMessage,
-  JsonTransformer,
-  KeyType,
-  LogLevel,
-  TypedArrayEncoder,
-  utils,
-} from '@aries-framework/core'
+import { AskarModule } from '@aries-framework/askar'
+import { Agent, ConsoleLogger, DidsModule, KeyType, LogLevel, TypedArrayEncoder, utils } from '@aries-framework/core'
+import { agentDependencies } from '@aries-framework/node'
+import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 import { Subject } from 'rxjs'
 
-import { PolygonDID } from '@ayanworks/polygon-did-registrar'
 import { PolygonModule } from '../src/PolygonModule'
-import { SubjectOutboundTransport } from './transport/SubjectOutboundTransport'
-import { SubjectInboundTransport } from './transport/SubjectInboundTransport'
 import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
-import { PolygonDidCreateOptions } from '../src/dids/PolygonDidRegistrar'
-import { PolygonDIDFixtures } from './fixtures'
+
+import { SubjectInboundTransport } from './transport/SubjectInboundTransport'
+import { SubjectOutboundTransport } from './transport/SubjectOutboundTransport'
 
 const logger = new ConsoleLogger(LogLevel.info)
 
@@ -32,6 +20,7 @@ const privateKey = TypedArrayEncoder.fromHex('7229440234c231c8dc067ef2425bc694f2
 
 const testNetdid = 'did:polygon:testnet:0x26C2809EC8385bB15eb66586582e3D4626ee63C7'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const testSchema = {
   '@context': [
     {
@@ -200,7 +189,7 @@ describe('Polygon Module did resolver', () => {
 
     it('should resolve a polygon did with metadata', async () => {
       const resolvedDIDDoc = await faberAgent.dids.resolve(testNetdid)
-      console.log('resolvedDIDDoc', JSON.stringify(resolvedDIDDoc))
+      faberAgent.config.logger.info('resolvedDIDDoc', resolvedDIDDoc)
     })
   })
 })

@@ -1,5 +1,7 @@
 import { DidDocument } from '@aries-framework/core'
+
 import { validateSpecCompliantPayload } from '../src/dids/didPolygonUtil'
+
 import { PolygonDIDFixtures } from './fixtures'
 
 describe('Test Polygon Did Utils', () => {

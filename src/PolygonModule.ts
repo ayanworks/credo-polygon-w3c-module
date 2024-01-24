@@ -1,4 +1,5 @@
 import type { PolygonModuleConfigOptions } from './PolygonModuleConfig'
+
 import {
   SignatureSuiteToken,
   type DependencyManager,
@@ -7,10 +8,10 @@ import {
   KeyType,
 } from '@aries-framework/core'
 
+import { PolygonApi } from './PolygonApi'
 import { PolygonModuleConfig } from './PolygonModuleConfig'
 import { PolygonLedgerService } from './ledger'
 import { EcdsaSecp256k1Signature2019 } from './signature-suites'
-import { PolygonApi } from './PolygonApi'
 
 export class PolygonModule implements Module {
   public readonly config: PolygonModuleConfig

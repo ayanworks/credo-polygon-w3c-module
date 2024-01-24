@@ -1,3 +1,5 @@
+import type { ResolverRegistry } from 'did-resolver'
+
 import {
   DidDocument,
   type AgentContext,
@@ -5,18 +7,17 @@ import {
   type DidResolver,
   JsonTransformer,
 } from '@aries-framework/core'
+import { getResolver } from '@ayanworks/polygon-did-resolver'
+import { Resolver } from 'did-resolver'
 
 import { isValidPolygonDid } from './didPolygonUtil'
-import { Resolver, ResolverRegistry } from 'did-resolver'
-
-import { getResolver } from '@ayanworks/polygon-did-resolver'
 
 export class PolygonDidResolver implements DidResolver {
   public readonly supportedMethods = ['polygon']
 
   public resolver: Resolver
 
-  constructor() {
+  public constructor() {
     this.resolver = new Resolver(getResolver() as ResolverRegistry)
   }
 

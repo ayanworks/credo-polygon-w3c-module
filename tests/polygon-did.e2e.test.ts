@@ -1,27 +1,27 @@
-import { agentDependencies } from '@aries-framework/node'
-import { AskarModule } from '@aries-framework/askar'
-import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
+import type { EncryptedMessage } from '@aries-framework/core'
 
+import { AskarModule } from '@aries-framework/askar'
 import {
   Agent,
   ConsoleLogger,
   DidDocument,
   DidsModule,
-  EncryptedMessage,
   JsonTransformer,
   KeyType,
   LogLevel,
   TypedArrayEncoder,
   utils,
 } from '@aries-framework/core'
+import { agentDependencies } from '@aries-framework/node'
+import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 import { Subject } from 'rxjs'
 
 import { PolygonModule } from '../src/PolygonModule'
-import { SubjectOutboundTransport } from './transport/SubjectOutboundTransport'
-import { SubjectInboundTransport } from './transport/SubjectInboundTransport'
 import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
-import { PolygonDidCreateOptions } from '../src/dids/PolygonDidRegistrar'
+
 import { PolygonDIDFixtures } from './fixtures'
+import { SubjectInboundTransport } from './transport/SubjectInboundTransport'
+import { SubjectOutboundTransport } from './transport/SubjectOutboundTransport'
 
 const logger = new ConsoleLogger(LogLevel.info)
 

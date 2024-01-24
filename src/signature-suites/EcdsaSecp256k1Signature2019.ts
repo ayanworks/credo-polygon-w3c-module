@@ -1,13 +1,13 @@
+import type { DocumentLoader, JwsLinkedDataSignatureOptions, Proof } from '@aries-framework/core'
+import type { JsonLdDoc } from '@aries-framework/core/build/modules/vc/data-integrity/jsonldUtil'
+
 import {
   CREDENTIALS_CONTEXT_V1_URL,
-  DocumentLoader,
   JwsLinkedDataSignature,
-  JwsLinkedDataSignatureOptions,
-  Proof,
   SECURITY_CONTEXT_URL,
   vcLibraries,
 } from '@aries-framework/core'
-import { JsonLdDoc, _includesContext } from '@aries-framework/core/build/modules/vc/data-integrity/jsonldUtil'
+import { _includesContext } from '@aries-framework/core/build/modules/vc/data-integrity/jsonldUtil'
 
 const { jsonld } = vcLibraries
 
@@ -92,7 +92,7 @@ export class EcdsaSecp256k1Signature2019 extends JwsLinkedDataSignature {
   }
 
   public async getVerificationMethod(options: { proof: Proof; documentLoader?: DocumentLoader }) {
-    let verificationMethod = await super.getVerificationMethod({
+    const verificationMethod = await super.getVerificationMethod({
       proof: options.proof,
       documentLoader: options.documentLoader,
     })

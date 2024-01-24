@@ -1,6 +1,9 @@
-import { AgentContext, AriesFrameworkError, injectable } from '@aries-framework/core'
+import type { AgentContext } from '@aries-framework/core'
+
+import { AriesFrameworkError, injectable } from '@aries-framework/core'
 import { PolygonDID } from '@ayanworks/polygon-did-registrar'
 import { PolygonSchema } from '@ayanworks/polygon-schema-manager'
+
 import { PolygonModuleConfig } from '../PolygonModuleConfig'
 
 interface SchemaRegistryConfig {

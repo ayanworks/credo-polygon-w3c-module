@@ -1,8 +1,9 @@
-import type { AgentContext, W3cJwtCredentialService } from '@aries-framework/core'
+import type { AgentContext } from '@aries-framework/core'
 
+import { AskarWallet } from '@aries-framework/askar'
+import { AskarModuleConfig } from '@aries-framework/askar/build/AskarModuleConfig'
 import {
   ClaimFormat,
-  W3cCredentialService,
   W3cJsonLdVerifiablePresentation,
   KeyType,
   JsonTransformer,
@@ -21,21 +22,19 @@ import {
   DidsModuleConfig,
   AriesFrameworkError,
 } from '@aries-framework/core'
-
-import { EcdsaSecp256k1Signature2019 } from '../src/signature-suites'
-import { W3cCredentialRepository } from '@aries-framework/core/build/modules/vc/repository'
-import { AskarWallet } from '@aries-framework/askar'
-import { agentDependencies } from '@aries-framework/node'
-import { W3cJsonLdCredentialService } from '@aries-framework/core/build/modules/vc/data-integrity/W3cJsonLdCredentialService'
 import { W3cCredentialsModuleConfig } from '@aries-framework/core/build/modules/vc/W3cCredentialsModuleConfig'
-import { getAgentConfig, getAgentContext } from './utils'
-import { registerAriesAskar } from '@hyperledger/aries-askar-shared'
-import { AskarModuleConfig } from '@aries-framework/askar/build/AskarModuleConfig'
-import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
+import { W3cJsonLdCredentialService } from '@aries-framework/core/build/modules/vc/data-integrity/W3cJsonLdCredentialService'
 import { LinkedDataProof } from '@aries-framework/core/build/modules/vc/data-integrity/models/LinkedDataProof'
-import { EcdsaSecp256k1Signature2019Fixtures } from './fixtures'
-import { buildDid } from '../src/dids/didPolygonUtil'
+import { agentDependencies } from '@aries-framework/node'
+import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
+import { registerAriesAskar } from '@hyperledger/aries-askar-shared'
+
 import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'
+import { buildDid } from '../src/dids/didPolygonUtil'
+import { EcdsaSecp256k1Signature2019 } from '../src/signature-suites'
+
+import { EcdsaSecp256k1Signature2019Fixtures } from './fixtures'
+import { getAgentConfig, getAgentContext } from './utils'
 
 export const askarModuleConfig = new AskarModuleConfig({ ariesAskar })
 registerAriesAskar({ askar: askarModuleConfig.ariesAskar })
@@ -56,7 +55,6 @@ describe('Secp256k1 W3cCredentialService', () => {
   let wallet: AskarWallet
   let agentContext: AgentContext
   let w3cJsonLdCredentialService: W3cJsonLdCredentialService
-  let w3cCredentialService: W3cCredentialService
   const privateKey = TypedArrayEncoder.fromHex('7229440234c231c8dc067ef2425bc694f202514779a02876c1d273b00adf66fb')
 
   beforeAll(async () => {
@@ -81,11 +79,6 @@ describe('Secp256k1 W3cCredentialService', () => {
     w3cJsonLdCredentialService = new W3cJsonLdCredentialService(
       signatureSuiteRegistry,
       new W3cCredentialsModuleConfig()
-    )
-    w3cCredentialService = new W3cCredentialService(
-      {} as unknown as W3cCredentialRepository,
-      w3cJsonLdCredentialService,
-      {} as unknown as W3cJwtCredentialService
     )
   })
 

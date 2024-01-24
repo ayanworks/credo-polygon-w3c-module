@@ -1,4 +1,4 @@
-import { Buffer } from '@aries-framework/core'
+import type { Buffer } from '@aries-framework/core'
 
 /**
  * PolygonModuleConfigOptions defines the interface for the options of the PolygonModuleConfig class.

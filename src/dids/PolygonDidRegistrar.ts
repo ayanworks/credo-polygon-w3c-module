@@ -1,24 +1,23 @@
-import {
+import type {
   AgentContext,
   DidCreateOptions,
   DidCreateResult,
   DidDeactivateOptions,
   DidDeactivateResult,
   DidRegistrar,
-  DidRepository,
   DidUpdateOptions,
   DidUpdateResult,
-  KeyType,
   Buffer,
-  DidRecord,
-  DidDocumentRole,
-  JsonTransformer,
-  DidDocument,
 } from '@aries-framework/core'
-import { buildDid, validateSpecCompliantPayload } from './didPolygonUtil'
-import { PolygonLedgerService } from '../ledger'
-import { Resolver, ResolverRegistry } from 'did-resolver'
+import type { ResolverRegistry } from 'did-resolver'
+
+import { DidRepository, KeyType, DidRecord, DidDocumentRole, JsonTransformer, DidDocument } from '@aries-framework/core'
 import { getResolver } from '@ayanworks/polygon-did-resolver'
+import { Resolver } from 'did-resolver'
+
+import { PolygonLedgerService } from '../ledger'
+
+import { buildDid, validateSpecCompliantPayload } from './didPolygonUtil'
 
 export class PolygonDidRegistrar implements DidRegistrar {
   public readonly supportedMethods = ['polygon']
@@ -158,6 +157,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async deactivate(agentContext: AgentContext, options: DidDeactivateOptions): Promise<DidDeactivateResult> {
     throw new Error('Method not implemented.')
   }

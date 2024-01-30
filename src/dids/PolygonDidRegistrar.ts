@@ -8,12 +8,24 @@ import type {
   DidUpdateOptions,
   DidUpdateResult,
   Buffer,
+  Wallet,
 } from '@aries-framework/core'
 import type { ResolverRegistry } from 'did-resolver'
 
-import { DidRepository, KeyType, DidRecord, DidDocumentRole, JsonTransformer, DidDocument } from '@aries-framework/core'
+import { AskarWallet } from '@aries-framework/askar'
+import {
+  DidRepository,
+  KeyType,
+  DidRecord,
+  DidDocumentRole,
+  JsonTransformer,
+  DidDocument,
+  AriesFrameworkError,
+  WalletError,
+} from '@aries-framework/core'
 import { getResolver } from '@ayanworks/polygon-did-resolver'
 import { Resolver } from 'did-resolver'
+import { SigningKey } from 'ethers'
 
 import { PolygonLedgerService } from '../ledger'
 
@@ -37,7 +49,9 @@ export class PolygonDidRegistrar implements DidRegistrar {
     agentContext.config.logger.info(`Creating DID on ledger: ${did}`)
 
     try {
-      const didRegistry = ledgerService.createDidRegistryInstance(privateKey.toString('hex'))
+      const signingKey = await this.getSigningKey(agentContext.wallet, key.publicKeyBase58)
+
+      const didRegistry = ledgerService.createDidRegistryInstance(signingKey)
 
       const response = await didRegistry.create({
         did,
@@ -68,7 +82,6 @@ export class PolygonDidRegistrar implements DidRegistrar {
           state: 'finished',
           did: didDocument.id,
           didDocument: didDocument,
-          secret: options.secret,
         },
       }
     } catch (error) {
@@ -120,9 +133,19 @@ export class PolygonDidRegistrar implements DidRegistrar {
         }
       }
 
-      const privateKey = options.secret.privateKey
+      if (!didRecord) {
+        throw new AriesFrameworkError('')
+      }
 
-      const didRegistry = ledgerService.createDidRegistryInstance(privateKey.toString('hex'))
+      const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, options.did)
+
+      if (!publicKeyBase58) {
+        throw new AriesFrameworkError('Public Key not found in wallet')
+      }
+
+      const signingKey = await this.getSigningKey(agentContext.wallet, publicKeyBase58)
+
+      const didRegistry = ledgerService.createDidRegistryInstance(signingKey)
 
       const response = await didRegistry.update(didDocument.id, didDocument)
 
@@ -161,6 +184,41 @@ export class PolygonDidRegistrar implements DidRegistrar {
   public async deactivate(agentContext: AgentContext, options: DidDeactivateOptions): Promise<DidDeactivateResult> {
     throw new Error('Method not implemented.')
   }
+
+  private async getSigningKey(wallet: Wallet, publicKeyBase58: string): Promise<SigningKey> {
+    if (!(wallet instanceof AskarWallet)) {
+      throw new AriesFrameworkError('Incorrect wallet type: Polygon Module currently only supports Askar wallet')
+    }
+
+    const keyEntry = await wallet.session.fetchKey({ name: publicKeyBase58 })
+
+    if (!keyEntry) {
+      throw new WalletError('Key not found in wallet')
+    }
+
+    const signingKey = new SigningKey(keyEntry.key.secretBytes)
+
+    keyEntry.key.handle.free()
+
+    return signingKey
+  }
+
+  private async getPublicKeyFromDid(agentContext: AgentContext, did: string) {
+    const didRepository = agentContext.dependencyManager.resolve(DidRepository)
+
+    const didRecord = await didRepository.findCreatedDid(agentContext, did)
+    if (!didRecord) {
+      throw new AriesFrameworkError('DidRecord not found')
+    }
+
+    if (!didRecord.didDocument?.verificationMethod) {
+      throw new AriesFrameworkError('VerificationMethod not found cannot get public key')
+    }
+
+    const publicKeyBase58 = didRecord.didDocument.verificationMethod[0].publicKeyBase58
+
+    return publicKeyBase58
+  }
 }
 
 export interface PolygonDidCreateOptions extends DidCreateOptions {
@@ -179,10 +237,4 @@ export interface PolygonDidUpdateOptions extends DidUpdateOptions {
   method: 'polygon'
   did: string
   didDocument: DidDocument
-  options: {
-    network: 'mainnet' | 'testnet'
-  }
-  secret: {
-    privateKey: Buffer
-  }
 }

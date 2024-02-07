@@ -10,7 +10,6 @@ import {
   DidsModule,
   InjectionSymbols,
   LogLevel,
-  TypedArrayEncoder,
   utils,
 } from '@aries-framework/core'
 import { agentDependencies } from '@aries-framework/node'

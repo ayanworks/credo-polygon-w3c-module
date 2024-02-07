@@ -148,7 +148,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
             controller: didDocument.id,
           })
 
-          didDocument.verificationMethod?.concat(verificationMethod)
+          didDocument.verificationMethod = [...(didDocument?.verificationMethod ?? []), verificationMethod]
         }
       } else {
         return {

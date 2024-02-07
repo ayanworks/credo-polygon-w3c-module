@@ -30,7 +30,7 @@ export class PolygonDidResolver implements DidResolver {
     try {
       const { didDocument, didDocumentMetadata, didResolutionMetadata } = await this.resolver.resolve(did)
 
-      if (didDocument?.verificationMethod?.length === 0) {
+      if (!didDocument?.verificationMethod) {
         agentContext.config.logger.warn(`No verification methods found for DID ${did}`)
 
         return {

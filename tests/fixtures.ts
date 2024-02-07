@@ -180,39 +180,26 @@ export const EcdsaSecp256k1Signature2019Fixtures = {
 export const PolygonDIDFixtures = {
   VALID_DID_DOCUMENT: {
     '@context': ['https://w3id.org/did/v1', 'https://w3id.org/security/suites/secp256k1-2019/v1'],
-    id: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771',
+    id: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72',
     verificationMethod: [
       {
-        id: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771#key-1',
+        id: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1',
         type: 'EcdsaSecp256k1VerificationKey2019',
-        controller: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771',
-        publicKeyBase58: 'ygG9PXu9eooJHivLv192iyY1mNQyU7nqeUqDpw6vwWum',
-      },
-    ],
-    authentication: [
-      'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771',
-      {
-        id: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771#key-1',
-        type: 'EcdsaSecp256k1VerificationKey2019',
-        controller: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771',
-        publicKeyBase58: 'ygG9PXu9eooJHivLv192iyY1mNQyU7nqeUqDpw6vwWum',
-      },
-    ],
-    assertionMethod: [
-      'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771',
-      {
-        id: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771#key-1',
-        type: 'EcdsaSecp256k1VerificationKey2019',
-        controller: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771',
-        publicKeyBase58: 'ygG9PXu9eooJHivLv192iyY1mNQyU7nqeUqDpw6vwWum',
+        controller: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72',
+        publicKeyBase58: 'uWa49bYNSW9JSdcYJbXRjYw2a5nFW8MLusUYjWKjKoay',
       },
     ],
     service: [
       {
-        id: 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771#linked-domain',
-        type: 'LinkedDomains',
+        id: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#linked-domain',
         serviceEndpoint: 'https://example.com',
+        type: 'LinkedDomains',
       },
     ],
+    authentication: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
+    assertionMethod: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
+    keyAgreement: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
+    capabilityInvocation: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
+    capabilityDelegation: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
   },
 }

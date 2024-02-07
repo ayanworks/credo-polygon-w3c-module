@@ -30,6 +30,21 @@ export class PolygonDidResolver implements DidResolver {
     try {
       const { didDocument, didDocumentMetadata, didResolutionMetadata } = await this.resolver.resolve(did)
 
+      if (didDocument?.verificationMethod?.length === 0) {
+        agentContext.config.logger.warn(`No verification methods found for DID ${did}`)
+
+        return {
+          didDocument: JsonTransformer.fromJSON(didDocument, DidDocument),
+          didDocumentMetadata: {
+            linkedResources: [],
+            deactivated: true,
+          },
+          didResolutionMetadata: {
+            contentType: 'application/did+ld+json',
+          },
+        }
+      }
+
       return {
         didDocument: JsonTransformer.fromJSON(didDocument, DidDocument),
         didDocumentMetadata,

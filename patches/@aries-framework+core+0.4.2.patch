@@ -47,6 +47,39 @@ index 766ca70..6ea2ae3 100644
 \ No newline at end of file
 +{"version":3,"file":"AgentModules.js","sourceRoot":"","sources":["../../src/agent/AgentModules.ts"],"names":[],"mappings":";;;AAIA,8DAA+D;AAC/D,4CAA8C;AAC9C,wDAA0D;AAC1D,wDAA0D;AAC1D,0CAA4C;AAC5C,oFAAoF;AACpF,oEAAqE;AACrE,gEAAiE;AACjE,mEAA+D;AAC/D,wCAAgD;AAChD,8CAAgD;AAChD,gDAA6E;AAC7E,sCAAoD;AACpD,sCAAwC;AAiGxC;;;GAGG;AACH,SAAS,sBAAsB;IAC7B,OAAO;QACL,WAAW,EAAE,GAAG,EAAE,CAAC,IAAI,+BAAiB,EAAE;QAC1C,WAAW,EAAE,GAAG,EAAE,CAAC,IAAI,+BAAiB,EAAE;QAC1C,MAAM,EAAE,GAAG,EAAE,CAAC,IAAI,qBAAY,EAAE;QAChC,QAAQ,EAAE,GAAG,EAAE,CAAC,IAAI,wBAAc,EAAE;QACpC,kBAAkB,EAAE,GAAG,EAAE,CAAC,IAAI,kCAAwB,EAAE;QACxD,aAAa,EAAE,GAAG,EAAE,CAAC,IAAI,oCAAmB,EAAE;QAC9C,aAAa,EAAE,GAAG,EAAE,CAAC,IAAI,oCAAmB,EAAE;QAC9C,cAAc,EAAE,GAAG,EAAE,CAAC,IAAI,sCAAoB,EAAE;QAChD,SAAS,EAAE,GAAG,EAAE,CAAC,IAAI,0CAAsB,EAAE;QAC7C,IAAI,EAAE,GAAG,EAAE,CAAC,IAAI,iBAAU,EAAE;QAC5B,MAAM,EAAE,GAAG,EAAE,CAAC,IAAI,qBAAY,EAAE;QAChC,GAAG,EAAE,GAAG,EAAE,CAAC,IAAI,qBAAe,EAAE;QAChC,cAAc,EAAE,GAAG,EAAE,CAAC,IAAI,yBAAoB,EAAE;QAChD,KAAK,EAAE,GAAG,EAAE,CAAC,IAAI,mBAAW,EAAE;QAC9B,GAAG,EAAE,GAAG,EAAE,CAAC,IAAI,yDAA6B,EAAE;KACtC,CAAA;AACZ,CAAC;AAED;;;;;GAKG;AACH,SAAgB,+BAA+B,CAC7C,OAAsB;IAEtB,MAAM,eAAe,qBAAgC,OAAO,CAAE,CAAA;IAC9D,MAAM,mBAAmB,GAAG,sBAAsB,EAAE,CAAA;IAEpD,sDAAsD;IACtD,KAAK,MAAM,CAAC,SAAS,EAAE,mBAAmB,CAAC,IAAI,MAAM,CAAC,OAAO,CAAC,mBAAmB,CAAC,EAAE;QAClF,uDAAuD;QACvD,IAAI,OAAO,IAAI,OAAO,CAAC,SAAS,CAAC;YAAE,SAAQ;QAE3C,eAAe,CAAC,SAAS,CAAC,GAAG,mBAAmB,EAAE,CAAA;KACnD;IAED,OAAO,eAAqD,CAAA;AAC9D,CAAC;AAfD,0EAeC;AAED;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GAiCG;AACH,SAAgB,WAAW,CACzB,iBAAoC,EACpC,eAA0B,EAAE;IAE5B,yFAAyF;IACzF,oCAAoC;IACpC,MAAM,GAAG,GAAG,MAAM,CAAC,OAAO,CAAC,iBAAiB,CAAC,iBAAiB,CAAC,CAAC,MAAM,CAAC,CAAC,GAAG,EAAE,CAAC,SAAS,EAAE,MAAM,CAAC,EAAE,EAAE;QAClG,oBAAoB;QACpB,IAAI,CAAC,MAAM,CAAC,GAAG;YAAE,OAAO,GAAG,CAAA;QAE3B,MAAM,WAAW,GAAG,iBAAiB,CAAC,OAAO,CAAC,MAAM,CAAC,GAAG,CAAC,CAAA;QAEzD,kBAAkB;QAClB,IAAI,YAAY,CAAC,QAAQ,CAAC,WAAW,CAAC;YAAE,OAAO,GAAG,CAAA;QAClD,uCAAY,GAAG,KAAE,CAAC,SAAS,CAAC,EAAE,WAAW,IAAE;IAC7C,CAAC,EAAE,EAAE,CAA2B,CAAA;IAEhC,OAAO,GAAG,CAAA;AACZ,CAAC;AAlBD,kCAkBC"}
 \ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/constants.d.ts b/node_modules/@aries-framework/core/build/constants.d.ts
+index b33a121..48ef47a 100644
+--- a/node_modules/@aries-framework/core/build/constants.d.ts
++++ b/node_modules/@aries-framework/core/build/constants.d.ts
+@@ -7,5 +7,6 @@ export declare const InjectionSymbols: {
+     Stop$: symbol;
+     FileSystem: symbol;
+     Wallet: symbol;
++    DifPresentationExchangeService: symbol;
+ };
+ export declare const DID_COMM_TRANSPORT_QUEUE = "didcomm:transport/queue";
+diff --git a/node_modules/@aries-framework/core/build/constants.js b/node_modules/@aries-framework/core/build/constants.js
+index c028c7a..cc4651f 100644
+--- a/node_modules/@aries-framework/core/build/constants.js
++++ b/node_modules/@aries-framework/core/build/constants.js
+@@ -10,6 +10,7 @@ exports.InjectionSymbols = {
+     Stop$: Symbol('Stop$'),
+     FileSystem: Symbol('FileSystem'),
+     Wallet: Symbol('Wallet'),
++    DifPresentationExchangeService: Symbol('DifPresentationExchangeService'),
+ };
+ exports.DID_COMM_TRANSPORT_QUEUE = 'didcomm:transport/queue';
+ //# sourceMappingURL=constants.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/constants.js.map b/node_modules/@aries-framework/core/build/constants.js.map
+index 9ef98cf..e22430d 100644
+--- a/node_modules/@aries-framework/core/build/constants.js.map
++++ b/node_modules/@aries-framework/core/build/constants.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"constants.js","sourceRoot":"","sources":["../src/constants.ts"],"names":[],"mappings":";;;AAAa,QAAA,gBAAgB,GAAG;IAC9B,iBAAiB,EAAE,MAAM,CAAC,mBAAmB,CAAC;IAC9C,cAAc,EAAE,MAAM,CAAC,gBAAgB,CAAC;IACxC,MAAM,EAAE,MAAM,CAAC,QAAQ,CAAC;IACxB,oBAAoB,EAAE,MAAM,CAAC,sBAAsB,CAAC;IACpD,iBAAiB,EAAE,MAAM,CAAC,mBAAmB,CAAC;IAC9C,KAAK,EAAE,MAAM,CAAC,OAAO,CAAC;IACtB,UAAU,EAAE,MAAM,CAAC,YAAY,CAAC;IAChC,MAAM,EAAE,MAAM,CAAC,QAAQ,CAAC;CACzB,CAAA;AAEY,QAAA,wBAAwB,GAAG,yBAAyB,CAAA"}
+\ No newline at end of file
++{"version":3,"file":"constants.js","sourceRoot":"","sources":["../src/constants.ts"],"names":[],"mappings":";;;AAAa,QAAA,gBAAgB,GAAG;IAC9B,iBAAiB,EAAE,MAAM,CAAC,mBAAmB,CAAC;IAC9C,cAAc,EAAE,MAAM,CAAC,gBAAgB,CAAC;IACxC,MAAM,EAAE,MAAM,CAAC,QAAQ,CAAC;IACxB,oBAAoB,EAAE,MAAM,CAAC,sBAAsB,CAAC;IACpD,iBAAiB,EAAE,MAAM,CAAC,mBAAmB,CAAC;IAC9C,KAAK,EAAE,MAAM,CAAC,OAAO,CAAC;IACtB,UAAU,EAAE,MAAM,CAAC,YAAY,CAAC;IAChC,MAAM,EAAE,MAAM,CAAC,QAAQ,CAAC;IACxB,8BAA8B,EAAE,MAAM,CAAC,gCAAgC,CAAC;CACzE,CAAA;AAEY,QAAA,wBAAwB,GAAG,yBAAyB,CAAA"}
+\ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts b/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts
 index d1369ea..337d40e 100644
 --- a/node_modules/@aries-framework/core/build/crypto/KeyType.d.ts
@@ -125,6 +158,27 @@ index 56f0cc0..9bff8f9 100644
 \ No newline at end of file
 +{"version":3,"file":"keyUtils.js","sourceRoot":"","sources":["../../src/crypto/keyUtils.ts"],"names":[],"mappings":"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"}
 \ No newline at end of file
+diff --git a/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js b/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js
+index 3124287..686dbaa 100644
+--- a/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js
++++ b/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js
+@@ -12,6 +12,7 @@ const multiCodecPrefixMap = {
+     4608: KeyType_1.KeyType.P256,
+     4609: KeyType_1.KeyType.P384,
+     4610: KeyType_1.KeyType.P521,
++    231: KeyType_1.KeyType.K256,
+ };
+ function getKeyTypeByMultiCodecPrefix(multiCodecPrefix) {
+     const keyType = multiCodecPrefixMap[multiCodecPrefix];
+diff --git a/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js.map b/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js.map
+index 96a01e5..9cc6970 100644
+--- a/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js.map
++++ b/node_modules/@aries-framework/core/build/crypto/multiCodecKey.js.map
+@@ -1 +1 @@
+-{"version":3,"file":"multiCodecKey.js","sourceRoot":"","sources":["../../src/crypto/multiCodecKey.ts"],"names":[],"mappings":";;;AAAA,uCAAmC;AAEnC,4EAA4E;AAC5E,MAAM,mBAAmB,GAA4B;IACnD,GAAG,EAAE,iBAAO,CAAC,UAAU;IACvB,GAAG,EAAE,iBAAO,CAAC,UAAU;IACvB,GAAG,EAAE,iBAAO,CAAC,MAAM;IACnB,GAAG,EAAE,iBAAO,CAAC,OAAO;IACpB,GAAG,EAAE,iBAAO,CAAC,YAAY;IACzB,IAAI,EAAE,iBAAO,CAAC,IAAI;IAClB,IAAI,EAAE,iBAAO,CAAC,IAAI;IAClB,IAAI,EAAE,iBAAO,CAAC,IAAI;CACnB,CAAA;AAED,SAAgB,4BAA4B,CAAC,gBAAwB;IACnE,MAAM,OAAO,GAAG,mBAAmB,CAAC,gBAAgB,CAAC,CAAA;IAErD,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,8CAA8C,gBAAgB,GAAG,CAAC,CAAA;KACnF;IAED,OAAO,OAAO,CAAA;AAChB,CAAC;AARD,oEAQC;AAED,SAAgB,4BAA4B,CAAC,OAAgB;IAC3D,MAAM,KAAK,GAAG,MAAM,CAAC,IAAI,CAAC,mBAAmB,CAAC,CAAA;IAC9C,MAAM,IAAI,GAAG,KAAK,CAAC,IAAI,CAAC,CAAC,GAAG,EAAE,EAAE,CAAC,mBAAmB,CAAC,GAAG,CAAC,KAAK,OAAO,CAAC,CAAA;IAEtE,IAAI,CAAC,IAAI,EAAE;QACT,MAAM,IAAI,KAAK,CAAC,kDAAkD,OAAO,GAAG,CAAC,CAAA;KAC9E;IAED,OAAO,MAAM,CAAC,IAAI,CAAC,CAAA;AACrB,CAAC;AATD,oEASC"}
+\ No newline at end of file
++{"version":3,"file":"multiCodecKey.js","sourceRoot":"","sources":["../../src/crypto/multiCodecKey.ts"],"names":[],"mappings":";;;AAAA,uCAAmC;AAEnC,4EAA4E;AAC5E,MAAM,mBAAmB,GAA4B;IACnD,GAAG,EAAE,iBAAO,CAAC,UAAU;IACvB,GAAG,EAAE,iBAAO,CAAC,UAAU;IACvB,GAAG,EAAE,iBAAO,CAAC,MAAM;IACnB,GAAG,EAAE,iBAAO,CAAC,OAAO;IACpB,GAAG,EAAE,iBAAO,CAAC,YAAY;IACzB,IAAI,EAAE,iBAAO,CAAC,IAAI;IAClB,IAAI,EAAE,iBAAO,CAAC,IAAI;IAClB,IAAI,EAAE,iBAAO,CAAC,IAAI;IAClB,GAAG,EAAE,iBAAO,CAAC,IAAI;CAClB,CAAA;AAED,SAAgB,4BAA4B,CAAC,gBAAwB;IACnE,MAAM,OAAO,GAAG,mBAAmB,CAAC,gBAAgB,CAAC,CAAA;IAErD,IAAI,CAAC,OAAO,EAAE;QACZ,MAAM,IAAI,KAAK,CAAC,8CAA8C,gBAAgB,GAAG,CAAC,CAAA;KACnF;IAED,OAAO,OAAO,CAAA;AAChB,CAAC;AARD,oEAQC;AAED,SAAgB,4BAA4B,CAAC,OAAgB;IAC3D,MAAM,KAAK,GAAG,MAAM,CAAC,IAAI,CAAC,mBAAmB,CAAC,CAAA;IAC9C,MAAM,IAAI,GAAG,KAAK,CAAC,IAAI,CAAC,CAAC,GAAG,EAAE,EAAE,CAAC,mBAAmB,CAAC,GAAG,CAAC,KAAK,OAAO,CAAC,CAAA;IAEtE,IAAI,CAAC,IAAI,EAAE;QACT,MAAM,IAAI,KAAK,CAAC,kDAAkD,OAAO,GAAG,CAAC,CAAA;KAC9E;IAED,OAAO,MAAM,CAAC,IAAI,CAAC,CAAA;AACrB,CAAC;AATD,oEASC"}
+\ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/decorators/attachment/Attachment.d.ts b/node_modules/@aries-framework/core/build/decorators/attachment/Attachment.d.ts
 index 8e10c7e..0605939 100644
 --- a/node_modules/@aries-framework/core/build/decorators/attachment/Attachment.d.ts
@@ -201,10 +255,10 @@ index 0000000..2d10f87
 +export declare const keyDidSecp256k1: KeyDidMapping;
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js
 new file mode 100644
-index 0000000..48e5a9b
+index 0000000..991e946
 --- /dev/null
 +++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,23 @@
 +"use strict";
 +Object.defineProperty(exports, "__esModule", { value: true });
 +exports.keyDidSecp256k1 = void 0;
@@ -212,13 +266,17 @@ index 0000000..48e5a9b
 +const error_1 = require("../../../../error");
 +const verificationMethod_1 = require("../verificationMethod");
 +exports.keyDidSecp256k1 = {
-+    supportedVerificationMethodTypes: [verificationMethod_1.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019],
-+    getVerificationMethods: (did, key) => [
-+        (0, verificationMethod_1.getEcdsaSecp256k1VerificationKey2019)({ id: `${did}#key-1`, key, controller: did }),
++    supportedVerificationMethodTypes: [
++        verificationMethod_1.VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
++        verificationMethod_1.VERIFICATION_METHOD_TYPE_JSON_WEB_KEY_2020,
 +    ],
++    getVerificationMethods: (did, key) => [(0, verificationMethod_1.getJsonWebKey2020)({ did, key })],
 +    getKeyFromVerificationMethod: (verificationMethod) => {
 +        if ((0, verificationMethod_1.isEcdsaSecp256k1VerificationKey2019)(verificationMethod)) {
 +            return (0, verificationMethod_1.getKeyFromEcdsaSecp256k1VerificationKey2019)(verificationMethod);
++        }
++        if ((0, verificationMethod_1.isJsonWebKey2020)(verificationMethod)) {
++            return (0, verificationMethod_1.getKeyFromJsonWebKey2020)(verificationMethod);
 +        }
 +        throw new error_1.AriesFrameworkError(`Verification method with type '${verificationMethod.type}' not supported for key type '${KeyType_1.KeyType.K256}'`);
 +    },
@@ -227,11 +285,11 @@ index 0000000..48e5a9b
 \ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map
 new file mode 100644
-index 0000000..b469b40
+index 0000000..41acac0
 --- /dev/null
 +++ b/node_modules/@aries-framework/core/build/modules/dids/domain/key-type/secp256k1.js.map
 @@ -0,0 +1 @@
-+{"version":3,"file":"secp256k1.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/secp256k1.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,6CAAuD;AACvD,8DAK8B;AAEjB,QAAA,eAAe,GAAkB;IAC5C,gCAAgC,EAAE,CAAC,mFAA8D,CAAC;IAClG,sBAAsB,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC;QACpC,IAAA,yDAAoC,EAAC,EAAE,EAAE,EAAE,GAAG,GAAG,QAAQ,EAAE,GAAG,EAAE,UAAU,EAAE,GAAG,EAAE,CAAC;KACnF;IACD,4BAA4B,EAAE,CAAC,kBAAsC,EAAE,EAAE;QACvE,IAAI,IAAA,wDAAmC,EAAC,kBAAkB,CAAC,EAAE;YAC3D,OAAO,IAAA,gEAA2C,EAAC,kBAAkB,CAAC,CAAA;SACvE;QAED,MAAM,IAAI,2BAAmB,CAC3B,kCAAkC,kBAAkB,CAAC,IAAI,iCAAiC,iBAAO,CAAC,IAAI,GAAG,CAC1G,CAAA;IACH,CAAC;CACF,CAAA"}
++{"version":3,"file":"secp256k1.js","sourceRoot":"","sources":["../../../../../src/modules/dids/domain/key-type/secp256k1.ts"],"names":[],"mappings":";;;AAGA,wDAAoD;AACpD,6CAAuD;AACvD,8DAQ8B;AAEjB,QAAA,eAAe,GAAkB;IAC5C,gCAAgC,EAAE;QAChC,mFAA8D;QAC9D,+DAA0C;KAC3C;IACD,sBAAsB,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC,CAAC,IAAA,sCAAiB,EAAC,EAAE,GAAG,EAAE,GAAG,EAAE,CAAC,CAAC;IACvE,4BAA4B,EAAE,CAAC,kBAAsC,EAAE,EAAE;QACvE,IAAI,IAAA,wDAAmC,EAAC,kBAAkB,CAAC,EAAE;YAC3D,OAAO,IAAA,gEAA2C,EAAC,kBAAkB,CAAC,CAAA;SACvE;QAED,IAAI,IAAA,qCAAgB,EAAC,kBAAkB,CAAC,EAAE;YACxC,OAAO,IAAA,6CAAwB,EAAC,kBAAkB,CAAC,CAAA;SACpD;QAED,MAAM,IAAI,2BAAmB,CAC3B,kCAAkC,kBAAkB,CAAC,IAAI,iCAAiC,iBAAO,CAAC,IAAI,GAAG,CAC1G,CAAA;IACH,CAAC;CACF,CAAA"}
 \ No newline at end of file
 diff --git a/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js b/node_modules/@aries-framework/core/build/modules/dids/domain/keyDidDocument.js
 index efafb05..bead61c 100644
@@ -2027,33 +2085,3 @@ index 91e4a29..9782198 100644
 \ No newline at end of file
 +{"version":3,"file":"W3cPresentation.js","sourceRoot":"","sources":["../../../../../src/modules/vc/models/presentation/W3cPresentation.ts"],"names":[],"mappings":";;;;;;;;;;;;AAMA,yDAA0C;AAC1C,qDAAsF;AAEtF,6CAAmD;AAEnD,6DAAkF;AAClF,+CAA0F;AAC1F,6GAAyG;AACzG,wFAAoF;AACpF,iDAA4D;AAC5D,mFAA0F;AAE1F,2CAA0E;AAU1E,MAAa,eAAe;IAC1B,YAAmB,OAA+B;;QAChD,IAAI,OAAO,EAAE;YACX,IAAI,CAAC,EAAE,GAAG,OAAO,CAAC,EAAE,CAAA;YACpB,IAAI,CAAC,OAAO,GAAG,MAAA,OAAO,CAAC,OAAO,mCAAI,CAAC,sCAA0B,CAAC,CAAA;YAC9D,IAAI,CAAC,IAAI,GAAG,MAAA,OAAO,CAAC,IAAI,mCAAI,CAAC,wCAA4B,CAAC,CAAA;YAC1D,IAAI,CAAC,oBAAoB,GAAG,OAAO,CAAC,oBAAoB,CAAA;YAExD,IAAI,OAAO,CAAC,MAAM,EAAE;gBAClB,IAAI,CAAC,MAAM,GAAG,OAAO,OAAO,CAAC,MAAM,KAAK,QAAQ,CAAC,CAAC,CAAC,OAAO,CAAC,MAAM,CAAC,CAAC,CAAC,IAAI,qBAAS,CAAC,OAAO,CAAC,MAAM,CAAC,CAAA;aAClG;SACF;IACH,CAAC;IAuBD,IAAW,QAAQ;QACjB,IAAI,CAAC,IAAI,CAAC,MAAM;YAAE,OAAO,IAAI,CAAA;QAE7B,OAAO,IAAI,CAAC,MAAM,YAAY,qBAAS,CAAC,CAAC,CAAC,IAAI,CAAC,MAAM,CAAC,EAAE,CAAC,CAAC,CAAC,IAAI,CAAC,MAAM,CAAA;IACxE,CAAC;IAEM,MAAM;QACX,OAAO,uBAAe,CAAC,MAAM,CAAC,IAAI,CAAwB,CAAA;IAC5D,CAAC;CACF;AA9BC;IAAC,IAAA,0BAAM,EAAC,EAAE,IAAI,EAAE,UAAU,EAAE,CAAC;IAC5B,IAAA,sCAAyB,GAAE;8BACX,KAAK;gDAAqB;AAE3C;IAAC,IAAA,4BAAU,GAAE;IACZ,IAAA,kBAAK,GAAE;;2CACU;AAElB;IAAC,4BAA4B,EAAE;8BACjB,KAAK;6CAAQ;AAE3B;IAAC,IAAA,gCAAoB,GAAE;IACtB,IAAA,uBAAW,GAAE;IACb,IAAA,4BAAU,GAAE;;+CACqB;AAElC;IAAC,IAAA,4DAAkC,GAAE;IACpC,IAAA,yCAA4B,EAAC,EAAE,SAAS,EAAE,CAAC,6DAA6B,EAAE,uDAA0B,CAAC,EAAE,CAAC;IACxG,IAAA,gCAAc,EAAC,EAAE,IAAI,EAAE,IAAI,EAAE,CAAC;;6DACqC;AAjCtE,0CA4CC;AAED,oBAAoB;AAEpB,SAAgB,4BAA4B,CAAC,iBAAqC;IAChF,OAAO,IAAA,4BAAU,EACf;QACE,IAAI,EAAE,8BAA8B;QACpC,SAAS,EAAE;YACT,QAAQ,EAAE,CAAC,KAAK,EAAW,EAAE;gBAC3B,IAAI,KAAK,CAAC,OAAO,CAAC,KAAK,CAAC,EAAE;oBACxB,OAAO,KAAK,CAAC,QAAQ,CAAC,wCAA4B,CAAC,CAAA;iBACpD;gBACD,OAAO,KAAK,CAAA;YACd,CAAC;YACD,cAAc,EAAE,IAAA,8BAAY,EAC1B,CAAC,UAAU,EAAE,EAAE,CAAC,UAAU,GAAG,+EAA+E,EAC5G,iBAAiB,CAClB;SACF;KACF,EACD,iBAAiB,CAClB,CAAA;AACH,CAAC;AAnBD,oEAmBC"}
 \ No newline at end of file
-diff --git a/node_modules/@aries-framework/core/package.json b/node_modules/@aries-framework/core/package.json
-index bd33ae9..09a01cb 100644
---- a/node_modules/@aries-framework/core/package.json
-+++ b/node_modules/@aries-framework/core/package.json
-@@ -30,6 +30,9 @@
-     "@stablelib/ed25519": "^1.0.2",
-     "@stablelib/random": "^1.0.1",
-     "@stablelib/sha256": "^1.0.1",
-+    "@sphereon/pex": "^2.2.2",
-+    "@sphereon/pex-models": "^2.1.2",
-+    "@sphereon/ssi-types": "^0.17.5",
-     "@types/node-fetch": "2.6.2",
-     "@types/ws": "^8.5.4",
-     "abort-controller": "^3.0.0",
-@@ -39,6 +42,7 @@
-     "class-transformer": "0.5.1",
-     "class-validator": "0.14.0",
-     "did-resolver": "^4.1.0",
-+    "jsonpath": "^1.1.1",
-     "lru_map": "^0.4.1",
-     "luxon": "^3.3.0",
-     "make-error": "^1.3.6",
-@@ -53,6 +57,7 @@
-   },
-   "devDependencies": {
-     "@types/events": "^3.0.0",
-+    "@types/jsonpath": "^0.2.4",
-     "@types/luxon": "^3.2.0",
-     "@types/object-inspect": "^1.8.0",
-     "@types/uuid": "^9.0.1",

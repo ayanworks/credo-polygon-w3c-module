@@ -10,7 +10,6 @@ import type {
   Buffer,
   Wallet,
 } from '@aries-framework/core'
-import type { ResolverRegistry } from 'did-resolver'
 
 import { AskarWallet } from '@aries-framework/askar'
 import {
@@ -22,6 +21,9 @@ import {
   DidDocument,
   AriesFrameworkError,
   WalletError,
+  isValidPrivateKey,
+  getEcdsaSecp256k1VerificationKey2019,
+  DidDocumentBuilder,
 } from '@aries-framework/core'
 import { getResolver } from '@ayanworks/polygon-did-resolver'
 import { Resolver } from 'did-resolver'
@@ -29,11 +31,11 @@ import { SigningKey } from 'ethers'
 
 import { PolygonLedgerService } from '../ledger'
 
-import { buildDid, validateSpecCompliantPayload } from './didPolygonUtil'
+import { buildDid, getSecp256k1DidDoc, validateSpecCompliantPayload } from './didPolygonUtil'
 
 export class PolygonDidRegistrar implements DidRegistrar {
   public readonly supportedMethods = ['polygon']
-  private resolver = new Resolver(getResolver() as ResolverRegistry)
+  private resolver = new Resolver(getResolver())
 
   public async create(agentContext: AgentContext, options: PolygonDidCreateOptions): Promise<DidCreateResult> {
     const ledgerService = agentContext.dependencyManager.resolve(PolygonLedgerService)
@@ -53,11 +55,10 @@ export class PolygonDidRegistrar implements DidRegistrar {
 
       const didRegistry = ledgerService.createDidRegistryInstance(signingKey)
 
-      const response = await didRegistry.create({
-        did,
-        publicKeyBase58: key.publicKeyBase58,
-        serviceEndpoint: options.options.endpoint,
-      })
+      // Create did document
+      const secpDidDoc = getSecp256k1DidDoc(did, key, options.options.endpoint)
+
+      const response = await didRegistry.create(did, secpDidDoc)
 
       agentContext.config.logger.info(`Published did on ledger: ${did}`)
 
@@ -122,6 +123,33 @@ export class PolygonDidRegistrar implements DidRegistrar {
             },
           }
         }
+
+        if (options?.secret?.privateKey) {
+          const privateKey = options?.secret?.privateKey
+          if (privateKey && !isValidPrivateKey(privateKey, KeyType.K256)) {
+            return {
+              didDocumentMetadata: {},
+              didRegistrationMetadata: {},
+              didState: {
+                state: 'failed',
+                reason: 'Invalid private key provided',
+              },
+            }
+          }
+
+          const key = await agentContext.wallet.createKey({
+            keyType: KeyType.K256,
+            privateKey: privateKey,
+          })
+
+          const verificationMethod = getEcdsaSecp256k1VerificationKey2019({
+            id: `${didDocument.id}#${key.fingerprint}`,
+            key,
+            controller: didDocument.id,
+          })
+
+          didDocument.verificationMethod?.concat(verificationMethod)
+        }
       } else {
         return {
           didDocumentMetadata: {},
@@ -134,7 +162,14 @@ export class PolygonDidRegistrar implements DidRegistrar {
       }
 
       if (!didRecord) {
-        throw new AriesFrameworkError('')
+        return {
+          didDocumentMetadata: {},
+          didRegistrationMetadata: {},
+          didState: {
+            state: 'failed',
+            reason: 'DidRecord not found in wallet',
+          },
+        }
       }
 
       const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, options.did)
@@ -180,9 +215,71 @@ export class PolygonDidRegistrar implements DidRegistrar {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async deactivate(agentContext: AgentContext, options: DidDeactivateOptions): Promise<DidDeactivateResult> {
-    throw new Error('Method not implemented.')
+    const didRepository = agentContext.dependencyManager.resolve(DidRepository)
+    const ledgerService = agentContext.dependencyManager.resolve(PolygonLedgerService)
+
+    const did = options.did
+
+    try {
+      const { didDocument, didDocumentMetadata } = await this.resolver.resolve(did)
+
+      const didRecord = await didRepository.findCreatedDid(agentContext, did)
+      if (!didDocument || didDocumentMetadata.deactivated || !didRecord) {
+        return {
+          didDocumentMetadata: {},
+          didRegistrationMetadata: {},
+          didState: {
+            state: 'failed',
+            reason: 'Did not found',
+          },
+        }
+      }
+
+      const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, options.did)
+
+      if (!publicKeyBase58) {
+        throw new AriesFrameworkError('Public Key not found in wallet')
+      }
+
+      const signingKey = await this.getSigningKey(agentContext.wallet, publicKeyBase58)
+
+      const didRegistry = ledgerService.createDidRegistryInstance(signingKey)
+
+      const updatedDidDocument = new DidDocumentBuilder(options.did).addContext('https://www.w3.org/ns/did/v1').build()
+
+      const response = await didRegistry.update(didDocument.id, updatedDidDocument)
+
+      if (!response) {
+        throw new AriesFrameworkError(`Unable to deactivate did document for did : ${did}`)
+      }
+
+      await didRepository.update(agentContext, didRecord)
+
+      return {
+        didDocumentMetadata: {
+          deactivated: true,
+        },
+        didRegistrationMetadata: {},
+        didState: {
+          state: 'finished',
+          did: didDocument.id,
+          didDocument: JsonTransformer.fromJSON(didDocument, DidDocument),
+          secret: options.secret,
+        },
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      agentContext.config.logger.error(`Error deactivating DID ${errorMessage}`)
+      return {
+        didDocumentMetadata: {},
+        didRegistrationMetadata: {},
+        didState: {
+          state: 'failed',
+          reason: `unknownError: ${errorMessage}`,
+        },
+      }
+    }
   }
 
   private async getSigningKey(wallet: Wallet, publicKeyBase58: string): Promise<SigningKey> {
@@ -237,4 +334,7 @@ export interface PolygonDidUpdateOptions extends DidUpdateOptions {
   method: 'polygon'
   did: string
   didDocument: DidDocument
+  secret?: {
+    privateKey: Buffer
+  }
 }

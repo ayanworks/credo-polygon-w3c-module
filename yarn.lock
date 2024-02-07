@@ -85,10 +85,10 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.7":
-  version "0.0.16-alpha.7"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.7.tgz#10a675ff307fda69ced2b6ffe12dad5bfb6f5878"
-  integrity sha512-n2BwxQgU5ibPe6u1tK7Gos8Yydc6xcqIOJ+qQRPktFbTgeeU3rpljxHuRsavlHMl0QvjtQbhdwGggIXyCal/lQ==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.8":
+  version "0.0.16-alpha.8"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.8.tgz#eb4e79a3b260fbbc3aff7facff68b3ca1f3ac572"
+  integrity sha512-bHQ0dJV4NTuWIzB+Oxlkja78QjjfIXTtfVHECucEMQSj/G14kHNy2d/I37o6iglrupIWZu9NpBs1JMSS1IaKLg==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     "@ethersproject/basex" "^5.7.0"

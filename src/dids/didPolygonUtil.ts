@@ -1,7 +1,8 @@
 import type { DidCreateResult, DidDocument } from '@aries-framework/core'
 
-import { VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019 } from '@aries-framework/core'
 import { computeAddress } from 'ethers'
+
+export const VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019 = 'EcdsaSecp256k1VerificationKey2019'
 
 export const polygonDidRegex = new RegExp(/^did:polygon(:testnet)?:0x[0-9a-fA-F]{40}$/)
 

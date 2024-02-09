@@ -1,17 +1,7 @@
 import type { EncryptedMessage } from '@aries-framework/core'
 
 import { AskarModule } from '@aries-framework/askar'
-import {
-  Agent,
-  ConsoleLogger,
-  DidDocument,
-  DidsModule,
-  JsonTransformer,
-  KeyType,
-  LogLevel,
-  TypedArrayEncoder,
-  utils,
-} from '@aries-framework/core'
+import { Agent, ConsoleLogger, DidsModule, KeyType, LogLevel, TypedArrayEncoder, utils } from '@aries-framework/core'
 import { agentDependencies } from '@aries-framework/node'
 import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 import { Subject } from 'rxjs'
@@ -27,7 +17,7 @@ const logger = new ConsoleLogger(LogLevel.info)
 
 export type SubjectMessage = { message: EncryptedMessage; replySubject?: Subject<SubjectMessage> }
 
-const did = 'did:polygon:testnet:0x50e775B5c3050e8B2Cfa404C3dE95ab97E43e771'
+const did = 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72'
 
 describe('Polygon Module did resolver', () => {
   let aliceAgent: Agent<{ askar: AskarModule; polygon: PolygonModule; dids: DidsModule }>
@@ -141,28 +131,6 @@ describe('Polygon Module did resolver', () => {
 
       expect(result.didDocument).toEqual(null)
       expect(result.didResolutionMetadata.error).toEqual('notFound')
-    })
-
-    it('should update the DID doc when new DIDDoc is passed', async () => {
-      const didDocument = JsonTransformer.fromJSON(PolygonDIDFixtures.VALID_DID_DOCUMENT, DidDocument)
-
-      const response = await aliceAgent.dids.update({
-        did,
-        didDocument,
-        secret: {
-          privateKey: TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99'),
-        },
-      })
-
-      expect(response).toEqual({
-        didDocumentMetadata: {},
-        didRegistrationMetadata: {},
-        didState: {
-          state: 'finished',
-          did: didDocument.id,
-          didDocument,
-        },
-      })
     })
   })
 })

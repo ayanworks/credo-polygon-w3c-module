@@ -1,2 +1,3 @@
-export { PolygonDidResolver } from './PolygonDidResolver'
-export { PolygonDidRegistrar } from './PolygonDidRegistrar'
+export * from './PolygonDidRegistrar'
+export * from './PolygonDidResolver'
+export * from './didPolygonUtil'

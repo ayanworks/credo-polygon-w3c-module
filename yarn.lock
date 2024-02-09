@@ -85,16 +85,18 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.7":
-  version "0.0.16-alpha.7"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.7.tgz#10a675ff307fda69ced2b6ffe12dad5bfb6f5878"
-  integrity sha512-n2BwxQgU5ibPe6u1tK7Gos8Yydc6xcqIOJ+qQRPktFbTgeeU3rpljxHuRsavlHMl0QvjtQbhdwGggIXyCal/lQ==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.10":
+  version "0.0.16-alpha.10"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.10.tgz#780755b037e21d7122cb708d3a03f746ff663357"
+  integrity sha512-XOPt5aAFhLFZsoThgaWf0AtVxwP5MSbZgJgCWioj7GWYEbp88z4tlB+h+R71Ec0vSbFOU4fgyroXGrfMNH/ttg==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
+    "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.10"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"
     "@ethersproject/wallet" "^5.7.0"
+    did-resolver "^4.1.0"
     ethers "^6.9.0"
     uuid "^9.0.1"
 
@@ -103,10 +105,10 @@
   resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-2.0.1-alpha.3.tgz#7bb932b712a4c48df857682f27adfb08154c4358"
   integrity sha512-8FZZVAmzXZn0pjZasuxdRblL0obK91JoaoXzpM4oZ7hD5VRUbiWf7BTh17WsWc6Oaf6XtafT4csuBo11fZiUoQ==
 
-"@ayanworks/polygon-did-resolver@0.0.16-alpha.8":
-  version "0.0.16-alpha.8"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.8.tgz#bea0d7343a2079cc849a3f7f2e358ed58fefd6f1"
-  integrity sha512-rTubdjbwGtvIoSpR3OWp/7SseShCZNzJ41Rd5yL/Y/xYlX8PJr2zWUM0pcUouReVQzgeAYuUphHAV0QpqWRoSQ==
+"@ayanworks/polygon-did-resolver@0.0.16-alpha.10", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.10":
+  version "0.0.16-alpha.10"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.10.tgz#85eb53f2f6dd53c5e6342e9d6d0c70bb560fa281"
+  integrity sha512-RfxDr+bggYcLsdN6nK+VKwjVLZzy3AqGULSsYT2bU+4n8obptufVIDg1cjbI4zi0eQIVmtkUeaHcJMlaR6wvvA==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     did-resolver "^4.1.0"

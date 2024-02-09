@@ -10,7 +10,6 @@ import {
   DidsModule,
   InjectionSymbols,
   LogLevel,
-  TypedArrayEncoder,
   utils,
 } from '@aries-framework/core'
 import { agentDependencies } from '@aries-framework/node'
@@ -60,7 +59,6 @@ export function getAgentConfig(
     polygon: new PolygonModule({
       rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
       didContractAddress: '0x12513116875BB3E4F098Ce74624739Ee51bAf023',
-      privateKey: TypedArrayEncoder.fromHex('7229440234c231c8dc067ef2425bc694f202514779a02876c1d273b00adf66fb'),
       fileServerToken:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6IjdmYjRmN2I3LWQ5ZWUtNDYxOC04OTE4LWZiMmIzYzY1M2EyYiJ9.x-kHeTVqX4w19ibSAspCYgIL-JFVss8yZ0CT21QVRYM',
       schemaManagerContractAddress: '0x67e8223D80aEcb337FE8D90dD41845A0DA31B4b0',

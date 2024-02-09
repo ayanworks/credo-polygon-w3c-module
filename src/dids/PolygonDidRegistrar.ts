@@ -112,8 +112,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
         didDocument = options.didDocument
         const resolvedDocument = await this.resolver.resolve(didDocument.id)
         didRecord = await didRepository.findCreatedDid(agentContext, didDocument.id)
-        // TODO: Add condition to check if did is deactivated
-        if (!resolvedDocument.didDocument || !didRecord) {
+        if (!resolvedDocument.didDocument || resolvedDocument.didDocumentMetadata.deactivated || !didRecord) {
           return {
             didDocumentMetadata: {},
             didRegistrationMetadata: {},
@@ -142,8 +141,10 @@ export class PolygonDidRegistrar implements DidRegistrar {
             privateKey: privateKey,
           })
 
+          const verificationMethodCount = didDocument?.verificationMethod?.length ?? 0
+
           const verificationMethod = getEcdsaSecp256k1VerificationKey2019({
-            id: `${didDocument.id}#${key.fingerprint}`,
+            id: `${didDocument.id}#key-${verificationMethodCount + 1}`,
             key,
             controller: didDocument.id,
           })

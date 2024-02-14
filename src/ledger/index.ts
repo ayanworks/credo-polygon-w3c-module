@@ -1,1 +1,1 @@
-export { PolygonLedgerService } from './PolygonLedgerService'
+export * from './PolygonLedgerService'

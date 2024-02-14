@@ -24,15 +24,14 @@
     "check-format": "yarn prettier --check",
     "prettier": "prettier --ignore-path .gitignore '**/*.+(js|json|ts|md|yml|yaml)'",
     "test": "jest",
-    "lint": "eslint --ignore-path .gitignore .",
-    "postinstall": "patch-package"
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "@aries-framework/askar": "0.4.2",
     "@aries-framework/core": "0.4.2",
-    "@ayanworks/polygon-did-registrar": "0.0.16-alpha.10",
+    "@ayanworks/polygon-did-registrar": "0.0.16-alpha.12",
     "@ayanworks/polygon-did-resolver": "0.0.16-alpha.10",
-    "@ayanworks/polygon-schema-manager": "0.0.2-alpha.2",
+    "@ayanworks/polygon-schema-manager": "0.0.2-alpha.4",
     "@sphereon/pex": "^2.2.2",
     "@sphereon/pex-models": "^2.1.2",
     "@sphereon/ssi-types": "^0.17.5",

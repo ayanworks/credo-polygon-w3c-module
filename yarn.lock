@@ -85,10 +85,10 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.10":
-  version "0.0.16-alpha.10"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.10.tgz#780755b037e21d7122cb708d3a03f746ff663357"
-  integrity sha512-XOPt5aAFhLFZsoThgaWf0AtVxwP5MSbZgJgCWioj7GWYEbp88z4tlB+h+R71Ec0vSbFOU4fgyroXGrfMNH/ttg==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.12":
+  version "0.0.16-alpha.12"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.12.tgz#dce077ca26b926e4ebf8dbfab56583da1adea373"
+  integrity sha512-DP/KddUXEu36mhEqXgoxfgfnlRGkwcDEtRk+T9YhgmKZ4LAzyrLfU59sWeqTHZ8io7MPFPhhnug8Cm65fQ9pug==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.10"
@@ -105,7 +105,7 @@
   resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-2.0.1-alpha.3.tgz#7bb932b712a4c48df857682f27adfb08154c4358"
   integrity sha512-8FZZVAmzXZn0pjZasuxdRblL0obK91JoaoXzpM4oZ7hD5VRUbiWf7BTh17WsWc6Oaf6XtafT4csuBo11fZiUoQ==
 
-"@ayanworks/polygon-did-resolver@0.0.16-alpha.10", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.10":
+"@ayanworks/polygon-did-resolver@0.0.16-alpha.10", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.10", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.3":
   version "0.0.16-alpha.10"
   resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.10.tgz#85eb53f2f6dd53c5e6342e9d6d0c70bb560fa281"
   integrity sha512-RfxDr+bggYcLsdN6nK+VKwjVLZzy3AqGULSsYT2bU+4n8obptufVIDg1cjbI4zi0eQIVmtkUeaHcJMlaR6wvvA==
@@ -114,15 +114,18 @@
     did-resolver "^4.1.0"
     ethers "^5.1.0"
 
-"@ayanworks/polygon-schema-manager@0.0.2-alpha.2":
-  version "0.0.2-alpha.2"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.2.tgz#0c487e95075bc94127bc6175df2470fa87179019"
-  integrity sha512-O4/L9n9YuGv904KvxvmslySdnYiR5CbzKDrtp75IrsLECiiIwUYfX2+qbS2CPq4ynf7mxTN2aZWdwokGEY5kHg==
+"@ayanworks/polygon-schema-manager@0.0.2-alpha.4":
+  version "0.0.2-alpha.4"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.4.tgz#cc707d271f89acd6aebcd7f1affb60e1a244d89a"
+  integrity sha512-1GHN7MNslkiDJXmZtBLGKFUO4rxtmv2vQwIsVjBw9h2zIXw9gtdrymawxt2aEVX3NsRhvB5ojhFqa3z/D7JNqg==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
+    "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.3"
     "@nomicfoundation/hardhat-verify" "^2.0.3"
     axios "^1.6.3"
+    did-resolver "^4.1.0"
     ethers "^6.9.0"
+    keccak256 "^1.0.6"
     uuid "^9.0.1"
 
 "@babel/code-frame@7.12.11":
@@ -2354,7 +2357,7 @@ bn.js@^4.11.9:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.12.0.tgz#775b3f278efbb9718eec7361f483fb36fbbfea88"
   integrity sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==
 
-bn.js@^5.2.1:
+bn.js@^5.2.0, bn.js@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.1.tgz#0bc527a6a0d18d0aa8d5b0538ce4a77dccfa7b70"
   integrity sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==
@@ -5292,6 +5295,24 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
+keccak256@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/keccak256/-/keccak256-1.0.6.tgz#dd32fb771558fed51ce4e45a035ae7515573da58"
+  integrity sha512-8GLiM01PkdJVGUhR1e6M/AvWnSqYS0HaERI+K/QtStGDGlSTx2B1zTqZk4Zlqu5TxHJNTxWAdP9Y+WI50OApUw==
+  dependencies:
+    bn.js "^5.2.0"
+    buffer "^6.0.3"
+    keccak "^3.0.2"
+
+keccak@^3.0.2:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/keccak/-/keccak-3.0.4.tgz#edc09b89e633c0549da444432ecf062ffadee86d"
+  integrity sha512-3vKuW0jV8J3XNTzvfyicFR5qvxrSAGl7KIhvgOu5cmWwM7tZRj3fMbj/pfIf4be7aznbc+prBWGjywox/g2Y6Q==
+  dependencies:
+    node-addon-api "^2.0.0"
+    node-gyp-build "^4.2.0"
+    readable-stream "^3.6.0"
+
 keyv@^4.5.3:
   version "4.5.4"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.5.4.tgz#a879a99e29452f942439f2a405e3af8b31d4de93"
@@ -5717,6 +5738,11 @@ next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
+node-addon-api@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-2.0.2.tgz#432cfa82962ce494b132e9d72a15b29f71ff5d32"
+  integrity sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==
+
 node-addon-api@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-3.2.1.tgz#81325e0a2117789c0128dab65e7e38f07ceba161"
@@ -5757,6 +5783,11 @@ node-fetch@^2.6.1, node-fetch@^2.6.12, node-fetch@^2.6.7:
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
+
+node-gyp-build@^4.2.0:
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.0.tgz#3fee9c1731df4581a3f9ead74664369ff00d26dd"
+  integrity sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==
 
 node-gyp-build@^4.2.1:
   version "4.7.1"

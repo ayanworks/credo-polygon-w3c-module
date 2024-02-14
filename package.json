@@ -24,7 +24,8 @@
     "check-format": "yarn prettier --check",
     "prettier": "prettier --ignore-path .gitignore '**/*.+(js|json|ts|md|yml|yaml)'",
     "test": "jest",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore .",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@aries-framework/askar": "0.4.2",

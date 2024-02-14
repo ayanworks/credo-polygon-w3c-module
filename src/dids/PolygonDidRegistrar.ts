@@ -27,7 +27,7 @@ import {
 } from '@aries-framework/core'
 import { getResolver } from '@ayanworks/polygon-did-resolver'
 import { Resolver } from 'did-resolver'
-import { SigningKey } from 'ethers'
+import { SigningKey, Wallet as EtherWallet, JsonRpcProvider } from 'ethers'
 
 import { PolygonLedgerService } from '../ledger'
 
@@ -42,6 +42,21 @@ export class PolygonDidRegistrar implements DidRegistrar {
     const didRepository = agentContext.dependencyManager.resolve(DidRepository)
 
     const privateKey = options.secret.privateKey
+
+    const wallet = new EtherWallet(new SigningKey(privateKey))
+    const provider = new JsonRpcProvider(ledgerService.rpcUrl)
+    const value = await provider.getBalance(wallet.address)
+
+    if (Number(value) == 0) {
+      return {
+        didDocumentMetadata: {},
+        didRegistrationMetadata: {},
+        didState: {
+          state: 'failed',
+          reason: 'Insufficient balance in wallet',
+        },
+      }
+    }
 
     const key = await agentContext.wallet.createKey({ keyType: KeyType.K256, privateKey })
 
@@ -78,7 +93,9 @@ export class PolygonDidRegistrar implements DidRegistrar {
 
       return {
         didDocumentMetadata: {},
-        didRegistrationMetadata: {},
+        didRegistrationMetadata: {
+          txn: response.txnHash,
+        },
         didState: {
           state: 'finished',
           did: didDocument.id,
@@ -195,7 +212,9 @@ export class PolygonDidRegistrar implements DidRegistrar {
 
       return {
         didDocumentMetadata: {},
-        didRegistrationMetadata: {},
+        didRegistrationMetadata: {
+          txn: response.txnHash,
+        },
         didState: {
           state: 'finished',
           did: didDocument.id,
@@ -261,7 +280,9 @@ export class PolygonDidRegistrar implements DidRegistrar {
         didDocumentMetadata: {
           deactivated: true,
         },
-        didRegistrationMetadata: {},
+        didRegistrationMetadata: {
+          txn: response.txnHash,
+        },
         didState: {
           state: 'finished',
           did: didDocument.id,

@@ -1,8 +1,8 @@
 {
-  "name": "afj-polygon-w3c-module",
+  "name": "@ayanworks/credo-polygon-w3c-module",
   "main": "build/index",
   "types": "build/index",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "files": [
     "build"
   ],
@@ -24,8 +24,7 @@
     "check-format": "yarn prettier --check",
     "prettier": "prettier --ignore-path .gitignore '**/*.+(js|json|ts|md|yml|yaml)'",
     "test": "jest",
-    "lint": "eslint --ignore-path .gitignore .",
-    "postinstall": "patch-package"
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "@aries-framework/askar": "0.4.2",

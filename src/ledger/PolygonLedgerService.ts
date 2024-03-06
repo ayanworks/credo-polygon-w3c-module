@@ -1,6 +1,6 @@
 import type { AgentContext, DidDocument, Wallet } from '@aries-framework/core'
 
-import { AskarWallet } from '@aries-framework/askar'
+import { AskarProfileWallet, AskarWallet } from '@aries-framework/askar'
 import {
   AriesFrameworkError,
   DidDocumentBuilder,
@@ -281,7 +281,7 @@ export class PolygonLedgerService {
   }
 
   private async getSigningKey(wallet: Wallet, publicKeyBase58: string): Promise<SigningKey> {
-    if (!(wallet instanceof AskarWallet)) {
+    if (!(wallet instanceof AskarWallet) && !(wallet instanceof AskarProfileWallet)) {
       throw new AriesFrameworkError('Incorrect wallet type: Polygon Module currently only supports Askar wallet')
     }
 

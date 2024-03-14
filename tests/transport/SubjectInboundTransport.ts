@@ -1,7 +1,7 @@
-import type { Agent, AgentContext, EncryptedMessage, InboundTransport, TransportSession } from '@aries-framework/core'
+import type { Agent, AgentContext, EncryptedMessage, InboundTransport, TransportSession } from '@credo-ts/core'
 import type { Subscription } from 'rxjs'
 
-import { MessageReceiver, TransportService, utils } from '@aries-framework/core'
+import { MessageReceiver, TransportService, utils } from '@credo-ts/core'
 import { Subject } from 'rxjs'
 
 export type SubjectMessage = { message: EncryptedMessage; replySubject?: Subject<SubjectMessage> }

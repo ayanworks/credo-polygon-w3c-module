@@ -1,12 +1,12 @@
-import type { DidCreateResult, DidDocument, Key } from '@aries-framework/core'
+import type { DidCreateResult, DidDocument, Key } from '@credo-ts/core'
 
 import {
-  AriesFrameworkError,
+  CredoError,
   DidDocumentBuilder,
   DidDocumentService,
   VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
   getEcdsaSecp256k1VerificationKey2019,
-} from '@aries-framework/core'
+} from '@credo-ts/core'
 import { computeAddress } from 'ethers'
 
 import { SECURITY_CONTEXT_SECP256k1_URL } from '../signature-suites/EcdsaSecp256k1Signature2019'
@@ -57,7 +57,7 @@ export function getSecp256k1DidDoc(did: string, key: Key, serviceEndpoint?: stri
   }
 
   if (!key.supportsEncrypting && !key.supportsSigning) {
-    throw new AriesFrameworkError('Key must support at least signing or encrypting')
+    throw new CredoError('Key must support at least signing or encrypting')
   }
 
   if (key.supportsSigning) {

@@ -1,6 +1,6 @@
 import type { CreateSchemaOperationOptions, DidOperationOptions } from './ledger'
 
-import { AgentContext, injectable } from '@aries-framework/core'
+import { AgentContext, injectable } from '@credo-ts/core'
 
 import { PolygonLedgerService } from './ledger'
 

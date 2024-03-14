@@ -9,9 +9,10 @@ import type {
   DidUpdateResult,
   Buffer,
   Wallet,
-} from '@aries-framework/core'
+} from '@credo-ts/core'
 
-import { AskarWallet } from '@aries-framework/askar'
+import { getResolver } from '@ayanworks/polygon-did-resolver'
+import { AskarProfileWallet, AskarWallet } from '@credo-ts/askar'
 import {
   DidRepository,
   KeyType,
@@ -19,13 +20,12 @@ import {
   DidDocumentRole,
   JsonTransformer,
   DidDocument,
-  AriesFrameworkError,
+  CredoError,
   WalletError,
   isValidPrivateKey,
   getEcdsaSecp256k1VerificationKey2019,
   DidDocumentBuilder,
-} from '@aries-framework/core'
-import { getResolver } from '@ayanworks/polygon-did-resolver'
+} from '@credo-ts/core'
 import { Resolver } from 'did-resolver'
 import { SigningKey, Wallet as EtherWallet, JsonRpcProvider } from 'ethers'
 
@@ -193,7 +193,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
       const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, options.did)
 
       if (!publicKeyBase58) {
-        throw new AriesFrameworkError('Public Key not found in wallet')
+        throw new CredoError('Public Key not found in wallet')
       }
 
       const signingKey = await this.getSigningKey(agentContext.wallet, publicKeyBase58)
@@ -259,7 +259,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
       const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, options.did)
 
       if (!publicKeyBase58) {
-        throw new AriesFrameworkError('Public Key not found in wallet')
+        throw new CredoError('Public Key not found in wallet')
       }
 
       const signingKey = await this.getSigningKey(agentContext.wallet, publicKeyBase58)
@@ -271,7 +271,7 @@ export class PolygonDidRegistrar implements DidRegistrar {
       const response = await didRegistry.update(didDocument.id, updatedDidDocument)
 
       if (!response) {
-        throw new AriesFrameworkError(`Unable to deactivate did document for did : ${did}`)
+        throw new CredoError(`Unable to deactivate did document for did : ${did}`)
       }
 
       await didRepository.update(agentContext, didRecord)
@@ -305,11 +305,11 @@ export class PolygonDidRegistrar implements DidRegistrar {
   }
 
   private async getSigningKey(wallet: Wallet, publicKeyBase58: string): Promise<SigningKey> {
-    if (!(wallet instanceof AskarWallet)) {
-      throw new AriesFrameworkError('Incorrect wallet type: Polygon Module currently only supports Askar wallet')
+    if (!(wallet instanceof AskarWallet) && !(wallet instanceof AskarProfileWallet)) {
+      throw new CredoError('Incorrect wallet type: Polygon Module currently only supports Askar wallet')
     }
 
-    const keyEntry = await wallet.session.fetchKey({ name: publicKeyBase58 })
+    const keyEntry = await wallet.withSession(async (session) => await session.fetchKey({ name: publicKeyBase58 }))
 
     if (!keyEntry) {
       throw new WalletError('Key not found in wallet')
@@ -327,11 +327,11 @@ export class PolygonDidRegistrar implements DidRegistrar {
 
     const didRecord = await didRepository.findCreatedDid(agentContext, did)
     if (!didRecord) {
-      throw new AriesFrameworkError('DidRecord not found')
+      throw new CredoError('DidRecord not found')
     }
 
     if (!didRecord.didDocument?.verificationMethod) {
-      throw new AriesFrameworkError('VerificationMethod not found cannot get public key')
+      throw new CredoError('VerificationMethod not found cannot get public key')
     }
 
     const publicKeyBase58 = didRecord.didDocument.verificationMethod[0].publicKeyBase58

@@ -6,7 +6,7 @@ import {
   type Module,
   VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
   KeyType,
-} from '@aries-framework/core'
+} from '@credo-ts/core'
 
 import { PolygonApi } from './PolygonApi'
 import { PolygonModuleConfig } from './PolygonModuleConfig'

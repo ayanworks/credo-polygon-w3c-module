@@ -1,12 +1,12 @@
-import type { DidDocument } from '@aries-framework/core'
+import type { DidDocument } from '@credo-ts/core'
 
+import { PolygonDID } from '@ayanworks/polygon-did-registrar'
 import {
   DidDocumentBuilder,
   DidDocumentService,
   VERIFICATION_METHOD_TYPE_ECDSA_SECP256K1_VERIFICATION_KEY_2019,
   VerificationMethod,
-} from '@aries-framework/core'
-import { PolygonDID } from '@ayanworks/polygon-did-registrar'
+} from '@credo-ts/core'
 
 import { SECURITY_CONTEXT_SECP256k1_URL } from '../signature-suites'
 

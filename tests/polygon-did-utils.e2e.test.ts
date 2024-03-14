@@ -1,4 +1,4 @@
-import { DidDocument } from '@aries-framework/core'
+import { DidDocument } from '@credo-ts/core'
 
 import { validateSpecCompliantPayload } from '../src/dids/didPolygonUtil'
 

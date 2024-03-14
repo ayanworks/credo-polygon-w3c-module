@@ -49,13 +49,14 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.12":
-  version "0.0.16-alpha.12"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.12.tgz#dce077ca26b926e4ebf8dbfab56583da1adea373"
-  integrity sha512-DP/KddUXEu36mhEqXgoxfgfnlRGkwcDEtRk+T9YhgmKZ4LAzyrLfU59sWeqTHZ8io7MPFPhhnug8Cm65fQ9pug==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.13":
+  version "0.0.16-alpha.13"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.13.tgz#cdb7f4dfee1f6e97006630d57c3a520051c09aeb"
+  integrity sha512-fihShp7HMMtzwuxV0VAVk/piktr/auig2Gj0rGq0S1x0GWP0NbZy7baLZvsVx4/kjgFNqu6cv3p42dmYVnRuIg==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.10"
+    "@credo-ts/core" "0.5.0"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"
@@ -2010,14 +2011,6 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.5.tgz#1ef302e01cf7d2b5a0fa526790c9123bf1d06690"
   integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
 
-"@types/node-fetch@^2.6.4":
-  version "2.6.9"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.9.tgz#15f529d247f1ede1824f7e7acdaa192d5f28071e"
-  integrity sha512-bQVlnMLFJ2d35DkPNjEPmd9ueO/rh5EiaZt2bhqiSarPjZIuIV6bPQVqcrEyvNo+AfTrRGVazle1tl597w3gfA==
-  dependencies:
-    "@types/node" "*"
-    form-data "^4.0.0"
-
 "@types/node@*":
   version "20.10.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.0.tgz#16ddf9c0a72b832ec4fcce35b8249cf149214617"
@@ -2030,10 +2023,12 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.13.tgz#f64277c341150c979e42b00e4ac289290c9df469"
   integrity sha512-N+0kuo9KgrUQ1Sn/ifDXsvg0TTleP7rIy4zOBGECxAljqvqfqpTfzx0Q1NUedOixRMBfe2Whhb056a42cWs26Q==
 
-"@types/node@^16.11.7":
-  version "16.18.65"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.65.tgz#b07eb49a14a808777b82879288a7e6f5a296ccfa"
-  integrity sha512-5E9WgTy95B7i90oISjui9U5Zu7iExUPfU4ygtv4yXEy6zJFE3oQYHCnh5H1jZRPkjphJt2Ml3oQW6M0qtK534A==
+"@types/node@^18.18.8":
+  version "18.19.24"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.19.24.tgz#707d8a4907e55901466e60e8f7a62bc6197ace95"
+  integrity sha512-eghAz3gnbQbvnHqB+mgB2ZR3aH6RhdEmHGS48BnV75KceQPHqabkxKI0BbUSsqhqy2Ddhc2xD/VAR9ySZd57Lw==
+  dependencies:
+    undici-types "~5.26.4"
 
 "@types/qs@*":
   version "6.9.10"

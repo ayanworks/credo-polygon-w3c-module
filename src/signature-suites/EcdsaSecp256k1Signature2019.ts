@@ -1,13 +1,8 @@
-import type { DocumentLoader, JwsLinkedDataSignatureOptions, Proof } from '@aries-framework/core'
-import type { JsonLdDoc } from '@aries-framework/core/build/modules/vc/data-integrity/jsonldUtil'
+import type { DocumentLoader, JwsLinkedDataSignatureOptions, Proof } from '@credo-ts/core'
+import type { JsonLdDoc } from '@credo-ts/core/build/modules/vc/data-integrity/jsonldUtil'
 
-import {
-  CREDENTIALS_CONTEXT_V1_URL,
-  JwsLinkedDataSignature,
-  SECURITY_CONTEXT_URL,
-  vcLibraries,
-} from '@aries-framework/core'
-import { _includesContext } from '@aries-framework/core/build/modules/vc/data-integrity/jsonldUtil'
+import { CREDENTIALS_CONTEXT_V1_URL, JwsLinkedDataSignature, SECURITY_CONTEXT_URL, vcLibraries } from '@credo-ts/core'
+import { _includesContext } from '@credo-ts/core/build/modules/vc/data-integrity/jsonldUtil'
 
 const { jsonld } = vcLibraries
 

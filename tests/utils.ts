@@ -1,5 +1,5 @@
-import type { AgentDependencies, InitConfig, InjectionToken, Wallet, WalletConfig } from '@aries-framework/core'
-import type { AgentModulesInput, EmptyModuleMap } from '@aries-framework/core/build/agent/AgentModules'
+import type { AgentDependencies, InitConfig, InjectionToken, Wallet, WalletConfig } from '@credo-ts/core'
+import type { AgentModulesInput, EmptyModuleMap } from '@credo-ts/core/build/agent/AgentModules'
 
 import {
   AgentConfig,
@@ -11,8 +11,8 @@ import {
   InjectionSymbols,
   LogLevel,
   utils,
-} from '@aries-framework/core'
-import { agentDependencies } from '@aries-framework/node'
+} from '@credo-ts/core'
+import { agentDependencies } from '@credo-ts/node'
 
 import { PolygonModule } from '../src/PolygonModule'
 import { PolygonDidRegistrar, PolygonDidResolver } from '../src/dids'

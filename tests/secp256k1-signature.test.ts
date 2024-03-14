@@ -1,7 +1,7 @@
-import type { AgentContext } from '@aries-framework/core'
+import type { AgentContext } from '@credo-ts/core'
 
-import { AskarWallet } from '@aries-framework/askar'
-import { AskarModuleConfig } from '@aries-framework/askar/build/AskarModuleConfig'
+import { AskarWallet } from '@credo-ts/askar'
+import { AskarModuleConfig } from '@credo-ts/askar/build/AskarModuleConfig'
 import {
   ClaimFormat,
   W3cJsonLdVerifiablePresentation,
@@ -20,12 +20,12 @@ import {
   ConsoleLogger,
   LogLevel,
   DidsModuleConfig,
-  AriesFrameworkError,
-} from '@aries-framework/core'
-import { W3cCredentialsModuleConfig } from '@aries-framework/core/build/modules/vc/W3cCredentialsModuleConfig'
-import { W3cJsonLdCredentialService } from '@aries-framework/core/build/modules/vc/data-integrity/W3cJsonLdCredentialService'
-import { LinkedDataProof } from '@aries-framework/core/build/modules/vc/data-integrity/models/LinkedDataProof'
-import { agentDependencies } from '@aries-framework/node'
+  CredoError,
+} from '@credo-ts/core'
+import { W3cCredentialsModuleConfig } from '@credo-ts/core/build/modules/vc/W3cCredentialsModuleConfig'
+import { W3cJsonLdCredentialService } from '@credo-ts/core/build/modules/vc/data-integrity/W3cJsonLdCredentialService'
+import { LinkedDataProof } from '@credo-ts/core/build/modules/vc/data-integrity/models/LinkedDataProof'
+import { agentDependencies } from '@credo-ts/node'
 import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 import { registerAriesAskar } from '@hyperledger/aries-askar-shared'
 
@@ -152,7 +152,7 @@ describe('Secp256k1 W3cCredentialService', () => {
             proofType: 'EcdsaSecp256k1Signature2019',
             verificationMethod: 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c5dB0475D0e07bFc96EF47#key-1',
           })
-        }).rejects.toThrowError(AriesFrameworkError)
+        }).rejects.toThrowError(CredoError)
       })
     })
 

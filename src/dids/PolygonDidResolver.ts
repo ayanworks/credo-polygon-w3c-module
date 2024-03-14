@@ -1,18 +1,20 @@
 import type { ResolverRegistry } from 'did-resolver'
 
+import { getResolver } from '@ayanworks/polygon-did-resolver'
 import {
   DidDocument,
   type AgentContext,
   type DidResolutionResult,
   type DidResolver,
   JsonTransformer,
-} from '@aries-framework/core'
-import { getResolver } from '@ayanworks/polygon-did-resolver'
+} from '@credo-ts/core'
 import { Resolver } from 'did-resolver'
 
 import { isValidPolygonDid } from './didPolygonUtil'
 
 export class PolygonDidResolver implements DidResolver {
+  public readonly allowsCaching = true
+
   public readonly supportedMethods = ['polygon']
 
   public resolver: Resolver

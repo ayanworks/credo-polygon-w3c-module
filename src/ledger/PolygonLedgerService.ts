@@ -1,17 +1,10 @@
-import type { AgentContext, DidDocument, Wallet } from '@aries-framework/core'
+import type { AgentContext, DidDocument, Wallet } from '@credo-ts/core'
 
-import { AskarProfileWallet, AskarWallet } from '@aries-framework/askar'
-import {
-  AriesFrameworkError,
-  DidDocumentBuilder,
-  DidRepository,
-  WalletError,
-  injectable,
-  utils,
-} from '@aries-framework/core'
 import { PolygonDID } from '@ayanworks/polygon-did-registrar'
 import { parseDid } from '@ayanworks/polygon-did-registrar/build/utils/did'
 import { PolygonSchema } from '@ayanworks/polygon-schema-manager'
+import { AskarProfileWallet, AskarWallet } from '@credo-ts/askar'
+import { CredoError, DidDocumentBuilder, DidRepository, WalletError, injectable, utils } from '@credo-ts/core'
 import { SigningKey } from 'ethers'
 
 import { PolygonModuleConfig } from '../PolygonModuleConfig'
@@ -102,7 +95,7 @@ export class PolygonLedgerService {
     const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, did)
 
     if (!publicKeyBase58) {
-      throw new AriesFrameworkError('Public Key not found in wallet')
+      throw new CredoError('Public Key not found in wallet')
     }
 
     const signingKey = await this.getSigningKey(agentContext.wallet, publicKeyBase58)
@@ -114,7 +107,7 @@ export class PolygonLedgerService {
     const response = await schemaRegistry.createSchema(did, schemaName, schema)
     if (!response) {
       agentContext.config.logger.error(`Schema creation failed for did: ${did} and schema: ${schema}`)
-      throw new AriesFrameworkError(`Schema creation failed for did: ${did} and schema: ${schema}`)
+      throw new CredoError(`Schema creation failed for did: ${did} and schema: ${schema}`)
     }
     agentContext.config.logger.info(`Published schema on ledger: ${did}`)
     return response
@@ -126,7 +119,7 @@ export class PolygonLedgerService {
     const publicKeyBase58 = await this.getPublicKeyFromDid(agentContext, did)
 
     if (!publicKeyBase58) {
-      throw new AriesFrameworkError('Public Key not found in wallet')
+      throw new CredoError('Public Key not found in wallet')
     }
 
     const signingKey = await this.getSigningKey(agentContext.wallet, publicKeyBase58)
@@ -137,7 +130,7 @@ export class PolygonLedgerService {
 
     if (!response) {
       agentContext.config.logger.error(`Schema not found for did: ${did} and schemaId: ${schemaId} Error: ${response}`)
-      throw new AriesFrameworkError(`Schema not found for did: ${did} and schemaId: ${schemaId}`)
+      throw new CredoError(`Schema not found for did: ${did} and schemaId: ${schemaId}`)
     }
     agentContext.config.logger.info(`Got schema from ledger: ${did} and schemaId: ${schemaId}`)
     return response
@@ -249,7 +242,7 @@ export class PolygonLedgerService {
 
   public createDidRegistryInstance(signingKey: SigningKey) {
     if (!this.rpcUrl || !this.didContractAddress) {
-      throw new AriesFrameworkError('Ledger config not found')
+      throw new CredoError('Ledger config not found')
     }
 
     return new PolygonDID({
@@ -267,7 +260,7 @@ export class PolygonLedgerService {
       !this.fileServerUrl ||
       !this.didContractAddress
     ) {
-      throw new AriesFrameworkError('Polygon schema module config not found')
+      throw new CredoError('Polygon schema module config not found')
     }
 
     return new PolygonSchema({
@@ -282,10 +275,10 @@ export class PolygonLedgerService {
 
   private async getSigningKey(wallet: Wallet, publicKeyBase58: string): Promise<SigningKey> {
     if (!(wallet instanceof AskarWallet) && !(wallet instanceof AskarProfileWallet)) {
-      throw new AriesFrameworkError('Incorrect wallet type: Polygon Module currently only supports Askar wallet')
+      throw new CredoError('Incorrect wallet type: Polygon Module currently only supports Askar wallet')
     }
 
-    const keyEntry = await wallet.session.fetchKey({ name: publicKeyBase58 })
+    const keyEntry = await wallet.withSession(async (session) => await session.fetchKey({ name: publicKeyBase58 }))
 
     if (!keyEntry) {
       throw new WalletError('Key not found in wallet')
@@ -303,11 +296,11 @@ export class PolygonLedgerService {
 
     const didRecord = await didRepository.findCreatedDid(agentContext, did)
     if (!didRecord) {
-      throw new AriesFrameworkError('DidRecord not found')
+      throw new CredoError('DidRecord not found')
     }
 
     if (!didRecord.didDocument?.verificationMethod) {
-      throw new AriesFrameworkError('VerificationMethod not found cannot get public key')
+      throw new CredoError('VerificationMethod not found cannot get public key')
     }
 
     const publicKeyBase58 = didRecord.didDocument.verificationMethod[0].publicKeyBase58

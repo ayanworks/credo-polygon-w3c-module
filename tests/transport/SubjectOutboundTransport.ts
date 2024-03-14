@@ -1,7 +1,7 @@
 import type { SubjectMessage } from './SubjectInboundTransport'
-import type { OutboundPackage, OutboundTransport, Agent, Logger } from '@aries-framework/core'
+import type { OutboundPackage, OutboundTransport, Agent, Logger } from '@credo-ts/core'
 
-import { MessageReceiver, InjectionSymbols, AriesFrameworkError } from '@aries-framework/core'
+import { MessageReceiver, InjectionSymbols, CredoError } from '@credo-ts/core'
 import { takeUntil, Subject, take } from 'rxjs'
 
 export class SubjectOutboundTransport implements OutboundTransport {
@@ -35,13 +35,13 @@ export class SubjectOutboundTransport implements OutboundTransport {
     const { payload, endpoint } = outboundPackage
 
     if (!endpoint) {
-      throw new AriesFrameworkError('Cannot send message to subject without endpoint')
+      throw new CredoError('Cannot send message to subject without endpoint')
     }
 
     const subject = this.subjectMap[endpoint]
 
     if (!subject) {
-      throw new AriesFrameworkError(`No subject found for endpoint ${endpoint}`)
+      throw new CredoError(`No subject found for endpoint ${endpoint}`)
     }
 
     // Create a replySubject just for this session. Both ends will be able to close it,

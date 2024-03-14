@@ -1,8 +1,8 @@
-import type { EncryptedMessage } from '@aries-framework/core'
+import type { EncryptedMessage } from '@credo-ts/core'
 
-import { AskarModule } from '@aries-framework/askar'
-import { Agent, ConsoleLogger, DidsModule, KeyType, LogLevel, TypedArrayEncoder, utils } from '@aries-framework/core'
-import { agentDependencies } from '@aries-framework/node'
+import { AskarModule } from '@credo-ts/askar'
+import { Agent, ConsoleLogger, DidsModule, KeyType, LogLevel, TypedArrayEncoder, utils } from '@credo-ts/core'
+import { agentDependencies } from '@credo-ts/node'
 import { ariesAskar } from '@hyperledger/aries-askar-nodejs'
 import { Subject } from 'rxjs'
 

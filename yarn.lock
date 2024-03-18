@@ -79,10 +79,10 @@
     did-resolver "^4.1.0"
     ethers "^5.1.0"
 
-"@ayanworks/polygon-schema-manager@0.0.2-alpha.4":
-  version "0.0.2-alpha.4"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.4.tgz#cc707d271f89acd6aebcd7f1affb60e1a244d89a"
-  integrity sha512-1GHN7MNslkiDJXmZtBLGKFUO4rxtmv2vQwIsVjBw9h2zIXw9gtdrymawxt2aEVX3NsRhvB5ojhFqa3z/D7JNqg==
+"@ayanworks/polygon-schema-manager@0.0.2-alpha.5":
+  version "0.0.2-alpha.5"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.5.tgz#f5b29b513c07f28eb52f52d6fa33ffec0b919370"
+  integrity sha512-0BnJ2FxmHnLia2zDxj7MPRnD7u5FA3LZF8xwuZf5vlHE9Jh/sgV6dQg5XMnPYmyhdlxSrTQ8FpNZbAir2PuMGQ==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.3"

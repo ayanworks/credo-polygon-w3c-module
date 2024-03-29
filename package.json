@@ -2,7 +2,7 @@
   "name": "@ayanworks/credo-polygon-w3c-module",
   "main": "build/index",
   "types": "build/index",
-  "version": "0.0.2-alpha.2",
+  "version": "0.0.2-alpha.3",
   "files": [
     "build"
   ],
@@ -27,8 +27,8 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@credo-ts/askar": "0.5.0",
-    "@credo-ts/core": "0.5.0",
+    "@credo-ts/askar": "0.5.1",
+    "@credo-ts/core": "0.5.1",
     "@ayanworks/polygon-did-registrar": "0.0.16-alpha.13",
     "@ayanworks/polygon-did-resolver": "0.0.16-alpha.10",
     "@ayanworks/polygon-schema-manager": "0.0.2-alpha.5",

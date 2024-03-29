@@ -36,7 +36,7 @@ export function failedResult(reason: string): DidCreateResult {
   }
 }
 
-export function getSecp256k1DidDoc(did: string, key: Key, serviceEndpoint?: string): DidDocument {
+export function getSecp256k1DidDoc(did: string, key: Key, serviceEndpoint?: string) {
   const verificationMethod = getEcdsaSecp256k1VerificationKey2019({
     id: `${did}#key-1`,
     key,

@@ -2,7 +2,7 @@
   "name": "@ayanworks/credo-polygon-w3c-module",
   "main": "build/index",
   "types": "build/index",
-  "version": "0.0.2-alpha.4",
+  "version": "0.0.2-alpha.5",
   "files": [
     "build"
   ],

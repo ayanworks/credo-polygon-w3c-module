@@ -49,14 +49,14 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.14":
-  version "0.0.16-alpha.14"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.14.tgz#1cc5840966879c79a5affd45a77927529a471614"
-  integrity sha512-7aevSI/dKSn5wi3xOCGSmV5MwR3y1LRyG+TQsGmJZhJ5Bg9ey68s4IiuqLzubwJY5AJ2Ecl+mFmGXmanN+VM9g==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.15":
+  version "0.0.16-alpha.15"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.15.tgz#6536469c97b1979134a4f95d01baae1985b3abd8"
+  integrity sha512-vU9QS7D3NQ0rNBODYg3cwI5JmmzbnARdUnPbbiibiNJ9ycpY0CQVWXGu94BK0BqKyy8jf5kTk8HrZ5+Phl7JHA==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.10"
-    "@credo-ts/core" "0.5.1"
+    "@credo-ts/core" "^0.5.0"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"

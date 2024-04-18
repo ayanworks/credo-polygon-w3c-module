@@ -49,14 +49,14 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@0.0.16-alpha.13":
-  version "0.0.16-alpha.13"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.13.tgz#cdb7f4dfee1f6e97006630d57c3a520051c09aeb"
-  integrity sha512-fihShp7HMMtzwuxV0VAVk/piktr/auig2Gj0rGq0S1x0GWP0NbZy7baLZvsVx4/kjgFNqu6cv3p42dmYVnRuIg==
+"@ayanworks/polygon-did-registrar@0.0.16-alpha.16":
+  version "0.0.16-alpha.16"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-0.0.16-alpha.16.tgz#8467412a8138ffb8b2305bf4ea7914a4ce979267"
+  integrity sha512-q3Y1bzeHmCAxRpbA6rXKaO9CQhLjlP4aMZuJxYiiicPlQ6plkRt+Icxdp1ozsCEcMouj3l4E5kgzjK48bhOxrw==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
-    "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.10"
-    "@credo-ts/core" "0.5.0"
+    "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.11"
+    "@credo-ts/core" "0.5.1"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"
@@ -70,22 +70,22 @@
   resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-2.0.1-alpha.3.tgz#7bb932b712a4c48df857682f27adfb08154c4358"
   integrity sha512-8FZZVAmzXZn0pjZasuxdRblL0obK91JoaoXzpM4oZ7hD5VRUbiWf7BTh17WsWc6Oaf6XtafT4csuBo11fZiUoQ==
 
-"@ayanworks/polygon-did-resolver@0.0.16-alpha.10", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.10", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.3":
-  version "0.0.16-alpha.10"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.10.tgz#85eb53f2f6dd53c5e6342e9d6d0c70bb560fa281"
-  integrity sha512-RfxDr+bggYcLsdN6nK+VKwjVLZzy3AqGULSsYT2bU+4n8obptufVIDg1cjbI4zi0eQIVmtkUeaHcJMlaR6wvvA==
+"@ayanworks/polygon-did-resolver@0.0.16-alpha.11", "@ayanworks/polygon-did-resolver@^0.0.16-alpha.11":
+  version "0.0.16-alpha.11"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-0.0.16-alpha.11.tgz#fe115f9a63eea5e0604712549e9c573dcef7d55c"
+  integrity sha512-rQ6iVz0uht/hLkYA29E2iHN7xW0EusG6ognndBJF0QUxuPBB2kbmcr/4kW1E1m8FJLPvmEX/ed5v0pbBnGSJwA==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
     did-resolver "^4.1.0"
     ethers "^5.1.0"
 
-"@ayanworks/polygon-schema-manager@0.0.2-alpha.5":
-  version "0.0.2-alpha.5"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.5.tgz#f5b29b513c07f28eb52f52d6fa33ffec0b919370"
-  integrity sha512-0BnJ2FxmHnLia2zDxj7MPRnD7u5FA3LZF8xwuZf5vlHE9Jh/sgV6dQg5XMnPYmyhdlxSrTQ8FpNZbAir2PuMGQ==
+"@ayanworks/polygon-schema-manager@0.0.2-alpha.6":
+  version "0.0.2-alpha.6"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-0.0.2-alpha.6.tgz#a872afc1166e39561dba63f0ba83f898376bb874"
+  integrity sha512-H8W0eS//Q3eDCiwtEqfqPhGW3bRLWOkJU1EYOuiwZGaIuZb4kWbYqAGdgl0s5g0ZP1rjirk4Ztx1w10cWqsZWw==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "2.0.1-alpha.3"
-    "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.3"
+    "@ayanworks/polygon-did-resolver" "^0.0.16-alpha.11"
     "@nomicfoundation/hardhat-verify" "^2.0.3"
     axios "^1.6.3"
     did-resolver "^4.1.0"
@@ -522,6 +522,43 @@
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@credo-ts/core/-/core-0.5.0.tgz#a6366df4b176a492f4f45b7e2f45b8c905e1eeca"
   integrity sha512-7SJBgs1yd2gpwv8BnCO+U63Uu06v6Cxzg+ypWpqyNkkG4nTsQZSI8r0oSQ+DgbiqwN/AZKsn9HuNISFftf5yKQ==
+  dependencies:
+    "@digitalcredentials/jsonld" "^6.0.0"
+    "@digitalcredentials/jsonld-signatures" "^9.4.0"
+    "@digitalcredentials/vc" "^6.0.1"
+    "@multiformats/base-x" "^4.0.1"
+    "@sd-jwt/core" "^0.2.1"
+    "@sd-jwt/decode" "^0.2.1"
+    "@sphereon/pex" "3.3.0"
+    "@sphereon/pex-models" "^2.2.2"
+    "@sphereon/ssi-types" "^0.18.1"
+    "@stablelib/ed25519" "^1.0.2"
+    "@stablelib/sha256" "^1.0.1"
+    "@types/ws" "^8.5.4"
+    abort-controller "^3.0.0"
+    big-integer "^1.6.51"
+    borc "^3.0.0"
+    buffer "^6.0.3"
+    class-transformer "0.5.1"
+    class-validator "0.14.1"
+    did-resolver "^4.1.0"
+    jsonpath "^1.1.1"
+    lru_map "^0.4.1"
+    luxon "^3.3.0"
+    make-error "^1.3.6"
+    object-inspect "^1.10.3"
+    query-string "^7.0.1"
+    reflect-metadata "^0.1.13"
+    rxjs "^7.8.0"
+    tsyringe "^4.8.0"
+    uuid "^9.0.0"
+    varint "^6.0.0"
+    web-did-resolver "^2.0.21"
+
+"@credo-ts/core@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@credo-ts/core/-/core-0.5.1.tgz#bb38e2f5451753cea1d3a73b1d407255af02c4ed"
+  integrity sha512-ywwFw6wwiMft3A994Y91LAm8CrEg2G7CJQRyLD8UzneU4coMWZTeED63thAEX6XK/tyDmv2MAcrO04hE3KQPcA==
   dependencies:
     "@digitalcredentials/jsonld" "^6.0.0"
     "@digitalcredentials/jsonld-signatures" "^9.4.0"

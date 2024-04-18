@@ -506,12 +506,12 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@credo-ts/askar@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@credo-ts/askar/-/askar-0.5.0.tgz#5fa2e6443fe3ae1b15c8b66eb73e63beb5c096a1"
-  integrity sha512-84wxDU6GbucBTe4HV7gUbCieFdhXVX19q8o6dNK8a3zl87yiV3OVwPwtnzghjh47vv14Xr+gWRvqbRvZrhRsaA==
+"@credo-ts/askar@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@credo-ts/askar/-/askar-0.5.1.tgz#107d2f91f6afecb77fc7f24556725ec0e7597989"
+  integrity sha512-O3XWnmpnEe5U/a0kGQHigzXPw6/SXKp2v4ob3DJdHA0kiK3DywANNeG/Hw44lxdg24nNpizmVlO5EjRa6ULcmw==
   dependencies:
-    "@credo-ts/core" "0.5.0"
+    "@credo-ts/core" "0.5.1"
     bn.js "^5.2.1"
     class-transformer "0.5.1"
     class-validator "0.14.1"

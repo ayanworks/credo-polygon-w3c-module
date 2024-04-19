@@ -108,7 +108,7 @@ describe('Polygon Module did resolver', () => {
         askar: new AskarModule({ ariesAskar }),
         // Add required modules
         polygon: new PolygonModule({
-          rpcUrl: 'https://rpc-mumbai.maticvigil.com/',
+          rpcUrl: 'https://rpc-amoy.polygon.technology',
           didContractAddress: '0x12513116875BB3E4F098Ce74624739Ee51bAf023',
           fileServerToken:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6IjdmYjRmN2I3LWQ5ZWUtNDYxOC04OTE4LWZiMmIzYzY1M2EyYiJ9.x-kHeTVqX4w19ibSAspCYgIL-JFVss8yZ0CT21QVRYM',

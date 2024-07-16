@@ -2,7 +2,7 @@
   "name": "@ayanworks/credo-polygon-w3c-module",
   "main": "build/index",
   "types": "build/index",
-  "version": "0.0.2-alpha.11",
+  "version": "1.0.1-0",
   "files": [
     "build"
   ],
@@ -27,18 +27,18 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@credo-ts/askar": "0.5.3",
-    "@credo-ts/core": "0.5.3",
-    "@ayanworks/polygon-did-registrar": "0.0.16-alpha.21",
-    "@ayanworks/polygon-did-resolver": "0.0.16-alpha.16",
-    "@ayanworks/polygon-schema-manager": "0.0.2-alpha.11",
+    "@credo-ts/askar": "0.5.7",
+    "@credo-ts/core": "0.5.7",
+    "@ayanworks/polygon-did-registrar": "1.0.1-alpha.0",
+    "@ayanworks/polygon-did-resolver": "1.0.0",
+    "@ayanworks/polygon-schema-manager": "1.0.0",
     "did-resolver": "^4.1.0",
     "ethers": "^6.9.0"
   },
   "devDependencies": {
-    "@credo-ts/node": "0.5.3",
-    "@hyperledger/aries-askar-nodejs": "0.2.1",
-    "@hyperledger/aries-askar-shared": "0.2.1",
+    "@credo-ts/node": "0.5.7",
+    "@hyperledger/aries-askar-nodejs": "0.2.3",
+    "@hyperledger/aries-askar-shared": "0.2.3",
     "@types/jest": "^26.0.23",
     "@types/node": "^18.18.8",
     "@types/uuid": "^9.0.0",
@@ -58,6 +58,6 @@
     "ts-jest": "^29.0.5",
     "ts-node": "^10.8.1",
     "tsconfig-paths": "^4.1.2",
-    "typescript": "~4.9.5"
+    "typescript": "~5.5.2"
   }
 }

@@ -7,11 +7,12 @@
     "strict": true,
     "noEmitOnError": true,
     "outDir": "./build",
-    "lib": ["es2015"],
+    "lib": [],
     "types": [],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },

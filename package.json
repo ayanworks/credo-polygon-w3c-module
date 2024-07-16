@@ -29,7 +29,7 @@
   "dependencies": {
     "@credo-ts/askar": "0.5.7",
     "@credo-ts/core": "0.5.7",
-    "@ayanworks/polygon-did-registrar": "1.0.0",
+    "@ayanworks/polygon-did-registrar": "1.0.1-alpha.0",
     "@ayanworks/polygon-did-resolver": "1.0.0",
     "@ayanworks/polygon-schema-manager": "1.0.0",
     "did-resolver": "^4.1.0",
@@ -58,6 +58,6 @@
     "ts-jest": "^29.0.5",
     "ts-node": "^10.8.1",
     "tsconfig-paths": "^4.1.2",
-    "typescript": "~4.9.5"
+    "typescript": "~5.5.2"
   }
 }

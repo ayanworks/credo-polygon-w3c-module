@@ -49,14 +49,14 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-1.0.0.tgz#6704a51b154e12c9484c90581a1c9dc41e01dcd3"
-  integrity sha512-pK6WELi9avhxFk7BGioMFu9U/VL6GLvW6n18QFq8G4EMPMWsAvTfiiqUadTVWU8nuHSOrgpBBW8kN5DPWwJPFg==
+"@ayanworks/polygon-did-registrar@1.0.1-alpha.0":
+  version "1.0.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-1.0.1-alpha.0.tgz#512a8ad535643a26ea51918f865d57d056749fec"
+  integrity sha512-Y9TtBKfx5kaYFM1otBlTNveyeD9hxammglQzNWsWTCe/9bVNjf8z7UeKtFXr/i4UTKr8kVfaK8hd9ZS5Uj7r+Q==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "3.0.0"
     "@ayanworks/polygon-did-resolver" "1.0.0"
-    "@credo-ts/core" "0.5.3"
+    "@credo-ts/core" "0.5.7"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"
@@ -517,45 +517,6 @@
     class-validator "0.14.1"
     rxjs "^7.8.0"
     tsyringe "^4.8.0"
-
-"@credo-ts/core@0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@credo-ts/core/-/core-0.5.3.tgz#cccbce993acbe7651fb397e7a0933ffde3246027"
-  integrity sha512-bM9iNhhXWiJ4YdH5uqaIfK3XhZ6GjuzF0AwE1vMy586sZz05J1ZLQvIYzRpm/p3Buxj9rimnLrc4jcYNit0VUw==
-  dependencies:
-    "@digitalcredentials/jsonld" "^6.0.0"
-    "@digitalcredentials/jsonld-signatures" "^9.4.0"
-    "@digitalcredentials/vc" "^6.0.1"
-    "@multiformats/base-x" "^4.0.1"
-    "@sd-jwt/core" "^0.6.1"
-    "@sd-jwt/decode" "^0.6.1"
-    "@sd-jwt/types" "^0.6.1"
-    "@sd-jwt/utils" "^0.6.1"
-    "@sphereon/pex" "^3.3.2"
-    "@sphereon/pex-models" "^2.2.4"
-    "@sphereon/ssi-types" "^0.23.0"
-    "@stablelib/ed25519" "^1.0.2"
-    "@stablelib/sha256" "^1.0.1"
-    "@types/ws" "^8.5.4"
-    abort-controller "^3.0.0"
-    big-integer "^1.6.51"
-    borc "^3.0.0"
-    buffer "^6.0.3"
-    class-transformer "0.5.1"
-    class-validator "0.14.1"
-    did-resolver "^4.1.0"
-    jsonpath "^1.1.1"
-    lru_map "^0.4.1"
-    luxon "^3.3.0"
-    make-error "^1.3.6"
-    object-inspect "^1.10.3"
-    query-string "^7.0.1"
-    reflect-metadata "^0.1.13"
-    rxjs "^7.8.0"
-    tsyringe "^4.8.0"
-    uuid "^9.0.0"
-    varint "^6.0.0"
-    web-did-resolver "^2.0.21"
 
 "@credo-ts/core@0.5.7":
   version "0.5.7"
@@ -1840,16 +1801,6 @@
     "@sd-jwt/types" "0.7.1"
     "@sd-jwt/utils" "0.7.1"
 
-"@sd-jwt/core@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@sd-jwt/core/-/core-0.6.1.tgz#d28be10d0f4b672636fcf7ad71737cb08e5dae96"
-  integrity sha512-egFTb23o6BGWF93vnjopN02rSiC1HOOnkk9BI8Kao3jz9ipZAHdO6wF7gwfZm5Nlol/Kd1/KSLhbOUPYt++FjA==
-  dependencies:
-    "@sd-jwt/decode" "0.6.1"
-    "@sd-jwt/present" "0.6.1"
-    "@sd-jwt/types" "0.6.1"
-    "@sd-jwt/utils" "0.6.1"
-
 "@sd-jwt/decode@0.6.1", "@sd-jwt/decode@^0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@sd-jwt/decode/-/decode-0.6.1.tgz#141f7782df53bab7159a75d91ed4711e1c14a7ea"
@@ -1875,15 +1826,6 @@
     base64url "^3.0.1"
     pako "^2.1.0"
 
-"@sd-jwt/present@0.6.1", "@sd-jwt/present@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@sd-jwt/present/-/present-0.6.1.tgz#82b9188becb0fa240897c397d84a54d55c7d169e"
-  integrity sha512-QRD3TUDLj4PqQNZ70bBxh8FLLrOE9mY8V9qiZrJSsaDOLFs2p1CtZG+v9ig62fxFYJZMf4bWKwYjz+qqGAtxCg==
-  dependencies:
-    "@sd-jwt/decode" "0.6.1"
-    "@sd-jwt/types" "0.6.1"
-    "@sd-jwt/utils" "0.6.1"
-
 "@sd-jwt/present@0.7.1":
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@sd-jwt/present/-/present-0.7.1.tgz#055774aec807146840c89f8df89863c924346a3a"
@@ -1892,6 +1834,15 @@
     "@sd-jwt/decode" "0.7.1"
     "@sd-jwt/types" "0.7.1"
     "@sd-jwt/utils" "0.7.1"
+
+"@sd-jwt/present@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@sd-jwt/present/-/present-0.6.1.tgz#82b9188becb0fa240897c397d84a54d55c7d169e"
+  integrity sha512-QRD3TUDLj4PqQNZ70bBxh8FLLrOE9mY8V9qiZrJSsaDOLFs2p1CtZG+v9ig62fxFYJZMf4bWKwYjz+qqGAtxCg==
+  dependencies:
+    "@sd-jwt/decode" "0.6.1"
+    "@sd-jwt/types" "0.6.1"
+    "@sd-jwt/utils" "0.6.1"
 
 "@sd-jwt/sd-jwt-vc@^0.7.0":
   version "0.7.1"
@@ -1912,7 +1863,7 @@
   resolved "https://registry.yarnpkg.com/@sd-jwt/types/-/types-0.7.1.tgz#fa0ba87fe73190f1c473f230e11660d0ee7ba12a"
   integrity sha512-rPXS+kWiDDznWUuRkvAeXTWOhYn2tb5dZLI3deepsXmofjhTGqMP89qNNNBqhnA99kJx9gxnUj/jpQgUm0MjmQ==
 
-"@sd-jwt/utils@0.6.1", "@sd-jwt/utils@^0.6.1":
+"@sd-jwt/utils@0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@sd-jwt/utils/-/utils-0.6.1.tgz#33273b20c9eb1954e4eab34118158b646b574ff9"
   integrity sha512-1NHZ//+GecGQJb+gSdDicnrHG0DvACUk9jTnXA5yLZhlRjgkjyfJLNsCZesYeCyVp/SiyvIC9B+JwoY4kI0TwQ==
@@ -2028,15 +1979,6 @@
   integrity sha512-rIsE83Xpb7clHPVRlBj8qNe5L8ISQOzjghYQm/dZ7VaM2KHYwMW5adjQjrzTZCchFnNCNhkwtnOBa9HTMJCI8w==
   dependencies:
     "@stablelib/binary" "^1.0.1"
-    "@stablelib/wipe" "^1.0.1"
-
-"@stablelib/sha256@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@stablelib/sha256/-/sha256-1.0.1.tgz#77b6675b67f9b0ea081d2e31bda4866297a3ae4f"
-  integrity sha512-GIIH3e6KH+91FqGV42Kcj71Uefd/QEe7Dy42sBTeqppXV95ggCcxLTk39bEr+lZfJmp+ghsR07J++ORkRELsBQ==
-  dependencies:
-    "@stablelib/binary" "^1.0.1"
-    "@stablelib/hash" "^1.0.1"
     "@stablelib/wipe" "^1.0.1"
 
 "@stablelib/sha512@^1.0.1":
@@ -7885,10 +7827,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@~4.9.5:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@~5.5.2:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.3.tgz#e1b0a3c394190838a0b168e771b0ad56a0af0faa"
+  integrity sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==
 
 uint8arrays@^3.1.1:
   version "3.1.1"

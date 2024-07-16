@@ -27,8 +27,8 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@credo-ts/askar": "0.5.3",
-    "@credo-ts/core": "0.5.3",
+    "@credo-ts/askar": "0.5.7",
+    "@credo-ts/core": "0.5.7",
     "@ayanworks/polygon-did-registrar": "1.0.0",
     "@ayanworks/polygon-did-resolver": "1.0.0",
     "@ayanworks/polygon-schema-manager": "1.0.0",
@@ -36,9 +36,9 @@
     "ethers": "^6.9.0"
   },
   "devDependencies": {
-    "@credo-ts/node": "0.5.3",
-    "@hyperledger/aries-askar-nodejs": "0.2.1",
-    "@hyperledger/aries-askar-shared": "0.2.1",
+    "@credo-ts/node": "0.5.7",
+    "@hyperledger/aries-askar-nodejs": "0.2.3",
+    "@hyperledger/aries-askar-shared": "0.2.3",
     "@types/jest": "^26.0.23",
     "@types/node": "^18.18.8",
     "@types/uuid": "^9.0.0",

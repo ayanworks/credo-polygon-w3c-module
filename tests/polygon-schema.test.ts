@@ -16,9 +16,9 @@ const logger = new ConsoleLogger(LogLevel.info)
 
 export type SubjectMessage = { message: EncryptedMessage; replySubject?: Subject<SubjectMessage> }
 
-const privateKey = TypedArrayEncoder.fromHex('7229440234c231c8dc067ef2425bc694f202514779a02876c1d273b00adf66fb')
+const privateKey = TypedArrayEncoder.fromHex('5a4a2c79f4bceb4976dde41897b2607e01e6b74a42bc854a7a20059cfa99a095')
 
-const testNetdid = 'did:polygon:testnet:0x26C2809EC8385bB15eb66586582e3D4626ee63C7'
+const testNetdid = 'did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const testSchema = {

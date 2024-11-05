@@ -179,27 +179,37 @@ export const EcdsaSecp256k1Signature2019Fixtures = {
 
 export const PolygonDIDFixtures = {
   VALID_DID_DOCUMENT: {
-    '@context': ['https://w3id.org/did/v1', 'https://w3id.org/security/suites/secp256k1-2019/v1'],
-    id: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72',
-    verificationMethod: [
-      {
-        id: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1',
-        type: 'EcdsaSecp256k1VerificationKey2019',
-        controller: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72',
-        publicKeyBase58: 'uWa49bYNSW9JSdcYJbXRjYw2a5nFW8MLusUYjWKjKoay',
-      },
-    ],
-    service: [
-      {
-        id: 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#linked-domain',
-        serviceEndpoint: 'https://example.com',
-        type: 'LinkedDomains',
-      },
-    ],
-    authentication: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
-    assertionMethod: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
-    keyAgreement: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
-    capabilityInvocation: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
-    capabilityDelegation: ['did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72#$key-1'],
+    didDocument: {
+      '@context': ['https://w3id.org/did/v1', 'https://w3id.org/security/suites/secp256k1-2019/v1'],
+      id: 'did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b',
+      verificationMethod: [
+        {
+          id: 'did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#key-1',
+          type: 'EcdsaSecp256k1VerificationKey2019',
+          controller: 'did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b',
+          publicKeyBase58: '29rkwHiVCjyhXk9FWhepUrHpEyurUSCFHh4aoDqb1adj8',
+        },
+      ],
+      service: [
+        {
+          id: 'did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#linked-domain',
+          serviceEndpoint: 'https://dev-agent.credebl.id',
+          type: 'LinkedDomains',
+        },
+      ],
+      authentication: ['did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#key-1'],
+      assertionMethod: ['did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#key-1'],
+      keyAgreement: ['did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#key-1'],
+      capabilityInvocation: ['did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#key-1'],
+      capabilityDelegation: ['did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b#key-1'],
+    },
+    didDocumentMetadata: {
+      linkedResourceMetadata: [],
+    },
+    didResolutionMetadata: {
+      contentType: 'application/did+ld+json',
+      resolutionTime: 1730803801926,
+      servedFromCache: true,
+    },
   },
 }

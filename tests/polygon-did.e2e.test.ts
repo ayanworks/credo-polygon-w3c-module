@@ -17,7 +17,7 @@ const logger = new ConsoleLogger(LogLevel.info)
 
 export type SubjectMessage = { message: EncryptedMessage; replySubject?: Subject<SubjectMessage> }
 
-const did = 'did:polygon:testnet:0x186f462430f90fee2b58609Dcf0539F08c400A72'
+const did = 'did:polygon:testnet:0x138d2231e4362fc0e028576Fb2DF56904bd59C1b'
 
 describe('Polygon Module did resolver', () => {
   let aliceAgent: Agent<{ askar: AskarModule; polygon: PolygonModule; dids: DidsModule }>
@@ -48,10 +48,10 @@ describe('Polygon Module did resolver', () => {
         // Add required modules
         polygon: new PolygonModule({
           rpcUrl: 'https://rpc-amoy.polygon.technology',
-          didContractAddress: '0xC1c392DC1073a86821B4ae37f1F0faCDcFFf45bF',
+          didContractAddress: '0xcB80F37eDD2bE3570c6C9D5B0888614E04E1e49E',
           fileServerToken:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6IjdmYjRmN2I3LWQ5ZWUtNDYxOC04OTE4LWZiMmIzYzY1M2EyYiJ9.x-kHeTVqX4w19ibSAspCYgIL-JFVss8yZ0CT21QVRYM',
-          schemaManagerContractAddress: '0x289c7Bd4C7d38cC54bff370d6f9f01b74Df51b11',
+          schemaManagerContractAddress: '0x4742d43C2dFCa5a1d4238240Afa8547Daf87Ee7a',
           serverUrl: 'https://51e1-103-97-166-226.ngrok-free.app',
         }),
         dids: new DidsModule({
@@ -71,7 +71,7 @@ describe('Polygon Module did resolver', () => {
       privateKeys: [
         {
           keyType: KeyType.K256,
-          privateKey: TypedArrayEncoder.fromHex('393a414a50885766089b0d33ddc22276e141a71a6a1dded4f224e67a0a43cc99'),
+          privateKey: TypedArrayEncoder.fromHex('5a4a2c79f4bceb4976dde41897b2607e01e6b74a42bc854a7a20059cfa99a095'),
         },
       ],
     })
@@ -108,24 +108,30 @@ describe('Polygon Module did resolver', () => {
   describe('PolygonDidResolver', () => {
     it('should resolve a polygon did when valid did is passed', async () => {
       const resolvedDIDDoc = await aliceAgent.dids.resolve(did)
-
-      expect(resolvedDIDDoc.didDocument?.context).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT['@context'])
-      expect(resolvedDIDDoc.didDocument?.id).toBe(PolygonDIDFixtures.VALID_DID_DOCUMENT.id)
+      expect(resolvedDIDDoc.didDocument?.context).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument['@context'])
+      expect(resolvedDIDDoc.didDocument?.id).toBe(PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.id)
       expect(resolvedDIDDoc.didDocument?.verificationMethod).toEqual(
-        PolygonDIDFixtures.VALID_DID_DOCUMENT.verificationMethod
+        PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.verificationMethod
       )
-      expect(resolvedDIDDoc.didDocument?.authentication).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT.authentication)
-      expect(resolvedDIDDoc.didDocument?.assertionMethod).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT.assertionMethod)
+      expect(resolvedDIDDoc.didDocument?.authentication).toEqual(
+        PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.authentication
+      )
+      expect(resolvedDIDDoc.didDocument?.assertionMethod).toEqual(
+        PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.assertionMethod
+      )
     })
 
-    it(`should fail with 'Invalid DID' message when invalid polygon did is passed`, async () => {
-      const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1e07bFc96EF44'
+    it("should fail with 'Invalid DID' message when invalid polygon did is passed", async () => {
+      const did = 'did:polygon:testnet:0x525D4605f4EE59e1149987F59668D4f272359093'
 
-      expect(async () => await aliceAgent.dids.resolve(did)).rejects.toThrowError('Invalid DID')
+      const result = await aliceAgent.dids.resolve(did)
+
+      expect(result.didResolutionMetadata.error).toBe('notFound')
+      expect(result.didResolutionMetadata.message).toContain('resolver_error: Unable to resolve did')
     })
 
     it('should fail after resolution invalid polygon did is passed', async () => {
-      const did = 'did:polygon:testnet:0x4A09b8CB511cca4Ca1c54B0475D0e07bFc96EF44'
+      const did = 'did:polygon:testnet:0x525D4605f4EE59e1149987F59668D4f272359093'
 
       const result = await aliceAgent.dids.resolve(did)
 

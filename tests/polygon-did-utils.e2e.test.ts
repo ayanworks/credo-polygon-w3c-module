@@ -6,7 +6,7 @@ import { PolygonDIDFixtures } from './fixtures'
 
 describe('Test Polygon Did Utils', () => {
   it('should validate did spec compliant payload', () => {
-    const didDoc = PolygonDIDFixtures.VALID_DID_DOCUMENT as unknown as DidDocument
+    const didDoc = PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument as unknown as DidDocument
     const result = validateSpecCompliantPayload(didDoc)
     expect(result).toBe(null)
   })

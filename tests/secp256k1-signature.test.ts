@@ -57,7 +57,7 @@ describe('Secp256k1 W3cCredentialService', () => {
   let wallet: AskarWallet
   let agentContext: AgentContext
   let w3cJsonLdCredentialService: W3cJsonLdCredentialService
-  const privateKey = TypedArrayEncoder.fromHex('7229440234c231c8dc067ef2425bc694f202514779a02876c1d273b00adf66fb')
+  const privateKey = TypedArrayEncoder.fromHex('5a4a2c79f4bceb4976dde41897b2607e01e6b74a42bc854a7a20059cfa99a095')
 
   beforeAll(async () => {
     const agentConfig = getAgentConfig('EcdsaSecp256k1e2eTest')
@@ -207,7 +207,7 @@ describe('Secp256k1 W3cCredentialService', () => {
 
         const purpose = new CredentialIssuancePurpose({
           controller: {
-            id: 'did:polygon:testnet:0x26C2809EC8385bB15eb66586582e3D4626ee63C7#key-1',
+            id: verificationMethod,
           },
           date: new Date().toISOString(),
         })

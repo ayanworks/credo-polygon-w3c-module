@@ -107,30 +107,33 @@ describe('Polygon Module did resolver', () => {
 
   describe('PolygonDidResolver', () => {
     it('should resolve a polygon did when valid did is passed', async () => {
-      const resolvedDIDDoc = await aliceAgent.dids.resolve(did) 
+      const resolvedDIDDoc = await aliceAgent.dids.resolve(did)
       expect(resolvedDIDDoc.didDocument?.context).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument['@context'])
       expect(resolvedDIDDoc.didDocument?.id).toBe(PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.id)
       expect(resolvedDIDDoc.didDocument?.verificationMethod).toEqual(
         PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.verificationMethod
       )
-      expect(resolvedDIDDoc.didDocument?.authentication).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.authentication)
-      expect(resolvedDIDDoc.didDocument?.assertionMethod).toEqual(PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.assertionMethod)
+      expect(resolvedDIDDoc.didDocument?.authentication).toEqual(
+        PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.authentication
+      )
+      expect(resolvedDIDDoc.didDocument?.assertionMethod).toEqual(
+        PolygonDIDFixtures.VALID_DID_DOCUMENT.didDocument.assertionMethod
+      )
     })
 
     it("should fail with 'Invalid DID' message when invalid polygon did is passed", async () => {
-      const did = 'did:polygon:testnet:0x525D4605f4EE59e1149987F59668D4f272359093';
-    
-      const result = await aliceAgent.dids.resolve(did);
-    
-      expect(result.didResolutionMetadata.error).toBe('notFound');
-      expect(result.didResolutionMetadata.message).toContain('resolver_error: Unable to resolve did');
-    });    
+      const did = 'did:polygon:testnet:0x525D4605f4EE59e1149987F59668D4f272359093'
+
+      const result = await aliceAgent.dids.resolve(did)
+
+      expect(result.didResolutionMetadata.error).toBe('notFound')
+      expect(result.didResolutionMetadata.message).toContain('resolver_error: Unable to resolve did')
+    })
 
     it('should fail after resolution invalid polygon did is passed', async () => {
       const did = 'did:polygon:testnet:0x525D4605f4EE59e1149987F59668D4f272359093'
 
       const result = await aliceAgent.dids.resolve(did)
-      console.log("result:::::::", JSON.stringify(result));
 
       expect(result.didDocument).toEqual(null)
       expect(result.didResolutionMetadata.error).toEqual('notFound')

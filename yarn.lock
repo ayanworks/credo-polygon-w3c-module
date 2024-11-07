@@ -49,14 +49,14 @@
   dependencies:
     static-eval "2.0.2"
 
-"@ayanworks/polygon-did-registrar@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-1.0.0.tgz#6704a51b154e12c9484c90581a1c9dc41e01dcd3"
-  integrity sha512-pK6WELi9avhxFk7BGioMFu9U/VL6GLvW6n18QFq8G4EMPMWsAvTfiiqUadTVWU8nuHSOrgpBBW8kN5DPWwJPFg==
+"@ayanworks/polygon-did-registrar@2.0.0-alpha.1":
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registrar/-/polygon-did-registrar-2.0.0-alpha.1.tgz#07584b526d01ebb370c82c777df73e22299b9079"
+  integrity sha512-boq2un5FLK4h+4q+94U2N+uwoiIHvAC1BwA8crR75vN9htiHIz0TepkJFLxj7Y1EJu+8pK24POFnAjnulLHWYQ==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "3.0.0"
-    "@ayanworks/polygon-did-resolver" "1.0.0"
-    "@credo-ts/core" "0.5.3"
+    "@ayanworks/polygon-did-resolver" "2.0.1-alpha.0"
+    "@credo-ts/core" "^0.5.3"
     "@ethersproject/basex" "^5.7.0"
     "@ethersproject/signing-key" "^5.7.0"
     "@ethersproject/transactions" "^5.7.0"
@@ -70,22 +70,22 @@
   resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-registry-contract/-/polygon-did-registry-contract-3.0.0.tgz#52b18768b887e933d44a9713b33dc2efbb1dcf53"
   integrity sha512-RnW31nkDIMG1YzuOycxGGrJFpgTcpBwS/UZR6/wMPrsJBKBEN28k2CZImwXkbgaknyTfL7xe1u3C8NxfDvhI4Q==
 
-"@ayanworks/polygon-did-resolver@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-1.0.0.tgz#4d267004a509fad9a75bb18c6f449f6c51e1f198"
-  integrity sha512-mzYh3XNQ4HJ0GakP1QD7UOW8PjMAhdtu/TXzeOqMtHLhWktFMQcgJuqNMNxMGbJFdIe12qFJROlle6p1BjF01g==
+"@ayanworks/polygon-did-resolver@2.0.1-alpha.0":
+  version "2.0.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-did-resolver/-/polygon-did-resolver-2.0.1-alpha.0.tgz#182758c05dfbd2a61319114556843561d6ebd22f"
+  integrity sha512-W3S8iVblLtROspEGbYaBRuhtXMiiXPSjO78x7SvkK9X10ESr2mvBFYbWTMJe+0yjK1l4Ac64n/BArVq3RVBjZQ==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "3.0.0"
     did-resolver "^4.1.0"
     ethers "^5.1.0"
 
-"@ayanworks/polygon-schema-manager@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-1.0.0.tgz#5f71320d93e874477906df15be1aacc32906d6aa"
-  integrity sha512-XByf/mydccNEnfiW83K9WlayvPgrRpLVqX7CwuHtdBTSlrhed+Vc9FnZLIQUsGGnlbowQVLaPteSaKg/lEYUzw==
+"@ayanworks/polygon-schema-manager@2.0.0-alpha.1":
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@ayanworks/polygon-schema-manager/-/polygon-schema-manager-2.0.0-alpha.1.tgz#d5ebef8183b2cb41901cf6f874d6f6c14012f203"
+  integrity sha512-nTPOEaBvdVcgC2haSxnHiOQu5tXX5HTAdkb8QCEh5A0VKxQmKFUH3nfQCwzOmL5FEzBJtNAJLmy7G71FDkRTBA==
   dependencies:
     "@ayanworks/polygon-did-registry-contract" "3.0.0"
-    "@ayanworks/polygon-did-resolver" "1.0.0"
+    "@ayanworks/polygon-did-resolver" "2.0.1-alpha.0"
     "@nomicfoundation/hardhat-verify" "^2.0.3"
     axios "^1.6.3"
     did-resolver "^4.1.0"
@@ -518,7 +518,7 @@
     rxjs "^7.8.0"
     tsyringe "^4.8.0"
 
-"@credo-ts/core@0.5.3":
+"@credo-ts/core@0.5.3", "@credo-ts/core@^0.5.3":
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@credo-ts/core/-/core-0.5.3.tgz#cccbce993acbe7651fb397e7a0933ffde3246027"
   integrity sha512-bM9iNhhXWiJ4YdH5uqaIfK3XhZ6GjuzF0AwE1vMy586sZz05J1ZLQvIYzRpm/p3Buxj9rimnLrc4jcYNit0VUw==

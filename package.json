@@ -31,7 +31,7 @@
     "@credo-ts/core": "0.5.3",
     "@ayanworks/polygon-did-registrar": "1.0.0",
     "@ayanworks/polygon-did-resolver": "1.0.0",
-    "@ayanworks/polygon-schema-manager": "1.0.1-alpha.0",
+    "@ayanworks/polygon-schema-manager": "1.0.1-alpha.1",
     "did-resolver": "^4.1.0",
     "ethers": "^6.9.0"
   },

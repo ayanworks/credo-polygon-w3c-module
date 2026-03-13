@@ -2,7 +2,7 @@
 
 This repository is being archived. For the latest features, security updates, and active development, please see the up-to-date version here:
 
-👉 **[https://github.com](https://github.com)**
+👉 **[https://github.com/ayanworks/polygon-did-modules](https://github.com/ayanworks/polygon-did-modules)**
 
 ---
 

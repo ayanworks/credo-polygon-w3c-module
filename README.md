@@ -1,3 +1,12 @@
+# ⚠️ ARCHIVED REPOSITORY
+
+This repository is being archived. For the latest features, security updates, and active development, please see the up-to-date version here:
+
+👉 **[https://github.com](https://github.com)**
+
+---
+
+
 # Credo did:polygon W3C Module
 
 - W3C did:polygon method registry for [credo-ts](https://github.com/openwallet-foundation/credo-ts).
